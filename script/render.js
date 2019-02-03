@@ -5,26 +5,30 @@ const renderTagName = (tagName) => {
 
 const renderId = (id) => {
   if (!id) return '';
-  return `<span class="ths-puzzle__id">#${id}</span>`;
+  return `<span class="ths-puzzle__id" data-draggable>#${id}</span>`;
 }
 
 
 const renderClasses = (classList) => {
   if (!classList || !classList.length) return '';
   return classList
-    .map(className => `<span class="ths-puzzle__class">.${className}</span>`)
+    .map(className => `<span class="ths-puzzle__class" data-draggable>.${className}</span>`)
     .join('');
 }
 
 
 const renderAttributes = (attributes) => {
   if (!attributes || !Object.keys(attributes).length) return '';
-  const joinedAttributes = Object.entries(attributes)
-    .map(([name, value]) => `<span class="ths-puzzle__attribute-name">${name}</span>` +
-      (value ? `=<span class="ths-puzzle__attribute-value">'${value}'</span>` : ''))
-    .join(', ');
+  const joinedAttributes = Object.entries(attributes).map(renderAttribute).join(', ');
   return `(${joinedAttributes})`;
 }
+
+const renderAttribute = ([name, value]) => [
+  '<span data-draggable>',
+  `<span class="ths-puzzle__attribute-name">${name}</span>`,
+  value ? `=<span class="ths-puzzle__attribute-value" data-draggable>'${value}'</span>` : '',
+  '</span>'
+].join('');
 
 
 const renderChildren = (children) => {
@@ -35,7 +39,7 @@ const renderChildren = (children) => {
 
 const renderElement = (element) => {
   return [
-    '<div class="ths-puzzle__block">',
+    '<div class="ths-puzzle__block" data-draggable>',
     renderTagName(element.tagName),
     renderId(element.id),
     renderClasses(element.classList),
@@ -47,7 +51,11 @@ const renderElement = (element) => {
 
 
 const renderText = (text) => {
-  return `| <span class="ths-puzzle__text">${text.text}</span>`;
+  return [
+    '<div class="ths-puzzle__block" data-draggable>',
+    `| <span class="ths-puzzle__text">${text.text}</span>`,
+    '</div>'
+  ].join('')
 }
 
 

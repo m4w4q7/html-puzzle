@@ -9,7 +9,12 @@ ths-puzzle {
   font-family: "SF Mono", Menlo, Monaco, "Courier New", monospace;
   font-size: 12px;
   line-height: 18px;
+  user-select: none;
+}
 
+[data-draggable] {
+  border-radius: 5px;
+  transition: background-color .1s;
 }
 
 .ths-puzzle__tag-name {
@@ -40,4 +45,8 @@ ths-puzzle {
 .ths-puzzle__children {
   border-left: 1px dotted rgb(120, 120, 120);
   padding-left: 2ch;
+}
+
+.ths-puzzle__highlighted {
+  background-color: rgb(32, 42, 52);
 }

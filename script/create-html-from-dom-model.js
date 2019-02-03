@@ -21,7 +21,7 @@ const renderAttributes = (attributes) => {
   if (!attributes || !Object.keys(attributes).length) return '';
   const joinedAttributes = Object.entries(attributes)
     .map(([name, value]) => `${name}='${value}'`)
-    .join(' ');
+    .join(', ');
   return `(${joinedAttributes})`;
 }
 
@@ -36,4 +36,4 @@ const createHtmlFromDomModel = (domModel) => {
 }
 
 
-export default createHtmlFromDomModel;
+export { createHtmlFromDomModel };

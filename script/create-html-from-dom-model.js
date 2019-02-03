@@ -32,18 +32,27 @@ const renderChildren = (children) => {
 }
 
 
-const createHtmlFromDomModel = (domModel) => {
-  if (Array.isArray(domModel)) return domModel.map(createHtmlFromDomModel).join('\n');
-
+const renderElement = (element) => {
   return [
     '<div class="ths-puzzle__block">',
-    renderTagName(domModel.tagName),
-    renderId(domModel.id),
-    renderClasses(domModel.classList),
-    renderAttributes(domModel.attributes),
-    renderChildren(domModel.children),
+    renderTagName(element.tagName),
+    renderId(element.id),
+    renderClasses(element.classList),
+    renderAttributes(element.attributes),
+    renderChildren(element.children),
     '</div>'
   ].join('');
+}
+
+
+const renderText = (text) => {
+  return `| <span class="ths-puzzle__text">${text.text}</span>`;
+}
+
+
+const createHtmlFromDomModel = (domModel) => {
+  if (Array.isArray(domModel)) return domModel.map(createHtmlFromDomModel).join('\n');
+  return domModel.type === 'element' ? renderElement(domModel) : renderText(domModel);
 }
 
 

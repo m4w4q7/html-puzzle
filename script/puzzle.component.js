@@ -1,10 +1,15 @@
-import { exampleDomTree } from './example-dom-tree.js';
 import { createHtmlFromDomModel } from './create-html-from-dom-model.js';
+// import { example } from './example.pug.js';
+import { parse } from './parse.js';
+
+const examplePromise = fetch('script/example.pug').then(response => response.text());
 
 class PuzzleComponent extends HTMLElement {
 
   connectedCallback() {
-    this.innerHTML = createHtmlFromDomModel(exampleDomTree);
+    examplePromise.then(example => {
+      this.innerHTML = createHtmlFromDomModel(parse(example));
+    });
   }
 
 }

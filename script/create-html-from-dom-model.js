@@ -26,6 +26,12 @@ const renderAttributes = (attributes) => {
 }
 
 
+const renderChildren = (children) => {
+  if (!children || !children.length) return '';
+  return `<div class="ths-puzzle__children">${createHtmlFromDomModel(children)}</div>`
+}
+
+
 const createHtmlFromDomModel = (domModel) => {
   if (Array.isArray(domModel)) return domModel.map(createHtmlFromDomModel).join('\n');
 
@@ -35,6 +41,7 @@ const createHtmlFromDomModel = (domModel) => {
     renderId(domModel.id),
     renderClasses(domModel.classList),
     renderAttributes(domModel.attributes),
+    renderChildren(domModel.children),
     '</div>'
   ].join('');
 }

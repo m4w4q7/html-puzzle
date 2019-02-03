@@ -20,7 +20,8 @@ const renderClasses = (classList) => {
 const renderAttributes = (attributes) => {
   if (!attributes || !Object.keys(attributes).length) return '';
   const joinedAttributes = Object.entries(attributes)
-    .map(([name, value]) => `<span class="ths-puzzle__attribute-name">${name}</span>=<span class="ths-puzzle__attribute-value">'${value}'</span>`)
+    .map(([name, value]) => `<span class="ths-puzzle__attribute-name">${name}</span>` +
+      (value ? `=<span class="ths-puzzle__attribute-value">'${value}'</span>` : ''))
     .join(', ');
   return `(${joinedAttributes})`;
 }
@@ -28,7 +29,7 @@ const renderAttributes = (attributes) => {
 
 const renderChildren = (children) => {
   if (!children || !children.length) return '';
-  return `<div class="ths-puzzle__children">${createHtmlFromDomModel(children)}</div>`
+  return `<div class="ths-puzzle__children">${render(children)}</div>`
 }
 
 
@@ -50,10 +51,10 @@ const renderText = (text) => {
 }
 
 
-const createHtmlFromDomModel = (domModel) => {
-  if (Array.isArray(domModel)) return domModel.map(createHtmlFromDomModel).join('\n');
+const render = (domModel) => {
+  if (Array.isArray(domModel)) return domModel.map(render).join('\n');
   return domModel.type === 'element' ? renderElement(domModel) : renderText(domModel);
 }
 
 
-export { createHtmlFromDomModel };
+export { render };

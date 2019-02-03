@@ -1,4 +1,4 @@
-import { createHtmlFromDomModel } from './create-html-from-dom-model.js';
+import { render } from './render.js';
 // import { example } from './example.pug.js';
 import { parse } from './parse.js';
 
@@ -8,7 +8,7 @@ class PuzzleComponent extends HTMLElement {
 
   connectedCallback() {
     examplePromise.then(example => {
-      this.innerHTML = createHtmlFromDomModel(parse(example));
+      this.innerHTML = render(parse(example));
     });
   }
 

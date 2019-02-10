@@ -81,9 +81,13 @@ class PuzzleComponent extends HTMLElement {
   }
 
 
-  _setDraggedElement(value) {
-    this._draggedElement = value;
-    this.classList.toggle('ths-puzzle--dragging', !!value);
+  _setDraggedElement(element) {
+    const draggedClass = 'ths-puzzle__dragged';
+    if (this._draggedElement) { this._draggedElement.classList.remove(draggedClass); }
+    if (element) { element.classList.add(draggedClass); }
+
+    this._draggedElement = element;
+    this.classList.toggle('ths-puzzle--dragging', !!element);
   }
 
 

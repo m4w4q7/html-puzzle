@@ -3,11 +3,24 @@ import { parse } from './parse.js';
 
 const examplePromise = fetch('script/example.pug').then(response => response.text());
 
+const doOnNext = (element, eventName, callback) => {
+  const unsubscribingCallback = event => {
+    element.removeEventListener(eventName, unsubscribingCallback);
+    callback(event);
+  }
+  element.addEventListener(eventName, unsubscribingCallback);
+};
+
+const reflow = element => void element.clientWidth;
+
+
+
 class PuzzleComponent extends HTMLElement {
 
   constructor() {
     super();
     this._highlightedElement = null;
+    this._draggedElement = null;
   }
 
   connectedCallback() {
@@ -17,10 +30,12 @@ class PuzzleComponent extends HTMLElement {
 
     this.addEventListener('mouseover', this._handleMouseOver.bind(this));
     this.addEventListener('mouseleave', this._handleMouseLeave.bind(this));
+    this.addEventListener('mousedown', this._handleMouseDown.bind(this));
   }
 
 
   _handleMouseOver({ target }) {
+    if (this._draggedElement) { return; }
     const draggableTarget = this._getDraggableAncestor(target);
     if (draggableTarget === this._highlightedElement) return;
 
@@ -29,7 +44,46 @@ class PuzzleComponent extends HTMLElement {
 
 
   _handleMouseLeave() {
+    if (this._draggedElement) { return; }
     this._setHighlightedElement(null);
+  }
+
+
+  _handleMouseDown() {
+    if (!this._highlightedElement) { return; }
+    if (this._highlightedElement.classList.contains('ths-puzzle__block')) {
+      const lineHeight = window.getComputedStyle(this._highlightedElement).getPropertyValue('line-height');
+      const fullHeight = `${this._highlightedElement.scrollHeight}px`;
+      if (fullHeight !== lineHeight) {
+        this._highlightedElement.style.height = fullHeight;
+        reflow(this._highlightedElement); // force reflow;
+        this._highlightedElement.style.height = lineHeight;
+      }
+    }
+
+    this._setDraggedElement(this._highlightedElement);;
+    doOnNext(document, 'mouseup', this._handleMouseUp.bind(this));
+
+  }
+
+
+  _handleMouseUp() {
+    if (!this._draggedElement) { return; }
+    if (this._draggedElement.classList.contains('ths-puzzle__block')) {
+      if (this._draggedElement.style.height) {
+        const fullHeight = `${this._draggedElement.scrollHeight}px`;
+        const draggedElement = this._draggedElement;
+        doOnNext(draggedElement, 'transitionend', () => draggedElement.style.height = '');
+        this._draggedElement.style.height = fullHeight;
+      }
+    }
+    this._setDraggedElement(null);
+  }
+
+
+  _setDraggedElement(value) {
+    this._draggedElement = value;
+    this.classList.toggle('ths-puzzle--dragging', !!value);
   }
 
 

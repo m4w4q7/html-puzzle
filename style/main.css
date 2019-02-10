@@ -15,7 +15,11 @@ ths-puzzle {
 
 ths-puzzle span {
   display: inline-block;
-  height: 100%;
+  line-height: 18px;
+}
+
+ths-puzzle.ths-puzzle--dragging {
+  cursor: grabbing;
 }
 
 [data-draggable] {
@@ -24,7 +28,8 @@ ths-puzzle span {
 }
 
 .ths-puzzle__block[data-draggable] {
-  transition: background-color .2s;
+  transition: background-color .2s, height .2s;
+  overflow: hidden;
 }
 
 .ths-puzzle__tag-name {

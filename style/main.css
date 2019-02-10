@@ -5,6 +5,7 @@ body {
 ths-puzzle {
   background-color: rgb(30, 30, 30);
   color: rgb(200, 200, 200);
+  cursor: grab;
   display: block;
   font-family: "SF Mono", Menlo, Monaco, "Courier New", monospace;
   font-size: 12px;
@@ -12,9 +13,18 @@ ths-puzzle {
   user-select: none;
 }
 
+ths-puzzle span {
+  display: inline-block;
+  height: 100%;
+}
+
 [data-draggable] {
   border-radius: 5px;
   transition: background-color .1s;
+}
+
+.ths-puzzle__block[data-draggable] {
+  transition: background-color .2s;
 }
 
 .ths-puzzle__tag-name {
@@ -48,5 +58,9 @@ ths-puzzle {
 }
 
 .ths-puzzle__highlighted {
+  background-color: rgb(66, 87, 108);
+}
+
+.ths-puzzle__block.ths-puzzle__highlighted {
   background-color: rgb(32, 42, 52);
 }

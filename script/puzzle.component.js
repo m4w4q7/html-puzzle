@@ -15,15 +15,21 @@ class PuzzleComponent extends HTMLElement {
       this.innerHTML = render(parse(example));
     });
 
-    this.addEventListener('mouseover', this._handleMouseover.bind(this));
+    this.addEventListener('mouseover', this._handleMouseOver.bind(this));
+    this.addEventListener('mouseleave', this._handleMouseLeave.bind(this));
   }
 
 
-  _handleMouseover({ target }) {
+  _handleMouseOver({ target }) {
     const draggableTarget = this._getDraggableAncestor(target);
     if (draggableTarget === this._highlightedElement) return;
 
     this._setHighlightedElement(draggableTarget);
+  }
+
+
+  _handleMouseLeave() {
+    this._setHighlightedElement(null);
   }
 
 

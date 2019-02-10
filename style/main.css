@@ -29,7 +29,6 @@ ths-puzzle.ths-puzzle--dragging {
 
 .ths-puzzle__block[data-draggable] {
   transition: background-color .2s, opacity .2s, height .2s;
-  overflow: hidden;
 }
 
 .ths-puzzle__tag-name {
@@ -59,7 +58,7 @@ ths-puzzle.ths-puzzle--dragging {
 
 .ths-puzzle__children {
   border-left: 1px dotted rgb(120, 120, 120);
-  padding-left: 2ch;
+  padding-left: calc(2ch - 1px);
 }
 
 .ths-puzzle__highlighted {

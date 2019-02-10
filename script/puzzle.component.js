@@ -56,8 +56,9 @@ class PuzzleComponent extends HTMLElement {
       const fullHeight = `${this._highlightedElement.scrollHeight}px`;
       if (fullHeight !== lineHeight) {
         this._highlightedElement.style.height = fullHeight;
-        reflow(this._highlightedElement); // force reflow;
+        reflow(this._highlightedElement);
         this._highlightedElement.style.height = lineHeight;
+        this._highlightedElement.style.overflow = 'hidden';
       }
     }
 
@@ -73,7 +74,12 @@ class PuzzleComponent extends HTMLElement {
       if (this._draggedElement.style.height) {
         const fullHeight = `${this._draggedElement.scrollHeight}px`;
         const draggedElement = this._draggedElement;
-        doOnNext(draggedElement, 'transitionend', () => draggedElement.style.height = '');
+        doOnNext(draggedElement, 'transitionend', () => {
+          if (draggedElement !== this._draggedElement) {
+            draggedElement.style.height = '';
+            draggedElement.style.overflow = '';
+          }
+        });
         this._draggedElement.style.height = fullHeight;
       }
     }

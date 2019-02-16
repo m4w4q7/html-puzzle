@@ -57,7 +57,7 @@ ths-puzzle.ths-puzzle--dragging {
 }
 
 .ths-puzzle__children {
-  border-left: 1px dotted rgb(120, 120, 120);
+  border-left: 1px solid rgb(64, 64, 64);
   padding-left: calc(2ch - 1px);
 }
 

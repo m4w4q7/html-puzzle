@@ -1,5 +1,5 @@
-import { render } from './render.js';
-import { parse } from './parse.js';
+import { render } from '../render.js';
+import { parse } from '../parse.js';
 
 const examplePromise = fetch('script/example.pug').then(response => response.text());
 

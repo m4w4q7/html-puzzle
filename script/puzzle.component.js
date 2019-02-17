@@ -52,14 +52,7 @@ class PuzzleComponent extends HTMLElement {
   _handleMouseDown() {
     if (!this._highlightedElement) { return; }
     if (this._highlightedElement.classList.contains('ths-puzzle__block')) {
-      const lineHeight = window.getComputedStyle(this._highlightedElement).getPropertyValue('line-height');
-      const fullHeight = `${this._highlightedElement.scrollHeight}px`;
-      if (fullHeight !== lineHeight) {
-        this._highlightedElement.style.height = fullHeight;
-        reflow(this._highlightedElement);
-        this._highlightedElement.style.height = lineHeight;
-        this._highlightedElement.style.overflow = 'hidden';
-      }
+      this._hideChildren();
     }
 
     this._setDraggedElement(this._highlightedElement);;
@@ -71,19 +64,34 @@ class PuzzleComponent extends HTMLElement {
   _handleMouseUp() {
     if (!this._draggedElement) { return; }
     if (this._draggedElement.classList.contains('ths-puzzle__block')) {
-      if (this._draggedElement.style.height) {
-        const fullHeight = `${this._draggedElement.scrollHeight}px`;
-        const draggedElement = this._draggedElement;
-        doOnNext(draggedElement, 'transitionend', () => {
-          if (draggedElement !== this._draggedElement) {
-            draggedElement.style.height = '';
-            draggedElement.style.overflow = '';
-          }
-        });
-        this._draggedElement.style.height = fullHeight;
-      }
+      this._showChildren();
     }
     this._setDraggedElement(null);
+  }
+
+
+  _hideChildren() {
+    const children = this._highlightedElement.querySelector('.ths-puzzle__children');
+    if (!children || !children.children) { return; }
+
+    const fullHeight = `${children.scrollHeight}px`;
+    children.style.height = fullHeight;
+    reflow(children);
+    children.style.height = '0';
+  }
+
+
+  _showChildren() {
+    const children = this._draggedElement.querySelector('.ths-puzzle__children');
+    if (!children || !children.children) { return; }
+
+    const fullHeight = `${children.scrollHeight}px`;
+    const draggedElement = this._draggedElement;
+    doOnNext(children, 'transitionend', () => {
+      if (draggedElement !== this._draggedElement) { children.style.height = ''; }
+    });
+    children.style.height = fullHeight;
+
   }
 
 

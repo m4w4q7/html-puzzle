@@ -3,7 +3,7 @@ import { render } from '../render.js';
 import { parse } from '../parse.js';
 import { State } from './state.js';
 import { HoverHandler } from './hover-handler.js';
-import { DragHandler } from './drag-handler.js';
+import { DragStartHandler } from './drag-start-handler.js';
 
 
 class PuzzleComponent extends HTMLElement {
@@ -12,7 +12,7 @@ class PuzzleComponent extends HTMLElement {
     super();
     this._state = new State();
     this._hoverHandler = new HoverHandler(this, this._state);
-    this._dragHandler = new DragHandler(this, this._state);
+    this._dragStartHandler = new DragStartHandler(this, this._state);
   }
 
 
@@ -22,7 +22,7 @@ class PuzzleComponent extends HTMLElement {
     });
 
     this._hoverHandler.activate();
-    this._dragHandler.activate();
+    this._dragStartHandler.activate();
   }
 
 }

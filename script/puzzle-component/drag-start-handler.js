@@ -1,6 +1,6 @@
 import { doOnNext, reflow } from './utils.js';
 
-export class DragHandler {
+export class DragStartHandler {
 
   constructor(host, state) {
     this._host = host;

@@ -1,0 +1,19 @@
+{
+  "name": "thesis-spike",
+  "version": "1.0.0",
+  "description": "",
+  "main": "script/main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://m4w4q7@bitbucket.org/m4w4q7/thesis-spike.git"
+  },
+  "author": "",
+  "license": "UNLICENSED",
+  "homepage": "https://bitbucket.org/m4w4q7/thesis-spike#readme",
+  "devDependencies": {
+    "eslint": "5.14.1"
+  }
+}

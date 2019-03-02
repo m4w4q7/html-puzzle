@@ -74,3 +74,23 @@ ths-puzzle.ths-puzzle--dragging {
 .ths-puzzle__dragged {
   opacity: .5;
 }
+
+.ths-puzzle__inserter {
+  height: 18px;
+  position: relative;
+}
+
+.ths-puzzle__block--inserting {
+  background-color: rgb(56, 61, 44);
+}
+
+.ths-puzzle__positioner {
+  position: absolute;
+  left: 0;
+  right: 0;
+  transition: left .2s;
+}
+
+html {
+  padding: 50px;
+}

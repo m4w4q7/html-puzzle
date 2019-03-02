@@ -13,6 +13,7 @@
     "sourceType": "module"
   },
   "rules": {
-    "semi": [2, "always"]
+    "semi": ["error", "always"],
+    "object-curly-spacing": ["error", "always"]
   }
 }

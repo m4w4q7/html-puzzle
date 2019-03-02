@@ -4,6 +4,7 @@ import { parse } from '../parse.js';
 import { State } from './state.js';
 import { HoverHandler } from './hover-handler.js';
 import { DragStartHandler } from './drag-start-handler.js';
+import { DragMoveHandler } from './drag-move-handler.js';
 
 
 class PuzzleComponent extends HTMLElement {
@@ -13,6 +14,7 @@ class PuzzleComponent extends HTMLElement {
     this._state = new State();
     this._hoverHandler = new HoverHandler(this, this._state);
     this._dragStartHandler = new DragStartHandler(this, this._state);
+    this._dragMoveHandler = new DragMoveHandler(this, this._state);
   }
 
 
@@ -21,8 +23,22 @@ class PuzzleComponent extends HTMLElement {
       this.innerHTML = render(parse(example));
     });
 
+    this._calculateCharacterDimensions();
+
     this._hoverHandler.activate();
     this._dragStartHandler.activate();
+    this._dragMoveHandler.activate();
+  }
+
+
+  _calculateCharacterDimensions() {
+    const character = document.createElement('div');
+    character.innerHTML = '&nbsp;';
+    character.style.display = 'inline-block';
+    this.appendChild(character);
+    const { clientWidth, clientHeight } = character;
+    this.removeChild(character);
+    this._state.characterDimensions = { width: clientWidth, height: clientHeight };
   }
 
 }

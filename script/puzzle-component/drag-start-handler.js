@@ -1,10 +1,13 @@
 import { doOnNext, reflow } from './utils.js';
 
+const draggedClass = 'ths-puzzle__dragged';
+const highlighterClass = 'ths-puzzle__highlighted';
+
 export class DragStartHandler {
 
   constructor(host, state) {
     this._host = host;
-    this._state = state
+    this._state = state;
   }
 
 
@@ -19,7 +22,7 @@ export class DragStartHandler {
       this._hideChildren();
     }
 
-    this._setDraggedElement(this._state.highlightedElement);;
+    this._setDraggedElement(this._state.highlightedElement);
     doOnNext(document, 'mouseup', this._handleMouseUp.bind(this));
   }
 
@@ -36,12 +39,22 @@ export class DragStartHandler {
 
 
   _setDraggedElement(element) {
-    const draggedClass = 'ths-puzzle__dragged';
+    this._state.draggedElementClone = this._cloneDraggedElement(element);
+
     if (this._state.draggedElement) { this._state.draggedElement.classList.remove(draggedClass); }
     if (element) { element.classList.add(draggedClass); }
 
     this._state.draggedElement = element;
     this._host.classList.toggle('ths-puzzle--dragging', !!element);
+  }
+
+
+  _cloneDraggedElement(element) {
+    if (!element) return element;
+    const elementClone = element.cloneNode(true);
+    elementClone.classList.remove(highlighterClass);
+    elementClone.classList.add('ths-puzzle--inserting');
+    return elementClone;
   }
 
 

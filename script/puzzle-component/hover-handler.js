@@ -1,8 +1,10 @@
+import { findAncestor } from './utils.js';
+
 export class HoverHandler {
 
   constructor(host, state) {
     this._host = host;
-    this._state = state
+    this._state = state;
   }
 
 
@@ -22,11 +24,7 @@ export class HoverHandler {
 
 
   _getDraggableAncestor(target) {
-    let currentTarget = target;
-    while (currentTarget !== this._host && !currentTarget.hasAttribute('data-draggable')) {
-      currentTarget = currentTarget.parentElement;
-    }
-    return currentTarget === this._host ? null : currentTarget;
+    return findAncestor(target, this._host, element => element.hasAttribute('data-draggable'));
   }
 
 

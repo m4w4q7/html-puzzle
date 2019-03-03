@@ -32,6 +32,7 @@ export const createElement = (name, properties, children) => {
 export const queryDifference = (container, containerToIgnore, selector) => {
   const matchingElements = Array.from(container.querySelectorAll(selector));
   const blacklist = Array.from(containerToIgnore.querySelectorAll(selector));
+  if (containerToIgnore.matches(selector)) { blacklist.push(containerToIgnore); }
   return getListDifference(matchingElements, blacklist);
 };
 

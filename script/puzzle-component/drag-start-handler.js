@@ -1,13 +1,13 @@
 import { doOnNext, reflow } from './utils.js';
 
 const draggedClass = 'ths-puzzle__dragged';
-const highlighterClass = 'ths-puzzle__highlighted';
 
 export class DragStartHandler {
 
   constructor(host, state) {
     this._host = host;
     this._state = state;
+    this._cancelTransitionEnd = null;
   }
 
 
@@ -39,30 +39,26 @@ export class DragStartHandler {
 
 
   _setDraggedElement(element) {
-    this._state.draggedElementClone = this._cloneDraggedElement(element);
-
     if (this._state.draggedElement) { this._state.draggedElement.classList.remove(draggedClass); }
-    if (element) { element.classList.add(draggedClass); }
+    if (element) {
+      element.classList.add(draggedClass);
+      this._cancelTransitionEnd = doOnNext(element, 'transitionend', () => this._state.isDragging = true);
+    } else {
+      if (this._cancelTransitionEnd) { this._cancelTransitionEnd(); }
+    }
 
+    this._state.dragType = element ? element.getAttribute('data-drag-type') : null;
     this._state.draggedElement = element;
     this._host.classList.toggle('ths-puzzle--dragging', !!element);
   }
 
 
-  _cloneDraggedElement(element) {
-    if (!element) return element;
-    const elementClone = element.cloneNode(true);
-    elementClone.classList.remove(highlighterClass);
-    elementClone.classList.add('ths-puzzle--inserting');
-    return elementClone;
-  }
-
-
-  _handleMouseUp() {
+  _handleMouseUp() { // TODO: it also handles drop (background-color change), so it should be refactored
     if (!this._state.draggedElement) { return; }
-    if (this._state.draggedElement.classList.contains('ths-puzzle__block')) {
+    if (this._state.draggedElement.classList.contains('ths-puzzle__block') && !this._state.isDragging) {
       this._showChildren();
     }
+    this._state.isDragging = false;
     this._setDraggedElement(null);
   }
 

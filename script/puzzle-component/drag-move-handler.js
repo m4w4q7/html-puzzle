@@ -1,5 +1,10 @@
 import { queryDifference } from './utils.js';
 import { Inserter } from './inserter.js';
+import { dragTypes } from './enums.js';
+
+
+const blockClassName = 'ths-puzzle__block';
+
 
 export class DragMoveHandler {
 
@@ -9,34 +14,41 @@ export class DragMoveHandler {
     this._handleMouseMove = this._handleMouseMove.bind(this);
     this._blocks = [];
     this._inserter = new Inserter();
-    this._inserterPosition = {
-      line: null,
-      absoluteIndentation: null
-    };
     this._state.observe('characterDimensions', ({ width }) => this._inserter.setIndentationSize(width * 2));
   }
 
 
   activate() {
-    this._state.observe('draggedElement', this._onDraggedElementChange, this);
+    this._state.observe('isDragging', this._onIsDraggingChange, this);
     this._host.addEventListener('mousemove', this._handleMouseMove.bind(this));
   }
 
 
-  _onDraggedElementChange(draggedElement) {
-    if (draggedElement) {
-      this._blocks = queryDifference(this._host, draggedElement, '.ths-puzzle__block');
-      this._inserter.setElementForInserting(this._state.draggedElementClone);
-    } else {
+  _onIsDraggingChange(isDragging) {
+    if (this._isDraggingBlock()) {
+      const indexOfBlock = [...this._host.querySelectorAll(`.${blockClassName}`)].indexOf(this._state.draggedElement);
+      this._blocks = queryDifference(this._host, this._state.draggedElement, `.${blockClassName}`);
+      this._inserter.setElementForInserting(this._state.draggedElement);
+      this._state.inserterPosition = {}; // clear "cache" so inserter will always appear
+      this._setInserterPosition({
+        line: indexOfBlock,
+        absoluteIndentation: this._getIndentation(this._state.draggedElement)
+      });
+    } else if (!isDragging) {
       this._inserter.hide();
     }
   }
 
 
   _handleMouseMove(event) {
-    if (!this._state.draggedElement || !this._state.draggedElement.classList.contains('ths-puzzle__block')) { return; }
+    if (!this._isDraggingBlock()) { return; }
     const inserterPosition = this._calculateInserterPosition(event);
     this._setInserterPosition(inserterPosition);
+  }
+
+
+  _isDraggingBlock() {
+    return this._state.isDragging && [dragTypes.element, dragTypes.text].includes(this._state.dragType);
   }
 
 
@@ -50,16 +62,16 @@ export class DragMoveHandler {
 
 
   _setInserterPosition({ line, absoluteIndentation }) {
-    if (line === this._inserterPosition.line && absoluteIndentation === this._inserterPosition.absoluteIndentation) {
+    if (line === this._state.inserterPosition.line && absoluteIndentation === this._state.inserterPosition.absoluteIndentation) {
       return;
     }
 
     const minIndentation = this._getMinIndentation(line);
     const relativeIndentation = Math.max((absoluteIndentation - minIndentation), 0);
 
-
-    if (line !== this._inserterPosition.line) {
-      const maxRelativeIndentation = this._getMaxIndentation(line) - minIndentation;
+    if (line !== this._state.inserterPosition.line) {
+      this._state.maxIndentation = this._getMaxIndentation(line);
+      const maxRelativeIndentation = this._state.maxIndentation - minIndentation;
       if (line === this._blocks.length) {
         this._inserter.showLast(this._host, relativeIndentation, maxRelativeIndentation);
       } else {
@@ -69,7 +81,7 @@ export class DragMoveHandler {
       this._inserter.moveToIndentation(relativeIndentation);
     }
 
-    this._inserterPosition = { line, absoluteIndentation };
+    this._state.inserterPosition = { line, absoluteIndentation };
   }
 
 

@@ -1,3 +1,6 @@
+import { dragTypes } from './enums.js';
+
+
 export const render = domModel => renderWithoutLastInserter(domModel);
 
 
@@ -5,8 +8,9 @@ const renderWithoutLastInserter = domModel => domModel.map(renderBlock).join('\n
 
 
 const renderBlock = (block) => {
+  const dragType = block.type === 'element' ? dragTypes.element : dragTypes.text;
   return [
-    '<div class="ths-puzzle__block" data-draggable>',
+    `<div class="ths-puzzle__block" data-draggable data-drag-type="${dragType}">`,
     block.type === 'element' ? renderElement(block) : renderText(block),
     '</div>'
   ].join('');
@@ -31,14 +35,14 @@ const renderTagName = (tagName) => {
 
 const renderId = (id) => {
   if (!id) return '';
-  return `<span class="ths-puzzle__id" data-draggable>#${id}</span>`;
+  return `<span class="ths-puzzle__id" data-draggable data-drag-type="${dragTypes.id}">#${id}</span>`;
 };
 
 
 const renderClasses = (classList) => {
   if (!classList || !classList.length) return '';
   return classList
-    .map(className => `<span class="ths-puzzle__class" data-draggable>.${className}</span>`)
+    .map(className => `<span class="ths-puzzle__class" data-draggable data-drag-type="${dragTypes.class}">.${className}</span>`)
     .join('');
 };
 
@@ -51,15 +55,15 @@ const renderAttributes = (attributes) => {
 
 
 const renderAttribute = ([name, value]) => [
-  '<span data-draggable>',
+  `<span data-draggable data-drag-type="${dragTypes.attribute}">`,
   `<span class="ths-puzzle__attribute-name">${name}</span>`,
-  value ? `=<span class="ths-puzzle__attribute-value" data-draggable>'${value}'</span>` : '',
+  value ? `=<span class="ths-puzzle__attribute-value" data-draggable data-drag-type="${dragTypes.attributeValue}">'${value}'</span>` : '',
   '</span>'
 ].join('');
 
 
 const renderChildren = (children) => {
-  if (!children || !children.length) return '';
+  // if (!children || !children.length) return '';
   return `<div class="ths-puzzle__children">${renderWithoutLastInserter(children, true)}</div>`;
 };
 

@@ -4,8 +4,11 @@ export class State {
     this._data = {
       highlightedElement: null,
       draggedElement: null,
-      draggedElementClone: null,
-      characterDimensions: {}
+      characterDimensions: { width: null, height: null },
+      isDragging: false,
+      dragType: null,
+      inserterPosition: { line: null, absoluteIndentation: null },
+      maxIndentation: null
     };
     this._observers = {};
     this._createSettersAndGetters();
@@ -25,6 +28,7 @@ export class State {
         enumerable: true,
         get: () => this._data[field],
         set: value => {
+          if (this._data[field] === value) { return; }
           this._data[field] = value;
           this._notifyObservers(field);
         }

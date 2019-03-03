@@ -24,11 +24,11 @@ ths-puzzle.ths-puzzle--dragging {
 
 [data-draggable] {
   border-radius: 5px;
-  transition: background-color .1s, opacity .1s;
+  transition: background-color .1s, background-color .1s;
 }
 
 .ths-puzzle__block[data-draggable] {
-  transition: background-color .2s, opacity .2s;
+  transition: background-color .2s, background-color .2s;
 }
 
 .ths-puzzle__tag-name {
@@ -71,16 +71,13 @@ ths-puzzle.ths-puzzle--dragging {
   background-color: rgb(32, 42, 52);
 }
 
-.ths-puzzle__dragged {
-  opacity: .5;
-}
-
 .ths-puzzle__inserter {
   height: 18px;
   position: relative;
 }
 
-.ths-puzzle__block--inserting {
+.ths-puzzle__dragged,
+.ths-puzzle__block.ths-puzzle__dragged {
   background-color: rgb(56, 61, 44);
 }
 

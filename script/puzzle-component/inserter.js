@@ -1,7 +1,6 @@
 import { createElement } from './utils.js';
 
 const inserterClass = 'ths-puzzle__inserter';
-const insertingClass = 'ths-puzzle__block--inserting';
 const indentationClass = 'ths-puzzle__children';
 const positionerClass = 'ths-puzzle__positioner';
 
@@ -27,25 +26,23 @@ export class Inserter {
 
   setElementForInserting(element) {
     this._elementForInserting = element;
-    element.classList.add(insertingClass);
-    this._positionerElement.appendChild(element);
 
   }
 
 
   showBeforeBlock(block, indentation, maxIndentation) {
+    this._positionerElement.appendChild(this._elementForInserting);
     this._setMaxIndentation(maxIndentation);
     this.moveToIndentation(indentation);
     block.insertAdjacentElement('beforebegin', this._inserterElement);
-    this._inserterElement.style.display = '';
   }
 
 
   showLast(container, indentation, maxIndentation) {
+    this._positionerElement.appendChild(this._elementForInserting);
     this._setMaxIndentation(maxIndentation);
     this.moveToIndentation(indentation);
     container.appendChild(this._inserterElement);
-    this._inserterElement.style.display = '';
   }
 
 
@@ -57,8 +54,7 @@ export class Inserter {
 
 
   hide() {
-    this._positionerElement.removeChild(this._elementForInserting);
-    this._inserterElement.style.display = 'none';
+    this._inserterElement.parentElement.removeChild(this._inserterElement);
   }
 
 

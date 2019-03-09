@@ -25,7 +25,9 @@ export class DragMoveHandler {
 
 
   _onIsDraggingChange(isDragging) {
-    if (this._isDraggingBlock()) {
+    if (!this._isDragTypeBlock()) { return; }
+
+    if (isDragging) {
       const indexOfBlock = [...this._host.querySelectorAll(`.${blockClassName}`)].indexOf(this._state.draggedElement);
       this._blocks = queryDifference(this._host, this._state.draggedElement, `.${blockClassName}`);
       this._inserter.setElementForInserting(this._state.draggedElement);
@@ -34,21 +36,21 @@ export class DragMoveHandler {
         line: indexOfBlock,
         absoluteIndentation: this._getIndentation(this._state.draggedElement)
       });
-    } else if (!isDragging) {
-      this._inserter.hide();
+    } else {
+      this._inserter.hide(); // this causes glitch sometimes
     }
   }
 
 
   _handleMouseMove(event) {
-    if (!this._isDraggingBlock()) { return; }
+    if (!this._state.isDragging || !this._isDragTypeBlock()) { return; }
     const inserterPosition = this._calculateInserterPosition(event);
     this._setInserterPosition(inserterPosition);
   }
 
 
-  _isDraggingBlock() {
-    return this._state.isDragging && [dragTypes.element, dragTypes.text].includes(this._state.dragType);
+  _isDragTypeBlock() {
+    return [dragTypes.element, dragTypes.text].includes(this._state.dragType);
   }
 
 

@@ -1,16 +1,7 @@
-import { dragTypes } from './enums.js';
-import { getDragType } from './utils.js';
 import { selectors } from './dom-identifiers.js';
 
 
-export const moveInlinePiece = (piece, tag) => {
-  if (getDragType(piece) === dragTypes.class) {
-    moveClass(piece, tag);
-  }
-};
-
-
-const moveClass = (piece, tag) => {
+export const addClass = (tag, piece) => {
   const line = tag.querySelector(selectors.line);
   const classes = [...line.querySelectorAll(selectors.class)];
   const textOfPiece = piece.textContent;
@@ -21,3 +12,9 @@ const moveClass = (piece, tag) => {
 
   previousElement.insertAdjacentElement('afterend', piece);
 };
+
+
+export const addId = (tag, piece) => tag.querySelector(selectors.tagName).insertAdjacentElement('afterend', piece);
+
+
+export const getId = tag => tag.querySelector(selectors.line).querySelector(selectors.id);

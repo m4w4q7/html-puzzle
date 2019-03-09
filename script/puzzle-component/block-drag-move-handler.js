@@ -2,8 +2,8 @@ import { queryDifference } from './utils.js';
 import { Inserter } from './inserter.js';
 import { dragTypes } from './enums.js';
 
-
 const blockClassName = 'hpu-puzzle__block';
+const blockDragTypes = [dragTypes.element, dragTypes.text];
 
 
 export class BlockDragMoveHandler {
@@ -50,7 +50,7 @@ export class BlockDragMoveHandler {
 
 
   _isDragTypeBlock() {
-    return [dragTypes.element, dragTypes.text].includes(this._state.dragType);
+    return blockDragTypes.includes(this._state.dragType);
   }
 
 

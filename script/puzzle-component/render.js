@@ -19,10 +19,12 @@ const renderBlock = (block) => {
 
 const renderElement = (element) => {
   return [
+    '<div class="hpu-puzzle__line">',
     renderTagName(element.tagName),
     renderId(element.id),
     renderClasses(element.classList),
     renderAttributes(element.attributes),
+    '</div>',
     renderChildren(element.children),
   ].join('');
 };

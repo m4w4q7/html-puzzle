@@ -1,4 +1,4 @@
-import { doOnNext, reflow } from './utils.js';
+import { doOnNext, reflow, getDragType } from './utils.js';
 
 const draggedClass = 'hpu-puzzle__dragged';
 
@@ -47,7 +47,7 @@ export class DragStartHandler {
       if (this._cancelTransitionEnd) { this._cancelTransitionEnd(); }
     }
 
-    this._state.dragType = element ? element.getAttribute('data-drag-type') : null;
+    this._state.dragType = element ? getDragType(element) : null;
     this._state.draggedElement = element;
     this._host.classList.toggle('hpu-puzzle--dragging', !!element);
   }

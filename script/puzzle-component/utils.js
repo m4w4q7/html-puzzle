@@ -29,6 +29,9 @@ export const createElement = (name, properties, children) => {
 };
 
 
+export const getDragType = element => element.getAttribute('data-drag-type');
+
+
 export const queryDifference = (container, containerToIgnore, selector) => {
   const matchingElements = Array.from(container.querySelectorAll(selector));
   const blacklist = Array.from(containerToIgnore.querySelectorAll(selector));

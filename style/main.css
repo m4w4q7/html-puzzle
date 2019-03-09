@@ -48,6 +48,10 @@ hpu-puzzle.hpu-puzzle--dragging {
   color: #dcdcaa;
 }
 
+.hpu-puzzle__attribute-separator {
+  white-space: pre-wrap;
+}
+
 .hpu-puzzle__text {
   color: #dadada;
   font-weight: bold;

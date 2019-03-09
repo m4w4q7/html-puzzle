@@ -1,9 +1,10 @@
-import { addClass, getId, addId } from './tag-manipulations.js';
+import { addClass, getId, addId, addAttribute, removeAttribute } from './tag-manipulations.js';
 import { dragTypes } from './enums.js';
 
 export const createForType = (type, piece, host) => {
   if (type === dragTypes.id) { return new IdMover(piece, host); }
   if (type === dragTypes.class) { return new ClassMover(piece); }
+  if (type === dragTypes.attribute) { return new AttributeMover(piece, host); }
   return { move() {} };
 };
 
@@ -38,4 +39,22 @@ class ClassMover {
   move(tag) {
     addClass(tag, this._piece);
   }
+
+}
+
+
+class AttributeMover {
+
+  constructor(piece, host) {
+    this._piece = piece;
+    this._lastTargetTag = host;
+  }
+
+
+  move(tag) {
+    removeAttribute(this._piece);
+    addAttribute(tag, this._piece);
+    this._lastTargetTag = tag;
+  }
+
 }

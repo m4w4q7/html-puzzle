@@ -51,8 +51,10 @@ const renderClasses = (classList) => {
 
 const renderAttributes = (attributes) => {
   if (!attributes || !Object.keys(attributes).length) return '';
-  const joinedAttributes = Object.entries(attributes).map(renderAttribute).join(', ');
-  return `(${joinedAttributes})`;
+  const joinedAttributes = Object.entries(attributes)
+    .map(renderAttribute)
+    .join('<span class="hpu-puzzle__attribute-separator">, </span>');
+  return `<span class="hpu-puzzle__attributes">(${joinedAttributes})</span>`;
 };
 
 
@@ -65,7 +67,6 @@ const renderAttribute = ([name, value]) => [
 
 
 const renderChildren = (children) => {
-  // if (!children || !children.length) return '';
   return `<div class="hpu-puzzle__children">${renderWithoutLastInserter(children, true)}</div>`;
 };
 

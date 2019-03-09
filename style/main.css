@@ -11,6 +11,7 @@ ths-puzzle {
   font-size: 12px;
   line-height: 18px;
   user-select: none;
+  -webkit-user-select: none;
 }
 
 ths-puzzle span {

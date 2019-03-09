@@ -8,6 +8,7 @@ export class State {
       isDragging: false,
       dragType: null,
       inserterPosition: { line: null, absoluteIndentation: null },
+      minIndentation: null,
       maxIndentation: null
     };
     this._observers = {};

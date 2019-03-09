@@ -1,5 +1,5 @@
 import { dragTypes } from './enums.js';
-import { doOnNext } from './utils.js';
+import { doOnNext, forceBetweenBoundaries } from './utils.js';
 
 const blockClassName = 'hpu-puzzle__block';
 
@@ -35,7 +35,11 @@ export class BlockDropHandler {
     const blocksBefore = [...this._host.querySelectorAll(`.${blockClassName}`)]
       .slice(0, this._state.inserterPosition.line);
 
-    const inserterIndentation = Math.min(this._state.maxIndentation, this._state.inserterPosition.absoluteIndentation);
+    const inserterIndentation = forceBetweenBoundaries(
+      this._state.inserterPosition.absoluteIndentation,
+      this._state.minIndentation,
+      this._state.maxIndentation
+    );
     let parent = this._host;
     let previousSibling = null;
     for (let block of blocksBefore) {

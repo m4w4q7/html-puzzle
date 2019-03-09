@@ -68,12 +68,12 @@ export class BlockDragMoveHandler {
       return;
     }
 
-    const minIndentation = this._getMinIndentation(line);
-    const relativeIndentation = Math.max((absoluteIndentation - minIndentation), 0);
+    this._state.minIndentation = this._getMinIndentation(line);
+    const relativeIndentation = Math.max((absoluteIndentation - this._state.minIndentation), 0);
 
     if (line !== this._state.inserterPosition.line) {
       this._state.maxIndentation = this._getMaxIndentation(line);
-      const maxRelativeIndentation = this._state.maxIndentation - minIndentation;
+      const maxRelativeIndentation = this._state.maxIndentation - this._state.minIndentation;
       if (line === this._blocks.length) {
         this._inserter.showLast(this._host, relativeIndentation, maxRelativeIndentation);
       } else {

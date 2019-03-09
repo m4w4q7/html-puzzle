@@ -1,3 +1,6 @@
+export const forceBetweenBoundaries = (value, min, max) => Math.min(Math.max(value, min), max);
+
+
 export const doOnNext = (element, eventName, callback) => {
   const unsubscribingCallback = event => {
     element.removeEventListener(eventName, unsubscribingCallback);

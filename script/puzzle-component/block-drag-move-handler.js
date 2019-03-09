@@ -6,7 +6,7 @@ import { dragTypes } from './enums.js';
 const blockClassName = 'ths-puzzle__block';
 
 
-export class DragMoveHandler {
+export class BlockDragMoveHandler {
 
   constructor(host, state) {
     this._host = host;

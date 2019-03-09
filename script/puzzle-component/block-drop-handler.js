@@ -3,7 +3,7 @@ import { doOnNext } from './utils.js';
 
 const blockClassName = 'ths-puzzle__block';
 
-export class DropHandler {
+export class BlockDropHandler {
 
   constructor(host, state) {
     this._host = host;

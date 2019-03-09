@@ -1,8 +1,8 @@
 import { createElement } from './utils.js';
 
-const inserterClass = 'ths-puzzle__inserter';
-const indentationClass = 'ths-puzzle__children';
-const positionerClass = 'ths-puzzle__positioner';
+const inserterClass = 'hpu-puzzle__inserter';
+const indentationClass = 'hpu-puzzle__children';
+const positionerClass = 'hpu-puzzle__positioner';
 
 export class Inserter {
 

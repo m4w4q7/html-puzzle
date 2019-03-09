@@ -1,7 +1,7 @@
 import { dragTypes } from './enums.js';
 import { doOnNext } from './utils.js';
 
-const blockClassName = 'ths-puzzle__block';
+const blockClassName = 'hpu-puzzle__block';
 
 export class BlockDropHandler {
 
@@ -23,7 +23,7 @@ export class BlockDropHandler {
     if (previousSibling) {
       previousSibling.insertAdjacentElement('afterend', this._state.draggedElement);
     } else {
-      const container = parent === this._host ? parent : parent.querySelector('.ths-puzzle__children');
+      const container = parent === this._host ? parent : parent.querySelector('.hpu-puzzle__children');
       container.insertAdjacentElement('afterbegin', this._state.draggedElement);
     }
 
@@ -54,14 +54,14 @@ export class BlockDropHandler {
   _getIndentation(block) { // TODO: It's a duplication!
     let indentation = 0;
     for (let element = block.parentNode; element !== this._host; element = element.parentNode) {
-      if (element.classList.contains('ths-puzzle__children')) { indentation++; }
+      if (element.classList.contains('hpu-puzzle__children')) { indentation++; }
     }
     return indentation;
   }
 
 
   _showChildren() { // TODO: It's a duplication!
-    const children = this._state.draggedElement.querySelector('.ths-puzzle__children');
+    const children = this._state.draggedElement.querySelector('.hpu-puzzle__children');
     if (!children || !children.children) { return; }
 
     const fullHeight = `${children.scrollHeight}px`;

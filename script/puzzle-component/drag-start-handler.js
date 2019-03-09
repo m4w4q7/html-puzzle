@@ -1,6 +1,6 @@
 import { doOnNext, reflow } from './utils.js';
 
-const draggedClass = 'ths-puzzle__dragged';
+const draggedClass = 'hpu-puzzle__dragged';
 
 export class DragStartHandler {
 
@@ -18,7 +18,7 @@ export class DragStartHandler {
 
   _handleMouseDown() {
     if (!this._state.highlightedElement) { return; }
-    if (this._state.highlightedElement.classList.contains('ths-puzzle__block')) {
+    if (this._state.highlightedElement.classList.contains('hpu-puzzle__block')) {
       this._hideChildren();
     }
 
@@ -28,7 +28,7 @@ export class DragStartHandler {
 
 
   _hideChildren() {
-    const children = this._state.highlightedElement.querySelector('.ths-puzzle__children');
+    const children = this._state.highlightedElement.querySelector('.hpu-puzzle__children');
     if (!children || !children.children) { return; }
 
     const fullHeight = `${children.scrollHeight}px`;
@@ -49,13 +49,13 @@ export class DragStartHandler {
 
     this._state.dragType = element ? element.getAttribute('data-drag-type') : null;
     this._state.draggedElement = element;
-    this._host.classList.toggle('ths-puzzle--dragging', !!element);
+    this._host.classList.toggle('hpu-puzzle--dragging', !!element);
   }
 
 
   _handleMouseUp() { // TODO: it also handles drop (background-color change), so it should be refactored
     if (!this._state.draggedElement) { return; }
-    if (this._state.draggedElement.classList.contains('ths-puzzle__block') && !this._state.isDragging) {
+    if (this._state.draggedElement.classList.contains('hpu-puzzle__block') && !this._state.isDragging) {
       this._showChildren();
     }
     this._state.isDragging = false;
@@ -64,7 +64,7 @@ export class DragStartHandler {
 
 
   _showChildren() {
-    const children = this._state.draggedElement.querySelector('.ths-puzzle__children');
+    const children = this._state.draggedElement.querySelector('.hpu-puzzle__children');
     if (!children || !children.children) { return; }
 
     const fullHeight = `${children.scrollHeight}px`;

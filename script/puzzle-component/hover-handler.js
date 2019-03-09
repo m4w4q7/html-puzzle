@@ -29,7 +29,7 @@ export class HoverHandler {
 
 
   _setHighlightedElement(element) {
-    const highlighterClass = 'ths-puzzle__highlighted';
+    const highlighterClass = 'hpu-puzzle__highlighted';
     if (this._state.highlightedElement) this._state.highlightedElement.classList.remove(highlighterClass);
     if (element) element.classList.add(highlighterClass);
     this._state.highlightedElement = element;

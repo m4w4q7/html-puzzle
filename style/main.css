@@ -2,7 +2,7 @@ body {
   background-color: rgb(37, 37, 37);
 }
 
-ths-puzzle {
+hpu-puzzle {
   background-color: rgb(30, 30, 30);
   color: rgb(200, 200, 200);
   cursor: grab;
@@ -14,12 +14,12 @@ ths-puzzle {
   -webkit-user-select: none;
 }
 
-ths-puzzle span {
+hpu-puzzle span {
   display: inline-block;
   line-height: 18px;
 }
 
-ths-puzzle.ths-puzzle--dragging {
+hpu-puzzle.hpu-puzzle--dragging {
   cursor: grabbing;
 }
 
@@ -28,57 +28,57 @@ ths-puzzle.ths-puzzle--dragging {
   transition: background-color .2s;
 }
 
-.ths-puzzle__tag-name {
+.hpu-puzzle__tag-name {
   color: #569cd6;
 }
 
-.ths-puzzle__id {
+.hpu-puzzle__id {
   color: #b5cea8;
 }
 
-.ths-puzzle__class {
+.hpu-puzzle__class {
   color: #9cdcfe;
 }
 
-.ths-puzzle__attribute-name {
+.hpu-puzzle__attribute-name {
   color: #ce9178;
 }
 
-.ths-puzzle__attribute-value {
+.hpu-puzzle__attribute-value {
   color: #dcdcaa;
 }
 
-.ths-puzzle__text {
+.hpu-puzzle__text {
   color: #dadada;
   font-weight: bold;
 }
 
-.ths-puzzle__children {
+.hpu-puzzle__children {
   border-left: 1px solid rgb(64, 64, 64);
   overflow-y: hidden;
   padding-left: calc(2ch - 1px);
   transition: height .2s;
 }
 
-.ths-puzzle__highlighted {
+.hpu-puzzle__highlighted {
   background-color: rgb(66, 87, 108);
 }
 
-.ths-puzzle__block.ths-puzzle__highlighted {
+.hpu-puzzle__block.hpu-puzzle__highlighted {
   background-color: rgb(32, 42, 52);
 }
 
-.ths-puzzle__inserter {
+.hpu-puzzle__inserter {
   height: 18px;
   position: relative;
 }
 
-.ths-puzzle__dragged,
-.ths-puzzle__block.ths-puzzle__dragged {
+.hpu-puzzle__dragged,
+.hpu-puzzle__block.hpu-puzzle__dragged {
   background-color: rgb(56, 61, 44);
 }
 
-.ths-puzzle__positioner {
+.hpu-puzzle__positioner {
   position: absolute;
   left: 0;
   right: 0;

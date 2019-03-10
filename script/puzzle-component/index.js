@@ -7,6 +7,7 @@ import { DragStartHandler } from './drag-start-handler.js';
 import { BlockDragMoveHandler } from './block-drag-move-handler.js';
 import { TagPieceDragMoveHandler } from './tag-piece-drag-move-handler.js';
 import { BlockDropHandler } from './block-drop-handler.js';
+import { AttributeValueDragMoveHandler } from './attribute-value-drag-handler.js';
 
 
 class PuzzleComponent extends HTMLElement {
@@ -19,6 +20,7 @@ class PuzzleComponent extends HTMLElement {
     this._blockDragMoveHandler = new BlockDragMoveHandler(this, this._state);
     this._tagPieceDragMoveHandler = new TagPieceDragMoveHandler(this, this._state);
     this._blockDropHandler = new BlockDropHandler(this, this._state);
+    this._attributeValueDragMoveHandler = new AttributeValueDragMoveHandler(this, this._state);
   }
 
 
@@ -34,6 +36,7 @@ class PuzzleComponent extends HTMLElement {
     this._blockDragMoveHandler.activate();
     this._tagPieceDragMoveHandler.activate();
     this._blockDropHandler.activate();
+    this._attributeValueDragMoveHandler.activate();
   }
 
 

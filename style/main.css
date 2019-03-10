@@ -46,6 +46,7 @@ hpu-puzzle.hpu-puzzle--dragging {
 
 .hpu-puzzle__attribute-value {
   color: #dcdcaa;
+  transition: background-color .2s, opacity .2s;
 }
 
 .hpu-puzzle__attribute-separator {
@@ -77,9 +78,14 @@ hpu-puzzle.hpu-puzzle--dragging {
   position: relative;
 }
 
+.hpu-puzzle__attribute-target,
 .hpu-puzzle__dragged,
 .hpu-puzzle__block.hpu-puzzle__dragged {
   background-color: rgb(56, 61, 44);
+}
+
+.hpu-puzzle__attribute-target .hpu-puzzle__attribute-value {
+  opacity: .1;
 }
 
 .hpu-puzzle__positioner {

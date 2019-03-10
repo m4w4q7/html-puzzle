@@ -1,12 +1,12 @@
 import { dragTypes } from './enums.js';
 import { findAncestor, getDragType } from './utils.js';
-import { createForType } from './inline-piece-movers.js';
+import { createForType } from './tag-piece-movers.js';
 import { selectors, classes } from './dom-identifiers.js';
 
-const inlineDragTypes = [dragTypes.id, dragTypes.class, dragTypes.attribute, dragTypes.attributeValue];
+const tagPieceTypes = [dragTypes.id, dragTypes.class, dragTypes.attribute];
 
 
-export class InlineDragMoveHandler {
+export class TagPieceDragMoveHandler {
 
   constructor(host, state) {
     this._host = host;
@@ -25,7 +25,7 @@ export class InlineDragMoveHandler {
 
 
   _onIsDraggingChange(isDragging) {
-    if (!isDragging || !this._isDragTypeInline()) { return; }
+    if (!isDragging || !this._isTagPieceDragType()) { return; }
 
     this._blocks = [...this._host.querySelectorAll(selectors.block)];
     const blockParent = findAncestor(
@@ -41,7 +41,7 @@ export class InlineDragMoveHandler {
 
 
   _handleMouseMove(event) {
-    if (!this._state.isDragging || !this._isDragTypeInline()) { return; }
+    if (!this._state.isDragging || !this._isTagPieceDragType()) { return; }
 
     const line = this._getLine(event);
     if (line === this._lastHoveredLine) { return; }
@@ -54,8 +54,8 @@ export class InlineDragMoveHandler {
   }
 
 
-  _isDragTypeInline() {
-    return inlineDragTypes.includes(this._state.dragType);
+  _isTagPieceDragType() {
+    return tagPieceTypes.includes(this._state.dragType);
   }
 
 

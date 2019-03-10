@@ -5,7 +5,7 @@ import { State } from './state.js';
 import { HoverHandler } from './hover-handler.js';
 import { DragStartHandler } from './drag-start-handler.js';
 import { BlockDragMoveHandler } from './block-drag-move-handler.js';
-import { InlineDragMoveHandler } from './inline-drag-move-handler.js';
+import { TagPieceDragMoveHandler } from './tag-piece-drag-move-handler.js';
 import { BlockDropHandler } from './block-drop-handler.js';
 
 
@@ -17,7 +17,7 @@ class PuzzleComponent extends HTMLElement {
     this._hoverHandler = new HoverHandler(this, this._state);
     this._dragStartHandler = new DragStartHandler(this, this._state);
     this._blockDragMoveHandler = new BlockDragMoveHandler(this, this._state);
-    this._inlineDragMoveHandler = new InlineDragMoveHandler(this, this._state);
+    this._tagPieceDragMoveHandler = new TagPieceDragMoveHandler(this, this._state);
     this._blockDropHandler = new BlockDropHandler(this, this._state);
   }
 
@@ -32,7 +32,7 @@ class PuzzleComponent extends HTMLElement {
     this._hoverHandler.activate();
     this._dragStartHandler.activate();
     this._blockDragMoveHandler.activate();
-    this._inlineDragMoveHandler.activate();
+    this._tagPieceDragMoveHandler.activate();
     this._blockDropHandler.activate();
   }
 

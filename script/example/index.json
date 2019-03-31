@@ -4,30 +4,21 @@
     "tagName": "my-element",
     "id": "testId1",
     "classList": ["class1", "class2"],
-    "attributes": {
-      "attr1": "value1",
-      "attr2": "value2"
-    },
+    "attributes": { "attr1": "value1", "attr2": "value2" },
     "children": [
       {
         "type": "element",
         "tagName": "div",
         "id": "testId2",
         "classList": ["class1", "class2"],
-        "attributes": {
-          "attr1": "value1",
-          "attr2": "value2"
-        },
+        "attributes": { "attr1": "value1", "attr2": "value2" },
         "children": [
           { "type": "text", "text": "Hello world!" },
           {
             "type": "element",
             "tagName": "div",
             "classList": ["class1", "class2"],
-            "attributes": {
-              "attr1": "value1",
-              "attr2": ""
-            },
+            "attributes": { "attr1": "value1", "attr2": "" },
             "children": []
           },
           { "type": "text", "text": "Hello world again!" }
@@ -37,10 +28,7 @@
         "type": "element",
         "tagName": "div",
         "classList": ["class1", "class2"],
-        "attributes": {
-          "(testEvent)": "myMethod",
-          "[testProperty]": "myValue"
-        },
+        "attributes": { "(testEvent)": "myMethod", "[testProperty]": "myValue" },
         "children": []
       }
     ]
@@ -50,10 +38,7 @@
     "tagName": "div",
     "id": "testId5",
     "classList": ["class1", "class2"],
-    "attributes": {
-      "attr1": "value1",
-      "attr2": "value2"
-    },
+    "attributes": { "attr1": "value1", "attr2": "value2" },
     "children": []
   }
 ]

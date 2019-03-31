@@ -1,6 +1,4 @@
-import { examplePromise } from './example.js';
 import { render } from './render.js';
-import { parse } from '../parse.js';
 import { State } from './state.js';
 import { HoverHandler } from './hover-handler.js';
 import { DragStartHandler } from './drag-start-handler.js';
@@ -26,10 +24,6 @@ class PuzzleComponent extends HTMLElement {
 
 
   connectedCallback() {
-    examplePromise.then(example => {
-      this.innerHTML = render(parse(example));
-    });
-
     this._calculateCharacterDimensions();
 
     this._hoverHandler.activate();
@@ -40,6 +34,11 @@ class PuzzleComponent extends HTMLElement {
     this._attributeValueDragMoveHandler.activate();
 
     this._state.observe('isDragging', isDragging => isDragging || this._emitChange());
+  }
+
+
+  set model(value) {
+    this.innerHTML = render(value);
   }
 
 

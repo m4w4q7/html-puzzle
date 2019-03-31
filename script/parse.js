@@ -11,8 +11,8 @@ const parseTag = (line) => {
       .map(attribute => attribute.split('=\''))
       .reduce((attributesMap, [name, value]) => ((attributesMap[name] = value && value.slice(0, -1)), attributesMap), {}),
     children: []
-  }
-}
+  };
+};
 
 const parse = (input) => {
   return input
@@ -26,6 +26,6 @@ const parse = (input) => {
       if (!isText) childrenOnLevels[level + 1] = node.children;
       return childrenOnLevels;
     }, [[]])[0];
-}
+};
 
 export { parse };

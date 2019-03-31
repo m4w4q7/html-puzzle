@@ -1,4 +1,4 @@
-import { fetchExample } from './example/fetch.js';
+import { fetchExample } from './examples/fetch.js';
 import { parse } from './parse.js';
 
 (async function() {

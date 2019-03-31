@@ -1,6 +1,6 @@
 import { fetchText } from '../utils.js';
 
-const exampleRoot = 'script/example';
+const exampleRoot = 'script/examples';
 
 
 export const fetchExample = async (name) => {

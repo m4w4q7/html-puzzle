@@ -4,3 +4,6 @@ export const createElement = (name, properties, children) => {
   if (children) { children.forEach(child => element.appendChild(child)); }
   return element;
 };
+
+
+export const fetchText = url => fetch(url).then(response => response.text());

@@ -1,0 +1,5 @@
+{
+  "pug": "./index.pug",
+  "css": ["https://redirector.eservice.emarsys.net/ui/latest/css/app.css"],
+  "js": ["https://redirector.eservice.emarsys.net/ui/latest/js/app.js"]
+}

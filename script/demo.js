@@ -4,7 +4,7 @@ import { parse } from './parse.js';
 (async function() {
 
   const [example] = await Promise.all([
-    fetchExample('basic'),
+    fetchExample('text-styles'),
     new Promise(resolve => window.addEventListener('DOMContentLoaded', resolve))
   ]);
 

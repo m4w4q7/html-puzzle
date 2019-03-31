@@ -1,0 +1,5 @@
+{
+  "pug": "./index.pug",
+  "css": ["./style.css"],
+  "js": []
+}

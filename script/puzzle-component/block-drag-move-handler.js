@@ -1,8 +1,8 @@
 import { queryDifference } from './utils.js';
 import { Inserter } from './inserter.js';
 import { dragTypes } from './enums.js';
+import { selectors, classes } from './dom-identifiers.js';
 
-const blockClassName = 'hpu-puzzle__block';
 const blockDragTypes = [dragTypes.element, dragTypes.text];
 
 
@@ -28,8 +28,8 @@ export class BlockDragMoveHandler {
     if (!this._isDragTypeBlock()) { return; }
 
     if (isDragging) {
-      const indexOfBlock = [...this._host.querySelectorAll(`.${blockClassName}`)].indexOf(this._state.draggedElement);
-      this._blocks = queryDifference(this._host, this._state.draggedElement, `.${blockClassName}`);
+      const indexOfBlock = [...this._host.querySelectorAll(selectors.block)].indexOf(this._state.draggedElement);
+      this._blocks = queryDifference(this._host, this._state.draggedElement, selectors.block);
       this._inserter.setElementForInserting(this._state.draggedElement);
       this._state.inserterPosition = {}; // clear "cache" so inserter will always appear
       this._setInserterPosition({
@@ -97,7 +97,7 @@ export class BlockDragMoveHandler {
     if (line === 0) { return 0; }
 
     const previousBlock = this._blocks[line - 1];
-    const isPreviousBlockAnElement = previousBlock.querySelector('.hpu-puzzle__tag-name'); // TODO: sophisticate this
+    const isPreviousBlockAnElement = previousBlock.querySelector(selectors.tagName); // TODO: sophisticate this
     return this._getIndentation(previousBlock) + (isPreviousBlockAnElement ? 1 : 0);
   }
 
@@ -105,7 +105,7 @@ export class BlockDragMoveHandler {
   _getIndentation(block) { // TODO: use a model instead of actual dom
     let indentation = 0;
     for (let element = block.parentNode; element !== this._host; element = element.parentNode) {
-      if (element.classList.contains('hpu-puzzle__children')) { indentation++; }
+      if (element.classList.contains(classes.children)) { indentation++; }
     }
     return indentation;
   }

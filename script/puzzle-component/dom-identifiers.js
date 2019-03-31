@@ -7,9 +7,12 @@ export const classes = {
   id: 'hpu-puzzle__id',
   class: 'hpu-puzzle__class',
   attributes: 'hpu-puzzle__attributes',
+  attributeName: 'hpu-puzzle__attribute-name',
   attributeValue: 'hpu-puzzle__attribute-value',
   attributeSeparator: 'hpu-puzzle__attribute-separator',
   attribteTarget: 'hpu-puzzle__attribute-target',
+  children: 'hpu-puzzle__children',
+  text: 'hpu-puzzle__text',
 };
 
 export const selectors = {
@@ -19,9 +22,12 @@ export const selectors = {
   id: `.${classes.id}`,
   class: `.${classes.class}`,
   attributes: `.${classes.attributes}`,
+  attributeName: `.${classes.attributeName}`,
   attributeValue: `.${classes.attributeValue}`,
   attributeSeparator: `.${classes.attributeSeparator}`,
   attribteTarget: `.${classes.attributeTarget}`,
+  children: `.${classes.children}`,
+  text: `.${classes.text}`,
 
   attribute: `[data-drag-type="${dragTypes.attribute}"]`,
 };

@@ -96,5 +96,10 @@ hpu-puzzle.hpu-puzzle--dragging {
 }
 
 html {
-  padding: 50px;
+  padding: 20px;
+}
+
+hpu-preview {
+  display: block;
+  margin-bottom: 20px;
 }

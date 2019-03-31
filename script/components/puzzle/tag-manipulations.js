@@ -1,5 +1,5 @@
 import { selectors, classes } from './dom-identifiers.js';
-import { createElement } from './utils.js';
+import { createElement } from '../../utils.js';
 
 
 export const addClass = (tag, piece) => {

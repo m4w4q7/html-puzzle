@@ -1,4 +1,4 @@
-import { createElement } from './utils.js';
+import { createElement } from '../../utils.js';
 
 const inserterClass = 'hpu-puzzle__inserter';
 const indentationClass = 'hpu-puzzle__children';

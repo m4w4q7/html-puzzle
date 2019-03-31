@@ -9,6 +9,12 @@ import { parse } from './parse.js';
   ]);
 
   const puzzleComponent = document.querySelector('hpu-puzzle');
-  puzzleComponent.model = parse(example);
-  puzzleComponent.addEventListener('change', event => console.log(event.detail.model)); // eslint-disable-line no-console
+  const previewComponent = document.querySelector('hpu-preview');
+  previewComponent.addScript('https://redirector.eservice.emarsys.net/ui/latest/js/app.js');
+  previewComponent.addStyleSheet('https://redirector.eservice.emarsys.net/ui/latest/css/app.css');
+
+  const model = parse(example);
+  puzzleComponent.model = model;
+  previewComponent.model = model;
+  puzzleComponent.addEventListener('change', event => { previewComponent.model = event.detail.model; });
 })();

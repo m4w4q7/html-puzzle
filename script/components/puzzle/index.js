@@ -9,7 +9,7 @@ import { AttributeValueDragMoveHandler } from './attribute-value-drag-handler.js
 import { createModelFromDom } from './create-model-from-dom.js';
 
 
-class PuzzleComponent extends HTMLElement {
+export class PuzzleComponent extends HTMLElement {
 
   constructor() {
     super();
@@ -59,5 +59,3 @@ class PuzzleComponent extends HTMLElement {
   }
 
 }
-
-export { PuzzleComponent };

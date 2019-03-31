@@ -1,7 +1,7 @@
 const getLevel = line => /[ ]*/.exec(line)[0].length / 2;
 const parseText = line => ({ type: 'text', text: /\| (.*)/.exec(line)[1] });
 const parseTag = (line) => {
-  const [_, tagName, id, classes, attributes] = /[ ]*([^#.(]*)(#[^.(]*)?(.[^(]*)(.*)?/.exec(line); // :D
+  const [_, tagName, id, classes, attributes] = /[ ]*([^#.(]*)(#[^.(]*)?([^(]*)(.*)?/.exec(line); // :D
   return {
     type: 'element',
     tagName: tagName || 'div',

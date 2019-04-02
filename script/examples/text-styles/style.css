@@ -33,3 +33,7 @@ html {
 .yellowText {
   color: yellow;
 }
+
+#italic {
+  font-style: italic;
+}

@@ -1,5 +1,6 @@
 import { fetchExample } from './examples/fetch.js';
 import { parse } from './parse.js';
+import { shuffle } from './shuffle/index.js';
 
 (async function() {
 
@@ -13,8 +14,9 @@ import { parse } from './parse.js';
   example.css.forEach(url => previewComponent.addStyleSheet(url));
   example.js.forEach(url => previewComponent.addScript(url));
 
-  const model = parse(example.pug);
-  puzzleComponent.model = model;
-  previewComponent.model = model;
+  const goal = parse(example.pug);
+  const initialModel = shuffle(goal);
+  puzzleComponent.model = initialModel;
+  previewComponent.model = initialModel;
   puzzleComponent.addEventListener('change', event => { previewComponent.model = event.detail.model; });
 })();

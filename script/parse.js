@@ -6,10 +6,11 @@ const parseTag = (line) => {
     type: 'element',
     tagName: tagName || 'div',
     id: id && id.substring(1),
-    classList: classes && classes.split('.').slice(1),
+    classList: classes && classes.split('.').slice(1) || [],
     attributes: attributes && attributes.slice(1, -1).split(', ')
       .map(attribute => attribute.split('=\''))
-      .reduce((attributesMap, [name, value]) => ((attributesMap[name] = value && value.slice(0, -1)), attributesMap), {}),
+      .reduce((attributesMap, [name, value]) => ((attributesMap[name] = value && value.slice(0, -1)), attributesMap), {})
+        || {},
     children: []
   };
 };

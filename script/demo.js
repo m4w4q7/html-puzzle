@@ -10,13 +10,16 @@ import { shuffle } from './shuffle/index.js';
   ]);
 
   const puzzleComponent = document.querySelector('hpu-puzzle');
-  const previewComponent = document.querySelector('hpu-preview');
-  example.css.forEach(url => previewComponent.addStyleSheet(url));
-  example.js.forEach(url => previewComponent.addScript(url));
+  const goalPreviewComponent = document.querySelector('#goalPreview');
+  const currentPreviewComponent = document.querySelector('#currentPreview');
+  const previews = [goalPreviewComponent, currentPreviewComponent];
+  example.css.forEach(url => previews.forEach(preview => preview.addStyleSheet(url)));
+  example.js.forEach(url => previews.forEach(preview => preview.addStyleScript(url)));
 
   const goal = parse(example.pug);
   const initialModel = shuffle(goal);
   puzzleComponent.model = initialModel;
-  previewComponent.model = initialModel;
-  puzzleComponent.addEventListener('change', event => { previewComponent.model = event.detail.model; });
+  goalPreviewComponent.model = goal;
+  currentPreviewComponent.model = initialModel;
+  puzzleComponent.addEventListener('change', event => { currentPreviewComponent.model = event.detail.model; });
 })();

@@ -10,10 +10,10 @@ const renderElement = ({ tagName, id, classList, attributes, children }) => {
 
 
 const renderAttributes = ({ id, classList, attributes }) => {
-  const allAttributes = { ...attributes };
-  if (id) { allAttributes.id = id; }
-  if (classList.length) allAttributes.class = classList.join(' ');
-  return Object.entries(allAttributes).map(([name, value]) => `${name}="${value}"`).join(' ');
+  const allAttributes = [...attributes];
+  if (id) { allAttributes.push(['id', id]); }
+  if (classList.length) { allAttributes.push(['class', classList.join(' ')]); }
+  return allAttributes.map(([name, value]) => `${name}="${value}"`).join(' ');
 };
 
 

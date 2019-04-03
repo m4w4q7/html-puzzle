@@ -40,13 +40,12 @@ const readId = (line) => {
 const readClassList = (line) => getChildrenWithClass(line, classes.class).map(element => element.textContent.slice(1));
 
 
-const readAttributes = (line) => queryAll(line, selectors.attribute).reduce((attributes, attribute) => {
+const readAttributes = (line) => queryAll(line, selectors.attribute).map((attribute) => {
   const name = attribute.querySelector(selectors.attributeName).textContent;
   const valueElement = attribute.querySelector(selectors.attributeValue);
   const value = valueElement ? valueElement.textContent.slice(1, -1) : '';
-  attributes[name] = value;
-  return attributes;
-}, {});
+  return [name, value];
+});
 
 
 const readText = (element) => ({ type: 'text', text: element.querySelector(selectors.text).textContent });

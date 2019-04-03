@@ -50,8 +50,8 @@ const renderClasses = (classList) => {
 
 
 const renderAttributes = (attributes) => {
-  if (!attributes || !Object.keys(attributes).length) return '';
-  const joinedAttributes = Object.entries(attributes)
+  if (!attributes.length) return '';
+  const joinedAttributes = attributes
     .map(renderAttribute)
     .join('<span class="hpu-puzzle__attribute-separator">, </span>');
   return `<span class="hpu-puzzle__attributes">(${joinedAttributes})</span>`;

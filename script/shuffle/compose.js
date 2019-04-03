@@ -43,7 +43,7 @@ const addClasses = (elements, classes) => {
 
 const addAttributes = (elements, attributeNames, attributeValues) => {
   const attributes = shuffleList(attributeNames).map((name, index) => [name, attributeValues[index]]);
-  attributes.forEach(([name, value]) => getRandomElement(elements).attributes[name] = value); // IMPORTANT TODO: attributes with same name can be lost!!!
+  attributes.forEach(attribute => getRandomElement(elements).attributes.push(attribute));
 };
 
 
@@ -57,6 +57,6 @@ const shuffleList = input => {
 };
 
 
-const createEmptyElement = tagName => ({ type: 'element', tagName, classList: [], attributes: {}, children: [] });
+const createEmptyElement = tagName => ({ type: 'element', tagName, classList: [], attributes: [], children: [] });
 
 const createText = text => ({ type: 'text', text });

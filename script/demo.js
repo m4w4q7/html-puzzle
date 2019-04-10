@@ -5,7 +5,7 @@ import { shuffle } from './shuffle/index.js';
 (async function() {
 
   const [example] = await Promise.all([
-    fetchExample('text-styles'),
+    fetchExample('dropdown'),
     new Promise(resolve => window.addEventListener('DOMContentLoaded', resolve))
   ]);
 

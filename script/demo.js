@@ -14,7 +14,7 @@ import { shuffle } from './shuffle/index.js';
   const currentPreviewComponent = document.querySelector('#currentPreview');
   const previews = [goalPreviewComponent, currentPreviewComponent];
   example.css.forEach(url => previews.forEach(preview => preview.addStyleSheet(url)));
-  example.js.forEach(url => previews.forEach(preview => preview.addStyleScript(url)));
+  example.js.forEach(url => previews.forEach(preview => preview.addScript(url)));
 
   const goal = parse(example.pug);
   const initialModel = shuffle(goal);

@@ -9,7 +9,7 @@ const parseTag = (line) => {
     classList: classes && classes.split('.').slice(1) || [],
     attributes: attributes && attributes.slice(1, -1).split(', ')
       .map(attribute => attribute.split('=\''))
-      .map(([name, value]) => [name, value.slice(0, -1)])
+      .map(([name, value = '']) => [name, value.slice(0, -1)])
         || [],
     children: []
   };

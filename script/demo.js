@@ -3,9 +3,10 @@ import { parse } from './parse.js';
 import { shuffle } from './shuffle/index.js';
 
 (async function() {
+  const exampleName = new URLSearchParams(window.location.search).get('id') || 'dropdown';
 
   const [example] = await Promise.all([
-    fetchExample('dropdown'),
+    fetchExample(exampleName),
     new Promise(resolve => window.addEventListener('DOMContentLoaded', resolve))
   ]);
 

@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>HTML Puzzle</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+
+    <style>
+      html {
+        box-sizing: border-box;
+      }
+
+      *, *:before, *:after {
+        box-sizing: inherit;
+      }
+
+      body {
+        background: rgb(45, 45, 45);
+        color: rgb(200, 200, 200);
+        font-family: 'Roboto', sans-serif;
+        font-size: 16px;
+        margin: 0;
+      }
+
+      .top-menu {
+        background-color: rgb(37, 37, 37);
+        display: flex;
+        height: 48px;
+        justify-content: space-between;
+        padding: 0 16px;
+        position: fixed;
+        top: 0;
+        width: 100vw;
+      }
+
+      .logo {
+        align-items: center;
+        color: #808080;
+        cursor: pointer;
+        display: flex;
+        font-family: "SF Mono", Menlo, Monaco, "Courier New", monospace;
+        font-size: 18px;
+        height: 48px;
+        user-select: none;
+        -moz-user-select: none;
+      }
+
+      .logo__name {
+        color: #569cd6;
+      }
+
+      .login-button {
+        align-items: center;
+        display: flex;
+        height: 48px;
+        padding: 16px;
+        user-select: none;
+        -moz-user-select: none;
+        cursor: pointer;
+      }
+
+      .login-button:hover {
+        background-color: rgb(45, 45, 45);
+        color: rgb(255, 255, 255);
+      }
+
+      .page-content {
+        margin-top: 48px;
+        padding: 16px;
+        height: calc(100vh - 48px);
+      }
+
+      .page-content--centered {
+        align-items: center;
+        display: flex;
+        justify-content: center;
+      }
+
+      .login-box {
+        padding: 24px;
+        background-color: rgb(56, 56, 56);
+        border-radius: 8px;
+      }
+
+      .hpu-input-field {
+        margin-bottom: 24px;
+        overflow: hidden;
+        height: 64px;
+        transition: height .2s;
+      }
+
+      .hpu-input-field--collapsed {
+        height: 0;
+
+      }
+
+      .hpu-label {
+        display: block;
+        margin-bottom: 8px;
+      }
+
+      .hpu-input {
+        display: block;
+        margin-bottom: 8px;
+        background-color: rgb(200, 200, 200);
+        height: 32px;
+        padding: 4px 8px;
+        border-radius: 8px;
+        border: 0;
+        width: 240px;
+
+        color: rgb(0, 0, 0);
+        font-family: 'Roboto', sans-serif;
+        font-size: 16px;
+      }
+
+      .hpu-input:focus {
+        background-color: rgb(255, 255, 255);
+        outline: 0;
+      }
+
+      .hpu-button-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+      }
+
+      .hpu-button {
+        color: rgb(200, 200, 200);
+        height: 32px;
+        border-radius: 8px;
+        border: 1px solid rgb(200, 200, 200);
+        background-color: transparent;
+        font-family: 'Roboto', sans-serif;
+        font-size: 16px;
+      }
+
+      .hpu-button:hover {
+        color: rgb(255, 255, 255);
+        border-color: rgb(255, 255, 255);
+        cursor: pointer;
+      }
+
+      .hpu-button:focus {
+        outline: 0;
+        color: rgb(255, 255, 255);
+        border-color: rgb(255, 255, 255);
+      }
+
+      .hpu-tabs {
+        display: flex;
+        justify-content: space-around;
+        height: 32px;
+        margin-bottom: 24px;
+      }
+
+      .hpu-tab {
+        height: 28px;
+        cursor: pointer;
+        transition: color .2s, border-color .2s;
+      }
+
+      .hpu-tab:not(.hpu-tab--active) {
+        border-bottom: 3px solid rgb(45, 45, 45);
+      }
+
+      .hpu-tab--active {
+        border-bottom: 3px solid rgb(200, 200, 200);
+      }
+
+      .hpu-tab:hover {
+        color: rgb(255, 255, 255);
+        border-bottom: 3px solid rgb(255, 255, 255);
+      }
+
+    </style>
+  </head>
+  <body>
+    <div class="top-menu">
+      <div class="logo">
+        <div>&lt;<span class="logo__name">html-puzzle</span>&gt;</div>
+      </div>
+      <div class="login-button">
+        <div>Login</div>
+      </div>
+    </div>
+    <div class="page-content page-content--centered">
+      <form class="login-box">
+
+        <div class="hpu-tabs">
+          <div id="login-tab" class="hpu-tab hpu-tab--active">Login</div>
+          <div id="register-tab" class="hpu-tab">Register</div>
+        </div>
+
+        <div class="hpu-input-field">
+          <label class="hpu-label" for="name-input">Username:</label>
+          <input id="name-input" class="hpu-input" autocomplete="username">
+        </div>
+
+        <div class="hpu-input-field">
+          <label class="hpu-label" for="password-input">Password:</label>
+          <input id="password-input" class="hpu-input" type="password" autocomplete="current-password">
+        </div>
+
+        <div id="confirm-password-input-field" class="hpu-input-field hpu-input-field--collapsed">
+          <label class="hpu-label" for="confirm-password-input">Confirm password:</label>
+          <input id="confirm-password-input" class="hpu-input" type="password" autocomplete="new-password">
+        </div>
+
+        <div class="hpu-button-container">
+          <button class="hpu-button">Go!</button>
+        </div>
+      </form>
+    </div>
+
+    <script>
+      const loginTab = document.querySelector('#login-tab');
+      const registerTab = document.querySelector('#register-tab');
+      const confirmPasswordInputField = document.querySelector('#confirm-password-input-field');
+      const passwordInput = document.querySelector('#password-input');
+
+      loginTab.addEventListener('click', () => {
+        confirmPasswordInputField.classList.add('hpu-input-field--collapsed');
+        loginTab.classList.add('hpu-tab--active');
+        registerTab.classList.remove('hpu-tab--active');
+        passwordInput.autocomplete = 'current-password';
+      });
+
+      registerTab.addEventListener('click', () => {
+        confirmPasswordInputField.classList.remove('hpu-input-field--collapsed');
+        registerTab.classList.add('hpu-tab--active');
+        loginTab.classList.remove('hpu-tab--active');
+        passwordInput.autocomplete = 'new-password';
+      });
+    </script>
+  </body>
+</html>

@@ -3,92 +3,10 @@
   <head>
     <meta charset="utf-8" />
     <title>HTML Puzzle</title>
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-
     <style>
-      :root {
-        --black: rgb(0, 0, 0);
-        --dark-gray-3: rgb(37, 37, 37);
-        --dark-gray-2: rgb(45, 45, 45);
-        --dark-gray-1: rgb(56, 56, 56);
-        --light-gray-1: rgb(200, 200, 200);
-        --light-gray-2: rgb(220, 220, 220);
-        --white: rgb(255, 255, 255);
-
-        /* code: */
-        --gray: #808080;
-        --dark-blue: #569cd6;
-      }
-
-      html {
-        box-sizing: border-box;
-      }
-
-      *, *:before, *:after {
-        box-sizing: inherit;
-      }
-
-      body {
-        background: var(--dark-gray-2);
-        color: var(--light-gray-1);
-        font-family: 'Roboto', sans-serif;
-        font-size: 16px;
-        margin: 0;
-      }
-
-      .top-menu {
-        background-color: var(--dark-gray-3);
-        display: flex;
-        height: 48px;
-        justify-content: space-between;
-        padding: 0 16px;
-        position: fixed;
-        top: 0;
-        width: 100vw;
-      }
-
-      .logo {
-        align-items: center;
-        color: var(--gray);
-        cursor: pointer;
-        display: flex;
-        font-family: "SF Mono", Menlo, Monaco, "Courier New", monospace;
-        font-size: 18px;
-        height: 48px;
-        user-select: none;
-        -moz-user-select: none;
-      }
-
-      .logo__name {
-        color: var(--dark-blue);
-      }
-
-      .login-button {
-        align-items: center;
-        display: flex;
-        height: 48px;
-        padding: 16px;
-        user-select: none;
-        -moz-user-select: none;
-        cursor: pointer;
-      }
-
-      .login-button:hover {
-        background-color: var(--dark-gray-2);
-        color: var(--white);
-      }
-
-      .page-content {
-        margin-top: 48px;
-        padding: 16px;
-        height: calc(100vh - 48px);
-      }
-
-      .page-content--centered {
-        align-items: center;
-        display: flex;
-        justify-content: center;
-      }
+      @import '/style/variables.css';
+      @import '/style/common.css';
+      @import 'script/components/top-menu/style.css';
 
       .login-box {
         padding: 24px;
@@ -188,16 +106,16 @@
       }
 
     </style>
+
+    <script type="module">
+      import { TopMenuComponent } from './script/components/top-menu/index.js';
+
+      customElements.define('hpu-top-menu', TopMenuComponent);
+    </script>
+
   </head>
   <body>
-    <div class="top-menu">
-      <div class="logo">
-        <div>&lt;<span class="logo__name">html-puzzle</span>&gt;</div>
-      </div>
-      <div class="login-button">
-        <div>Login</div>
-      </div>
-    </div>
+    <hpu-top-menu></hpu-top-menu>
     <div class="page-content page-content--centered">
       <form class="login-box">
 

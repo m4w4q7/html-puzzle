@@ -6,6 +6,20 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 
     <style>
+      :root {
+        --black: rgb(0, 0, 0);
+        --dark-gray-3: rgb(37, 37, 37);
+        --dark-gray-2: rgb(45, 45, 45);
+        --dark-gray-1: rgb(56, 56, 56);
+        --light-gray-1: rgb(200, 200, 200);
+        --light-gray-2: rgb(220, 220, 220);
+        --white: rgb(255, 255, 255);
+
+        /* code: */
+        --gray: #808080;
+        --dark-blue: #569cd6;
+      }
+
       html {
         box-sizing: border-box;
       }
@@ -15,15 +29,15 @@
       }
 
       body {
-        background: rgb(45, 45, 45);
-        color: rgb(200, 200, 200);
+        background: var(--dark-gray-2);
+        color: var(--light-gray-1);
         font-family: 'Roboto', sans-serif;
         font-size: 16px;
         margin: 0;
       }
 
       .top-menu {
-        background-color: rgb(37, 37, 37);
+        background-color: var(--dark-gray-3);
         display: flex;
         height: 48px;
         justify-content: space-between;
@@ -35,7 +49,7 @@
 
       .logo {
         align-items: center;
-        color: #808080;
+        color: var(--gray);
         cursor: pointer;
         display: flex;
         font-family: "SF Mono", Menlo, Monaco, "Courier New", monospace;
@@ -46,7 +60,7 @@
       }
 
       .logo__name {
-        color: #569cd6;
+        color: var(--dark-blue);
       }
 
       .login-button {
@@ -60,8 +74,8 @@
       }
 
       .login-button:hover {
-        background-color: rgb(45, 45, 45);
-        color: rgb(255, 255, 255);
+        background-color: var(--dark-gray-2);
+        color: var(--white);
       }
 
       .page-content {
@@ -78,7 +92,7 @@
 
       .login-box {
         padding: 24px;
-        background-color: rgb(56, 56, 56);
+        background-color: var(--dark-gray-1);
         border-radius: 8px;
       }
 
@@ -102,20 +116,20 @@
       .hpu-input {
         display: block;
         margin-bottom: 8px;
-        background-color: rgb(200, 200, 200);
+        background-color: var(--light-gray-1);
         height: 32px;
         padding: 4px 8px;
         border-radius: 8px;
         border: 0;
         width: 240px;
 
-        color: rgb(0, 0, 0);
+        color: var(--black);
         font-family: 'Roboto', sans-serif;
         font-size: 16px;
       }
 
       .hpu-input:focus {
-        background-color: rgb(255, 255, 255);
+        background-color: var(--white);
         outline: 0;
       }
 
@@ -126,25 +140,25 @@
       }
 
       .hpu-button {
-        color: rgb(200, 200, 200);
+        color: var(--light-gray-1);
         height: 32px;
         border-radius: 8px;
-        border: 1px solid rgb(200, 200, 200);
+        border: 1px solid var(--light-gray-1);
         background-color: transparent;
         font-family: 'Roboto', sans-serif;
         font-size: 16px;
       }
 
       .hpu-button:hover {
-        color: rgb(255, 255, 255);
-        border-color: rgb(255, 255, 255);
+        color: var(--white);
+        border-color: var(--white);
         cursor: pointer;
       }
 
       .hpu-button:focus {
         outline: 0;
-        color: rgb(255, 255, 255);
-        border-color: rgb(255, 255, 255);
+        color: var(--white);
+        border-color: var(--white);
       }
 
       .hpu-tabs {
@@ -161,16 +175,16 @@
       }
 
       .hpu-tab:not(.hpu-tab--active) {
-        border-bottom: 3px solid rgb(45, 45, 45);
+        border-bottom: 3px solid var(--dark-gray-2);
       }
 
       .hpu-tab--active {
-        border-bottom: 3px solid rgb(200, 200, 200);
+        border-bottom: 3px solid var(--light-gray-1);
       }
 
       .hpu-tab:hover {
-        color: rgb(255, 255, 255);
-        border-bottom: 3px solid rgb(255, 255, 255);
+        color: var(--white);
+        border-bottom: 3px solid var(--white);
       }
 
     </style>

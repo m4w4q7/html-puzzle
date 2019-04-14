@@ -13,6 +13,10 @@ import { shuffle } from './shuffle/index.js';
   const puzzleComponent = document.querySelector('hpu-puzzle');
   const goalPreviewComponent = document.querySelector('#goalPreview');
   const currentPreviewComponent = document.querySelector('#currentPreview');
+  const exerciseNameElement = document.querySelector('#exerciseName');
+
+  exerciseNameElement.textContent = example.name;
+
   const previews = [goalPreviewComponent, currentPreviewComponent];
   example.css.forEach(url => previews.forEach(preview => preview.addStyleSheet(url)));
   example.js.forEach(url => previews.forEach(preview => preview.addScript(url)));

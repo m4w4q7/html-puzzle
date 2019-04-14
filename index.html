@@ -11,6 +11,12 @@
       @import '/style/variables.css';
       @import '/style/common.css';
       @import '/script/components/top-menu/style.css';
+
+      .puzzle-container {
+        background-color: rgb(30, 30, 30);
+        height: 100%;
+        padding: 16px 0 0 16px;
+      }
     </style>
 
   </head>
@@ -24,7 +30,9 @@
       </div>
       <hpu-horizontal-resizable ratio="0.66" style="flex: 1 0 0">
 
-        <hpu-puzzle slot="left"></hpu-puzzle>
+        <div class="puzzle-container" slot="left">
+          <hpu-puzzle></hpu-puzzle>
+        </div>
 
         <div slot="right" style="display: flex; flex-direction: column; height: 100%">
           <div>Current:</div>

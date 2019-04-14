@@ -102,3 +102,7 @@ hpu-preview iframe {
   height: 100%;
   width: 100%;
 }
+
+.hpu-title {
+  font-size: 24px;
+}

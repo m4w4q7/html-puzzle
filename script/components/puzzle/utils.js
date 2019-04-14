@@ -1,17 +1,3 @@
-export const forceBetweenBoundaries = (value, min, max) => Math.min(Math.max(value, min), max);
-
-
-export const doOnNext = (element, eventName, callback) => {
-  const unsubscribingCallback = event => {
-    element.removeEventListener(eventName, unsubscribingCallback);
-    callback(event);
-  };
-  element.addEventListener(eventName, unsubscribingCallback);
-  const cancel = () => element.removeEventListener(eventName, unsubscribingCallback);
-  return cancel;
-};
-
-
 export const reflow = element => void element.clientWidth;
 
 

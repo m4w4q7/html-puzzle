@@ -1,4 +1,5 @@
-import { doOnNext, reflow, getDragType } from './utils.js';
+import { reflow, getDragType } from './utils.js';
+import { doOnNext } from '../../utils.js';
 
 const draggedClass = 'hpu-puzzle__dragged';
 

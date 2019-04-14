@@ -1,3 +1,6 @@
+export const minMax = (value, min, max) => Math.min(Math.max(value, min), max);
+
+
 export const createElement = (name, properties, children) => {
   const element = document.createElement(name);
   Object.assign(element, properties);
@@ -7,3 +10,14 @@ export const createElement = (name, properties, children) => {
 
 
 export const fetchText = url => fetch(url).then(response => response.text());
+
+
+export const doOnNext = (element, eventName, callback) => {
+  const unsubscribingCallback = event => {
+    element.removeEventListener(eventName, unsubscribingCallback);
+    callback(event);
+  };
+  element.addEventListener(eventName, unsubscribingCallback);
+  const cancel = () => element.removeEventListener(eventName, unsubscribingCallback);
+  return cancel;
+};

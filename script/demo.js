@@ -19,7 +19,7 @@ import { doOnNext } from './utils.js';
 
   exerciseNameElement.textContent = example.name;
 
-  doOnNext(puzzleComponent, 'click', () => clockComponent.start());
+  doOnNext(puzzleComponent, 'mousedown', () => clockComponent.start());
 
   const previews = [goalPreviewComponent, currentPreviewComponent];
   example.css.forEach(url => previews.forEach(preview => preview.addStyleSheet(url)));

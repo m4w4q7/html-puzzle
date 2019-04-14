@@ -1,6 +1,7 @@
 import { fetchExample } from './examples/fetch.js';
 import { parse } from './parse.js';
 import { shuffle } from './shuffle/index.js';
+import { doOnNext } from './utils.js';
 
 (async function() {
   const exampleName = new URLSearchParams(window.location.search).get('id') || 'dropdown';
@@ -13,9 +14,12 @@ import { shuffle } from './shuffle/index.js';
   const puzzleComponent = document.querySelector('hpu-puzzle');
   const goalPreviewComponent = document.querySelector('#goalPreview');
   const currentPreviewComponent = document.querySelector('#currentPreview');
+  const clockComponent = document.querySelector('hpu-clock');
   const exerciseNameElement = document.querySelector('#exerciseName');
 
   exerciseNameElement.textContent = example.name;
+
+  doOnNext(puzzleComponent, 'click', () => clockComponent.start());
 
   const previews = [goalPreviewComponent, currentPreviewComponent];
   example.css.forEach(url => previews.forEach(preview => preview.addStyleSheet(url)));

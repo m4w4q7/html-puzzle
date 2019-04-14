@@ -32,3 +32,26 @@ body {
   height: calc(100vh - 48px);
 }
 
+.hpu-button {
+  color: var(--light-gray-1);
+  height: 32px;
+  line-height: 32px;
+  padding: 0 8px;
+  border-radius: 8px;
+  border: 1px solid var(--light-gray-1);
+  background-color: transparent;
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+}
+
+.hpu-button:hover {
+  color: var(--white);
+  border-color: var(--white);
+  cursor: pointer;
+}
+
+.hpu-button:focus {
+  outline: 0;
+  color: var(--white);
+  border-color: var(--white);
+}

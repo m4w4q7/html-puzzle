@@ -7,6 +7,7 @@
   position: fixed;
   top: 0;
   width: 100vw;
+  align-items: center;
 }
 
 .hpu-logo {
@@ -23,19 +24,4 @@
 
 .hpu-logo__name {
   color: var(--dark-blue);
-}
-
-.hpu-login-button {
-  align-items: center;
-  display: flex;
-  height: 48px;
-  padding: 16px;
-  user-select: none;
-  -moz-user-select: none;
-  cursor: pointer;
-}
-
-.hpu-login-button:hover {
-  background-color: var(--dark-gray-2);
-  color: var(--white);
 }

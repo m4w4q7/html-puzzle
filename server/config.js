@@ -1,3 +1,3 @@
 module.exports = {
-  port: process.env.port || 5500
+  port: process.env.PORT || 5500
 };

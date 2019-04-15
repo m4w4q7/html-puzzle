@@ -1,9 +1,10 @@
 {
-  "name": "thesis-spike",
+  "name": "html-puzzle",
   "version": "1.0.0",
   "description": "",
-  "main": "script/main.js",
+  "main": "server/index.js",
   "scripts": {
+    "start": "node server/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -15,5 +16,12 @@
   "homepage": "https://bitbucket.org/m4w4q7/thesis-spike#readme",
   "devDependencies": {
     "eslint": "5.14.1"
+  },
+  "dependencies": {
+    "koa": "2.7.0",
+    "koa-static": "5.0.0"
+  },
+  "engines": {
+    "node": "11.x"
   }
 }

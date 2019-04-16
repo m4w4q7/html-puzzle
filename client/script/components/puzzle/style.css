@@ -4,8 +4,8 @@ hpu-puzzle {
   cursor: grab;
   display: block;
   font-family: "SF Mono", Menlo, Monaco, "Courier New", monospace;
-  font-size: 12px;
-  line-height: 18px;
+  font-size: 14px;
+  line-height: 22px;
   user-select: none;
   -webkit-user-select: none;
   white-space: nowrap;

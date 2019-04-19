@@ -2,6 +2,7 @@ import { fetchExample } from './examples/fetch.js';
 import { parse } from './parse.js';
 import { shuffle } from './shuffle/index.js';
 import { doOnNext } from './utils.js';
+import { isEqual } from './model-utils.js';
 
 (async function() {
   const exampleName = new URLSearchParams(window.location.search).get('id') || 'dropdown';
@@ -30,5 +31,8 @@ import { doOnNext } from './utils.js';
   puzzleComponent.model = initialModel;
   goalPreviewComponent.model = goal;
   currentPreviewComponent.model = initialModel;
-  puzzleComponent.addEventListener('change', event => { currentPreviewComponent.model = event.detail.model; });
+  puzzleComponent.addEventListener('change', event => {
+    currentPreviewComponent.model = event.detail.model;
+    if (isEqual(event.detail.model, goal)) { alert('Congratulations! 🙂👍'); }
+  });
 })();

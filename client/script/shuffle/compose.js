@@ -57,6 +57,6 @@ const shuffleList = input => {
 };
 
 
-const createEmptyElement = tagName => ({ type: 'element', tagName, classList: [], attributes: [], children: [] });
+const createEmptyElement = tagName => ({ type: 'element', tagName, id: undefined, classList: [], attributes: [], children: [] });
 
 const createText = text => ({ type: 'text', text });

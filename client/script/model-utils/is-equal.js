@@ -21,9 +21,9 @@ const normalizeElement = (element) => ({
 const normalizeText = ({ type, text }) => ({ type, text });
 
 
-const compareAttributes = ([key1, value1], [key2, value2]) => {
-  if (key1 < key2) { return -1; }
-  if (key1 > key2) { return 1; }
+const compareAttributes = ([name1, value1], [name2, value2]) => {
+  if (name1 < name2) { return -1; }
+  if (name1 > name2) { return 1; }
   if (value1 < value2) { return -1; }
   if (value1 > value2) { return 1; }
   return 0;

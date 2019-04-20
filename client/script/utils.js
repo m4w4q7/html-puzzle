@@ -21,3 +21,9 @@ export const doOnNext = (element, eventName, callback) => {
   const cancel = () => element.removeEventListener(eventName, unsubscribingCallback);
   return cancel;
 };
+
+
+export const pick = (properties, object) => properties.reduce((result, property) => {
+  if (property in object) { result[property] = object[property]; }
+  return result;
+}, {});

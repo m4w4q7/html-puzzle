@@ -1,12 +1,10 @@
+import { AbstractPuzzleSubcomponent } from '../abstract-puzzle-subcomponent/index.js';
 import { createTemplate } from './template.js';
 
-export class PuzzleAttributeComponent extends HTMLElement {
+export class PuzzleAttributeComponent extends AbstractPuzzleSubcomponent {
 
-  constructor() {
-    super();
-    const { content, nodes } = createTemplate();
-    this.attachShadow({ mode: 'open' }).appendChild(content);
-    this._nodes = nodes;
+  static get createTemplate() {
+    return createTemplate;
   }
 
 

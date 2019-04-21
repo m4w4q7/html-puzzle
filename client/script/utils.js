@@ -9,6 +9,21 @@ export const createElement = (name, properties, children) => {
 };
 
 
+export const createDocumentFragment = (children = []) => {
+  const documentFragment = document.createDocumentFragment();
+  children.forEach(child => documentFragment.appendChild(child));
+  return documentFragment;
+};
+
+
+export const clearElement = (element) => {
+  const newElement = element.cloneNode(false);
+  element.insertAdjacentElement('afterend', newElement);
+  element.remove();
+  return newElement;
+};
+
+
 export const fetchText = url => fetch(url).then(response => response.text());
 
 

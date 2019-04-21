@@ -6,21 +6,30 @@ import { PuzzleClassListComponent } from './subcomponents/class-list/index.js';
 import { PuzzleAttributeListComponent } from './subcomponents/attribute-list/index.js';
 import { PuzzleAttributeComponent } from './subcomponents/attribute/index.js';
 import { PuzzleTextComponent } from './subcomponents/text/index.js';
+import { State } from './state.js';
 
 
 export class PuzzleComponent extends HTMLElement {
 
   constructor() {
     super();
+    this._state = new State();
     this._nodes = {
-      blockList: createElement('hpu-puzzle-block-list')
+      blockList: createElement('hpu-puzzle-block-list', { state: this._state })
     };
-    this.attachShadow({ mode: 'open' }).appendChild(this._nodes.blockList);
+    this.attachShadow({ mode: 'open' });
   }
+
 
   set model(value) {
     this._nodes.blockList.model = value;
   }
+
+
+  connectedCallback() {
+    this.shadowRoot.appendChild(this._nodes.blockList);
+  }
+
 
   static define(name) {
     customElements.define('hpu-puzzle-block-list', PuzzleBlockListComponent);

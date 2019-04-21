@@ -9,7 +9,7 @@ export class PuzzleClassListComponent extends AbstractPuzzleSubcomponent {
   }
 
 
-  set classes(classes) {
+  set value(classes) {
     this._nodes.container = clearElement(this._nodes.container);
     this._nodes.container.appendChild(this._createAttributes(classes));
   }

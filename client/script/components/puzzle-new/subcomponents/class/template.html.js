@@ -4,4 +4,5 @@ export default
       color: #9cdcfe;
     }
   </style>` +
-  `<span class="container"></span>`;
+
+  `<span class="class"></span>`;

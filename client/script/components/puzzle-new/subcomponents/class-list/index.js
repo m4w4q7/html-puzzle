@@ -11,12 +11,12 @@ export class PuzzleClassListComponent extends AbstractPuzzleSubcomponent {
 
   set value(classes) {
     this._nodes.container = clearElement(this._nodes.container);
-    this._nodes.container.appendChild(this._createAttributes(classes));
+    this._nodes.container.appendChild(this._createClasses(classes));
   }
 
 
-  _createAttributes(classes) {
-    const nodes = classes.map(className => createElement('span', { className: 'class', textContent: `.${className}` }));
+  _createClasses(classes) {
+    const nodes = classes.map(className => createElement('hpu-puzzle-class', { value: className }));
     return createDocumentFragment(nodes);
   }
 

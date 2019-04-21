@@ -1,7 +1,5 @@
 import { createTemplateFactory } from '../../../../create-template-factory.js';
-import templateHtml from './template.html.js';
 
-
-export const createTemplate = createTemplateFactory(templateHtml, {
+export const createTemplate = createTemplateFactory(`<span class="container"></span>`, {
   container: '.container',
 });

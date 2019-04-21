@@ -15,7 +15,7 @@ export class PuzzleAttributeComponent extends AbstractPuzzleSubcomponent {
 
   set value(value) {
     this._nodes.valueContainer.style.display = value ? '' : 'none';
-    this._nodes.value.textContent = `'${value}'`;
+    this._nodes.value.value = value;
   }
 
 }

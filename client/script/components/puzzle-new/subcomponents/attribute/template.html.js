@@ -3,10 +3,6 @@ export default
     .name {
       color: #ce9178;
     }
-
-    .value {
-      color: #dcdcaa;
-    }
   </style>` +
   `<span class="name"></span>` +
-  `<span class="value-container" style="display: none;">=<span class="value">''</span></span>`;
+  `<span class="value-container" style="display: none;">=<hpu-puzzle-attribute-value class="value">''</hpu-puzzle-attribute-value></span>`;

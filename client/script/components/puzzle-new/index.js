@@ -5,6 +5,7 @@ import { PuzzleIdComponent } from './subcomponents/id/index.js';
 import { PuzzleClassListComponent } from './subcomponents/class-list/index.js';
 import { PuzzleAttributeListComponent } from './subcomponents/attribute-list/index.js';
 import { PuzzleAttributeComponent } from './subcomponents/attribute/index.js';
+import { PuzzleAttributeValueComponent } from './subcomponents/attribute-value/index.js';
 import { PuzzleTextComponent } from './subcomponents/text/index.js';
 import { State } from './state.js';
 
@@ -38,6 +39,7 @@ export class PuzzleComponent extends HTMLElement {
     customElements.define('hpu-puzzle-class-list', PuzzleClassListComponent);
     customElements.define('hpu-puzzle-attribute-list', PuzzleAttributeListComponent);
     customElements.define('hpu-puzzle-attribute', PuzzleAttributeComponent);
+    customElements.define('hpu-puzzle-attribute-value', PuzzleAttributeValueComponent);
     customElements.define('hpu-puzzle-text', PuzzleTextComponent);
     customElements.define(name, PuzzleComponent);
   }

@@ -1,5 +1,6 @@
 import { createElement } from '../../utils.js';
 import { State } from './state.js';
+import { PuzzleContentComponent } from './subcomponents/content/index.js';
 import { PuzzleBlockListComponent } from './subcomponents/block-list/index.js';
 import { PuzzleElementComponent } from './subcomponents/element/index.js';
 import { PuzzleIdComponent } from './subcomponents/id/index.js';
@@ -24,32 +25,33 @@ export class PuzzleComponent extends HTMLElement {
     super();
     this._state = new State();
     this._nodes = {
-      blockList: createElement('hpu-puzzle-block-list', { state: this._state })
+      content: createElement('hpu-puzzle-content')
     };
 
-    this._mouseOverListener = new MouseOverListener(this, this._state);
-    this._mouseLeaveListener = new MouseLeaveListener(this, this._state);
-    this._mouseDownListener = new MouseDownListener(this, this._state);
-    this._mouseUpListener = new MouseUpListener(this, this._state);
+    this._mouseOverListener = new MouseOverListener(this._nodes.content, this._state);
+    this._mouseLeaveListener = new MouseLeaveListener(this._nodes.content, this._state);
+    this._mouseDownListener = new MouseDownListener(this._nodes.content, this._state);
+    this._mouseUpListener = new MouseUpListener(this._nodes.content, this._state);
 
-    this._hoveredPieceObserver = new HoveredPieceObserver(this._state);
-    this._draggedPieceObserver = new DraggedPieceObserver(this._state);
+    this._hoveredPieceObserver = new HoveredPieceObserver(this._nodes.content, this._state);
+    this._draggedPieceObserver = new DraggedPieceObserver(this._nodes.content, this._state);
   }
 
 
   set model(value) {
-    this._nodes.blockList.model = value;
+    this._nodes.content.model = value;
   }
 
 
   connectedCallback() {
-    this.appendChild(this._nodes.blockList);
+    this.appendChild(this._nodes.content);
     this._addEventListeners();
     this._addStateObservers();
   }
 
 
   static define(name) {
+    customElements.define('hpu-puzzle-content', PuzzleContentComponent);
     customElements.define('hpu-puzzle-block-list', PuzzleBlockListComponent);
     customElements.define('hpu-puzzle-element', PuzzleElementComponent);
     customElements.define('hpu-puzzle-id', PuzzleIdComponent);
@@ -64,9 +66,9 @@ export class PuzzleComponent extends HTMLElement {
 
 
   _addEventListeners() {
-    this.addEventListener('mouseover', this._mouseOverListener);
-    this.addEventListener('mouseleave', this._mouseLeaveListener);
-    this.addEventListener('mousedown', this._mouseDownListener);
+    this._nodes.content.addEventListener('mouseover', this._mouseOverListener);
+    this._nodes.content.addEventListener('mouseleave', this._mouseLeaveListener);
+    this._nodes.content.addEventListener('mousedown', this._mouseDownListener);
     document.addEventListener('mouseup', this._mouseUpListener);
   }
 

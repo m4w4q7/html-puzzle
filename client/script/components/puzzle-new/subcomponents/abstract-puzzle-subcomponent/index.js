@@ -1,3 +1,7 @@
+import { createTemplateFactory } from '../../../../create-template-factory.js';
+const createTemplate = createTemplateFactory();
+
+
 export class AbstractPuzzleSubcomponent extends HTMLElement {
 
   constructor() {
@@ -8,7 +12,7 @@ export class AbstractPuzzleSubcomponent extends HTMLElement {
 
 
   static createTemplate() {
-    throw new Error('Abstract getter / method should be overridden!');
+    return createTemplate();
   }
 
 

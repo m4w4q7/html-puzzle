@@ -2,7 +2,8 @@ import { dragStates } from '../enums.js';
 
 export class HoveredPieceObserver {
 
-  constructor(state) {
+  constructor(host, state) {
+    this._host = host;
     this._state = state;
     this._isObserving = false;
   }

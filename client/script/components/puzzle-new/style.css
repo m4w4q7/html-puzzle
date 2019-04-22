@@ -12,6 +12,7 @@ hpu-puzzle {
   min-width: max-content;
 }
 
+hpu-puzzle-content,
 hpu-puzzle-element,
 hpu-puzzle-block-list,
 hpu-puzzle-text {
@@ -26,9 +27,9 @@ hpu-puzzle-attribute-value {
   line-height: 22px;
 }
 
-/* hpu-puzzle.hpu-puzzle--dragging {
+hpu-puzzle-content[dragging] {
   cursor: grabbing;
-} */
+}
 
 hpu-puzzle-element,
 hpu-puzzle-id,

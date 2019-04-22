@@ -26,6 +26,7 @@ export class DraggedPieceObserver {
 
 
   _onDraggingPiece(draggedPiece) {
+    this._host.setAttribute('dragging', '');
     draggedPiece.setAttribute('dragged', '');
 
     if (draggedPiece.pieceType === pieceTypes.element) {
@@ -38,6 +39,7 @@ export class DraggedPieceObserver {
 
 
   _onReleasingPiece(previousDraggedPiece) {
+    this._host.removeAttribute('dragging');
     previousDraggedPiece.removeAttribute('dragged', '');
 
     if (previousDraggedPiece.pieceType === pieceTypes.element) {

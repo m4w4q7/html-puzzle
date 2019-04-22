@@ -2,6 +2,7 @@ export class State {
 
   constructor() {
     this._data = {
+      hoveredPiece: null
     };
     this._observers = {};
     this._createSettersAndGetters();

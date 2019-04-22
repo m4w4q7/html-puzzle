@@ -1,7 +1,7 @@
-import { AbstractPuzzleSubcomponent } from '../abstract-puzzle-subcomponent/index.js';
+import { AbstractPuzzlePiece } from '../abstract-puzzle-piece/index.js';
 import { createTemplate } from './template.js';
 
-export class PuzzleTextComponent extends AbstractPuzzleSubcomponent {
+export class PuzzleTextComponent extends AbstractPuzzlePiece {
 
   constructor() {
     super();

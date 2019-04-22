@@ -1,3 +1,4 @@
+import { pieceTypes } from '../../enums.js';
 import { AbstractPuzzlePiece } from '../abstract-puzzle-piece/index.js';
 import { createTemplate } from './template.js';
 
@@ -8,14 +9,20 @@ export class PuzzleClassComponent extends AbstractPuzzlePiece {
     this._value = null;
   }
 
-  static get createTemplate() {
-    return createTemplate;
+
+  get pieceType() {
+    return pieceTypes.class;
   }
 
 
   set value(value) {
     this._value = value;
     this.textContent = value ? `.${value}` : '';
+  }
+
+
+  static get createTemplate() {
+    return createTemplate;
   }
 
 }

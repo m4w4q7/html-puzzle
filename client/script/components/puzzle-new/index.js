@@ -11,7 +11,10 @@ import { PuzzleAttributeValueComponent } from './subcomponents/attribute-value/i
 import { PuzzleTextComponent } from './subcomponents/text/index.js';
 import { MouseOverListener } from './event-listeners/mouse-over.js';
 import { MouseLeaveListener } from './event-listeners/mouse-leave.js';
-import { HoverHighlighter } from './state-observers/hover-highlighter.js';
+import { MouseDownListener } from './event-listeners/mouse-down.js';
+import { MouseUpListener } from './event-listeners/mouse-up.js';
+import { HoveredPieceObserver } from './state-observers/hovered-piece.js';
+import { DraggedPieceObserver } from './state-observers/dragged-piece.js';
 
 
 
@@ -26,8 +29,11 @@ export class PuzzleComponent extends HTMLElement {
 
     this._mouseOverListener = new MouseOverListener(this, this._state);
     this._mouseLeaveListener = new MouseLeaveListener(this, this._state);
+    this._mouseDownListener = new MouseDownListener(this, this._state);
+    this._mouseUpListener = new MouseUpListener(this, this._state);
 
-    this._hoverHighlighter = new HoverHighlighter(this._state);
+    this._hoveredPieceObserver = new HoveredPieceObserver(this._state);
+    this._draggedPieceObserver = new DraggedPieceObserver(this._state);
   }
 
 
@@ -38,9 +44,8 @@ export class PuzzleComponent extends HTMLElement {
 
   connectedCallback() {
     this.appendChild(this._nodes.blockList);
-    this.addEventListener('mouseover', this._mouseOverListener);
-    this.addEventListener('mouseleave', this._mouseLeaveListener);
-    this._hoverHighlighter.observe();
+    this._addEventListeners();
+    this._addStateObservers();
   }
 
 
@@ -55,6 +60,20 @@ export class PuzzleComponent extends HTMLElement {
     customElements.define('hpu-puzzle-attribute-value', PuzzleAttributeValueComponent);
     customElements.define('hpu-puzzle-text', PuzzleTextComponent);
     customElements.define(name, PuzzleComponent);
+  }
+
+
+  _addEventListeners() {
+    this.addEventListener('mouseover', this._mouseOverListener);
+    this.addEventListener('mouseleave', this._mouseLeaveListener);
+    this.addEventListener('mousedown', this._mouseDownListener);
+    document.addEventListener('mouseup', this._mouseUpListener);
+  }
+
+
+  _addStateObservers() {
+    this._hoveredPieceObserver.observe();
+    this._draggedPieceObserver.observe();
   }
 
 }

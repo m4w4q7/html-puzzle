@@ -1,3 +1,5 @@
+export const reflow = element => void element.clientWidth;
+
 export const findAncestor = (element, container, callback) => {
   let currentElement = element;
   while (currentElement !== container && !callback(currentElement)) {

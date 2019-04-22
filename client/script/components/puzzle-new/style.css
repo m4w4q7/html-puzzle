@@ -13,6 +13,7 @@ hpu-puzzle {
 }
 
 hpu-puzzle-element,
+hpu-puzzle-block-list,
 hpu-puzzle-text {
   display: block;
 }
@@ -37,6 +38,11 @@ hpu-puzzle-attribute-value,
 hpu-puzzle-text {
   border-radius: 5px;
   transition: background-color .2s;
+}
+
+hpu-puzzle-block-list {
+  overflow-y: hidden;
+  transition: height .2s;
 }
 
 .hpu-puzzle-element__tag-name {
@@ -72,9 +78,7 @@ hpu-puzzle-text {
 
 .hpu-puzzle-element__children {
   border-left: 1px solid rgb(64, 64, 64);
-  overflow-y: hidden;
   padding-left: calc(2ch - 1px);
-  transition: height .2s;
 }
 
 hpu-puzzle [hovered] {
@@ -86,15 +90,19 @@ hpu-puzzle-text[hovered] {
   background-color: rgb(32, 42, 52);
 }
 
-/* .hpu-puzzle__inserter {
-  height: 18px;
-  position: relative;
-} */
+hpu-puzzle [dragged] {
+  background-color: rgb(56, 61, 44);
+}
 
 /* .hpu-puzzle__attribute-target,
 .hpu-puzzle__dragged,
 .hpu-puzzle__block.hpu-puzzle__dragged {
   background-color: rgb(56, 61, 44);
+} */
+
+/* .hpu-puzzle__inserter {
+  height: 18px;
+  position: relative;
 } */
 
 /* .hpu-puzzle__attribute-target .hpu-puzzle__attribute-value {

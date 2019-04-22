@@ -14,6 +14,7 @@ import { MouseOverListener } from './event-listeners/mouse-over.js';
 import { MouseLeaveListener } from './event-listeners/mouse-leave.js';
 import { MouseDownListener } from './event-listeners/mouse-down.js';
 import { MouseUpListener } from './event-listeners/mouse-up.js';
+import { MouseMoveListener } from './event-listeners/mouse-move.js';
 import { HoveredPieceObserver } from './state-observers/hovered-piece.js';
 import { DraggedPieceObserver } from './state-observers/dragged-piece.js';
 
@@ -32,6 +33,7 @@ export class PuzzleComponent extends HTMLElement {
     this._mouseLeaveListener = new MouseLeaveListener(this._nodes.content, this._state);
     this._mouseDownListener = new MouseDownListener(this._nodes.content, this._state);
     this._mouseUpListener = new MouseUpListener(this._nodes.content, this._state);
+    this._mouseMoveListener = new MouseMoveListener(this._nodes.content, this._state);
 
     this._hoveredPieceObserver = new HoveredPieceObserver(this._nodes.content, this._state);
     this._draggedPieceObserver = new DraggedPieceObserver(this._nodes.content, this._state);
@@ -70,6 +72,7 @@ export class PuzzleComponent extends HTMLElement {
     this._nodes.content.addEventListener('mouseleave', this._mouseLeaveListener);
     this._nodes.content.addEventListener('mousedown', this._mouseDownListener);
     document.addEventListener('mouseup', this._mouseUpListener);
+    this._nodes.content.addEventListener('mousemove', this._mouseMoveListener);
   }
 
 

@@ -1,5 +1,4 @@
 import { findAncestor } from '../utils.js';
-import { AbstractPuzzlePiece } from '../subcomponents/abstract-puzzle-piece/index.js';
 
 export class MouseOverListener {
 
@@ -15,7 +14,7 @@ export class MouseOverListener {
 
 
   _isPuzzlePiece(element) {
-    return element.tagName.toUpperCase().indexOf('HPU-') === 0 && element instanceof AbstractPuzzlePiece;
+    return element.tagName.toUpperCase().indexOf('HPU-') === 0 && element.pieceType;
   }
 
 }

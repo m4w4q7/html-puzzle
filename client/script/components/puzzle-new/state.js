@@ -7,6 +7,8 @@ export class State {
       hoveredPiece: null,
       draggedPiece: null,
       dragState: dragStates.hover,
+      characterDimensions: { width: 0, height: 0 },
+      cursorPosition: { line: null, character: null },
     };
     this._observers = {};
     this._createSettersAndGetters();

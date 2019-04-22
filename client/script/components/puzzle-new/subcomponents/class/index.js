@@ -3,13 +3,19 @@ import { createTemplate } from './template.js';
 
 export class PuzzleClassComponent extends AbstractPuzzleSubcomponent {
 
+  constructor() {
+    super();
+    this._value = null;
+  }
+
   static get createTemplate() {
     return createTemplate;
   }
 
 
   set value(value) {
-    this._nodes.value.textContent = value ? `.${value}` : '';
+    this._value = value;
+    this.textContent = value ? `.${value}` : '';
   }
 
 }

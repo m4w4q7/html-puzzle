@@ -19,7 +19,6 @@ export class PuzzleComponent extends HTMLElement {
     this._nodes = {
       blockList: createElement('hpu-puzzle-block-list', { state: this._state })
     };
-    this.attachShadow({ mode: 'open' });
   }
 
 
@@ -29,7 +28,7 @@ export class PuzzleComponent extends HTMLElement {
 
 
   connectedCallback() {
-    this.shadowRoot.appendChild(this._nodes.blockList);
+    this.appendChild(this._nodes.blockList);
   }
 
 

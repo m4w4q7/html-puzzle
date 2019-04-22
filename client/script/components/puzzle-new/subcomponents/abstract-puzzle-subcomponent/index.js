@@ -2,16 +2,8 @@ export class AbstractPuzzleSubcomponent extends HTMLElement {
 
   constructor() {
     super();
-    const { content, nodes } = this.constructor.createTemplate();
-    this.attachShadow({ mode: 'open' }).appendChild(content);
-    this._nodes = nodes;
-    this._state = null;
-    this._onChildSubcomponentConnect = this._onChildSubcomponentConnect.bind(this);
-  }
-
-
-  set state(value) {
-    this._state = value;
+    this._wasConnected = false;
+    this._nodes = null;
   }
 
 
@@ -21,14 +13,15 @@ export class AbstractPuzzleSubcomponent extends HTMLElement {
 
 
   connectedCallback() {
-    this.dispatchEvent(new CustomEvent('connected', { bubbles: true, composed: false }));
-    this.shadowRoot.addEventListener('connected', this._onChildSubcomponentConnect);
+    if (this._wasConnected) { return; }
+    const { content, nodes } = this.constructor.createTemplate();
+    this.appendChild(content);
+    this._nodes = nodes;
+    this._wasConnected = true;
+    this._render();
   }
 
 
-  _onChildSubcomponentConnect(event) {
-    event.target.state = this._state;
-    event.stopPropagation();
-  }
+  _render() {}
 
 }

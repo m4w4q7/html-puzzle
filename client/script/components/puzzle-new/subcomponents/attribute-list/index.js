@@ -4,16 +4,28 @@ import { clearElement, createElement, createDocumentFragment } from '../../../..
 
 export class PuzzleAttributeListComponent extends AbstractPuzzleSubcomponent {
 
+  constructor() {
+    super();
+    this._attributes = null;
+  }
+
   static get createTemplate() {
     return createComponentTemplate;
   }
 
 
-  set value(attributes) {
-    this._nodes.attributeContainer = clearElement(this._nodes.attributeContainer);
-    this._nodes.wrapper.style.display = attributes.length ? '' : 'none';
+  set value(value) {
+    this._attributes = value;
+    this._render();
+  }
 
-    this._nodes.attributeContainer.appendChild(this._createAttributes(attributes));
+
+  _render() {
+    if (!this._nodes || !this._attributes) { return; }
+    this._nodes.attributeContainer = clearElement(this._nodes.attributeContainer);
+    this._nodes.wrapper.style.display = this._attributes.length ? '' : 'none';
+
+    this._nodes.attributeContainer.appendChild(this._createAttributes(this._attributes));
   }
 
 

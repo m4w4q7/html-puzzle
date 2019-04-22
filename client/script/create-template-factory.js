@@ -1,6 +1,6 @@
 import { createDocumentFragment } from './utils.js';
 
-export const createTemplateFactory = (htmlTemplate, selectors = {}) => {
+export const createTemplateFactory = (htmlTemplate = '', selectors = {}) => {
   const container = document.createElement('div');
   container.innerHTML = htmlTemplate;
   const documentFragment = createDocumentFragment(Array.from(container.childNodes));

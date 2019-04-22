@@ -12,84 +12,91 @@ hpu-puzzle {
   min-width: max-content;
 }
 
-hpu-puzzle span {
+hpu-puzzle-text {
+  display: block;
+}
+
+hpu-puzzle-id,
+hpu-puzzle-class,
+hpu-puzzle-attribute,
+hpu-puzzle-attribute-value {
   display: inline-block;
   line-height: 22px;
 }
 
-hpu-puzzle.hpu-puzzle--dragging {
+/* hpu-puzzle.hpu-puzzle--dragging {
   cursor: grabbing;
-}
+} */
 
-hpu-puzzle [data-draggable] {
+/* hpu-puzzle [data-draggable] {
   border-radius: 5px;
   transition: background-color .2s;
-}
+} */
 
-.hpu-puzzle__tag-name {
+.hpu-puzzle-element__tag-name {
   color: #569cd6;
 }
 
-.hpu-puzzle__id {
+hpu-puzzle-id {
   color: #b5cea8;
 }
 
-.hpu-puzzle__class {
+hpu-puzzle-class {
   color: #9cdcfe;
 }
 
-.hpu-puzzle__attribute-name {
+.hpu-puzzle-attribute__name {
   color: #ce9178;
 }
 
-.hpu-puzzle__attribute-value {
+hpu-puzzle-attribute-value {
   color: #dcdcaa;
   transition: background-color .2s, opacity .2s;
 }
 
-.hpu-puzzle__attribute-separator {
+/* .hpu-puzzle__attribute-separator {
   white-space: pre-wrap;
-}
+} */
 
-.hpu-puzzle__text {
+hpu-puzzle-text {
   color: #dadada;
   font-weight: bold;
   white-space: pre-wrap;
 }
 
-.hpu-puzzle__children {
+.hpu-puzzle-element__children {
   border-left: 1px solid rgb(64, 64, 64);
   overflow-y: hidden;
   padding-left: calc(2ch - 1px);
   transition: height .2s;
 }
 
-.hpu-puzzle__highlighted {
+/* .hpu-puzzle__highlighted {
   background-color: rgb(66, 87, 108);
-}
+} */
 
-.hpu-puzzle__block.hpu-puzzle__highlighted {
+/* .hpu-puzzle__block.hpu-puzzle__highlighted {
   background-color: rgb(32, 42, 52);
-}
+} */
 
-.hpu-puzzle__inserter {
+/* .hpu-puzzle__inserter {
   height: 18px;
   position: relative;
-}
+} */
 
-.hpu-puzzle__attribute-target,
+/* .hpu-puzzle__attribute-target,
 .hpu-puzzle__dragged,
 .hpu-puzzle__block.hpu-puzzle__dragged {
   background-color: rgb(56, 61, 44);
-}
+} */
 
-.hpu-puzzle__attribute-target .hpu-puzzle__attribute-value {
+/* .hpu-puzzle__attribute-target .hpu-puzzle__attribute-value {
   opacity: .1;
-}
+} */
 
-.hpu-puzzle__positioner {
+/* .hpu-puzzle__positioner {
   position: absolute;
   left: 0;
   right: 0;
   transition: left .2s;
-}
+} */

@@ -1,5 +1,5 @@
 import { createTemplateFactory } from '../../../../create-template-factory.js';
 
-export const createTemplate = createTemplateFactory(`<span class="container"></span>`, {
-  container: '.container',
+export const createTemplate = createTemplateFactory(`<span class="hpu-puzzle-class-list__container"></span>`, {
+  container: '.hpu-puzzle-class-list__container',
 });

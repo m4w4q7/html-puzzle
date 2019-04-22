@@ -10,6 +10,7 @@ import { PuzzleAttributeComponent } from './subcomponents/attribute/index.js';
 import { PuzzleAttributeValueComponent } from './subcomponents/attribute-value/index.js';
 import { PuzzleTextComponent } from './subcomponents/text/index.js';
 import { MouseOverListener } from './event-listeners/mouse-over.js';
+import { MouseLeaveListener } from './event-listeners/mouse-leave.js';
 import { HoverHighlighter } from './state-observers/hover-highlighter.js';
 
 
@@ -24,6 +25,7 @@ export class PuzzleComponent extends HTMLElement {
     };
 
     this._mouseOverListener = new MouseOverListener(this, this._state);
+    this._mouseLeaveListener = new MouseLeaveListener(this, this._state);
 
     this._hoverHighlighter = new HoverHighlighter(this._state);
   }
@@ -37,6 +39,7 @@ export class PuzzleComponent extends HTMLElement {
   connectedCallback() {
     this.appendChild(this._nodes.blockList);
     this.addEventListener('mouseover', this._mouseOverListener);
+    this.addEventListener('mouseleave', this._mouseLeaveListener);
     this._hoverHighlighter.observe();
   }
 

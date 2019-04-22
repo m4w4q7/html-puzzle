@@ -1,4 +1,5 @@
 import { createElement } from '../../utils.js';
+import { State } from './state.js';
 import { PuzzleBlockListComponent } from './subcomponents/block-list/index.js';
 import { PuzzleElementComponent } from './subcomponents/element/index.js';
 import { PuzzleIdComponent } from './subcomponents/id/index.js';
@@ -9,7 +10,8 @@ import { PuzzleAttributeComponent } from './subcomponents/attribute/index.js';
 import { PuzzleAttributeValueComponent } from './subcomponents/attribute-value/index.js';
 import { PuzzleTextComponent } from './subcomponents/text/index.js';
 import { MouseOverListener } from './event-listeners/mouse-over.js';
-import { State } from './state.js';
+import { HoverHighlighter } from './state-observers/hover-highlighter.js';
+
 
 
 export class PuzzleComponent extends HTMLElement {
@@ -20,7 +22,10 @@ export class PuzzleComponent extends HTMLElement {
     this._nodes = {
       blockList: createElement('hpu-puzzle-block-list', { state: this._state })
     };
+
     this._mouseOverListener = new MouseOverListener(this, this._state);
+
+    this._hoverHighlighter = new HoverHighlighter(this._state);
   }
 
 
@@ -32,6 +37,7 @@ export class PuzzleComponent extends HTMLElement {
   connectedCallback() {
     this.appendChild(this._nodes.blockList);
     this.addEventListener('mouseover', this._mouseOverListener);
+    this._hoverHighlighter.observe();
   }
 
 

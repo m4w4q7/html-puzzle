@@ -5,17 +5,15 @@ export class HoveredPieceObserver {
   constructor(host, state) {
     this._host = host;
     this._state = state;
-    this._isObserving = false;
   }
 
 
   observe() {
-    if (this._isObserving) { return; }
-    this._state.observe('hoveredPiece', this._onHoveredPieceCahnge, this);
+    this._state.observe('hoveredPiece', this._onHoveredPieceChange, this);
   }
 
 
-  _onHoveredPieceCahnge(hoveredPiece, previousHoveredPiece) {
+  _onHoveredPieceChange(hoveredPiece, previousHoveredPiece) {
     if (hoveredPiece && this._state.dragState === dragStates.hover) {
       hoveredPiece.setAttribute('hovered', '');
     }

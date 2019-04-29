@@ -5,12 +5,10 @@ export class DraggedPieceObserver {
   constructor(host, state) {
     this._host = host;
     this._state = state;
-    this._isObserving = false;
   }
 
 
   observe() {
-    if (this._isObserving) { return; }
     this._state.observe('draggedPiece', this._onDraggedPieceChange, this);
   }
 
@@ -26,22 +24,19 @@ export class DraggedPieceObserver {
 
 
   _onDraggingPiece(draggedPiece) {
-    this._host.setAttribute('dragging', '');
-    draggedPiece.setAttribute('dragged', '');
-
     if (draggedPiece.pieceType === pieceTypes.element) {
       this._state.dragState = dragStates.beforeDrag;
       draggedPiece.hideChildren(() => this._state.dragState = dragStates.drag);
     } else {
       this._state.dragState = dragStates.drag;
     }
+
+    this._host.setAttribute('dragging', '');
+    draggedPiece.setAttribute('dragged', '');
   }
 
 
   _onReleasingPiece(previousDraggedPiece) {
-    this._host.removeAttribute('dragging');
-    previousDraggedPiece.removeAttribute('dragged', '');
-
     if (previousDraggedPiece.pieceType === pieceTypes.element) {
       this._state.dragState = dragStates.afterDrag;
       previousDraggedPiece.showChildren(() => {
@@ -51,6 +46,9 @@ export class DraggedPieceObserver {
     } else {
       this._state.dragState = dragStates.hover;
     }
+
+    this._host.removeAttribute('dragging');
+    previousDraggedPiece.removeAttribute('dragged', '');
   }
 
 }

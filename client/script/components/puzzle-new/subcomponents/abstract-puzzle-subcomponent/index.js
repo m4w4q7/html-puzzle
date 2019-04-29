@@ -17,12 +17,13 @@ export class AbstractPuzzleSubcomponent extends HTMLElement {
 
 
   connectedCallback() {
-    if (this._wasConnected) { return; }
+    if (this._wasConnected) { return false; }
     const { content, nodes } = this.constructor.createTemplate();
     this.appendChild(content);
     this._nodes = nodes;
     this._wasConnected = true;
     this._render();
+    return true;
   }
 
 

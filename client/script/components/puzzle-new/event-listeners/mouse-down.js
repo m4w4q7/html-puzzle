@@ -11,7 +11,6 @@ export class MouseDownListener {
   handleEvent() {
     if (isBlock(this._state.hoveredPiece)) {
       this._state.characterDimensions = this._host.getCharacterDimensions();
-      this._state.cursorPosition = { line: null, character: null };
     }
     this._state.draggedPiece = this._state.hoveredPiece;
   }

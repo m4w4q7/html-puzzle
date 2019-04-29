@@ -67,19 +67,20 @@ hpu-puzzle-attribute-value {
   transition: background-color .2s, opacity .2s;
 }
 
-/* .hpu-puzzle__attribute-separator {
-  white-space: pre-wrap;
-} */
-
 hpu-puzzle-text {
   color: #dadada;
   font-weight: bold;
   white-space: pre-wrap;
 }
 
+.hpu-puzzle-block-inserter__indentation,
 .hpu-puzzle-element__children {
   border-left: 1px solid rgb(64, 64, 64);
   padding-left: calc(2ch - 1px);
+}
+
+.hpu-puzzle-block-inserter__indentation {
+  height: 100%;
 }
 
 hpu-puzzle [hovered] {
@@ -95,24 +96,36 @@ hpu-puzzle [dragged] {
   background-color: rgb(56, 61, 44);
 }
 
+hpu-puzzle-block-inserter {
+  display: block;
+}
+
+.hpu-puzzle-block-inserter__container {
+  position: relative;
+}
+
+.hpu-puzzle-block-inserter__indentation-container {
+  background-color: rgb(45, 45, 45);
+}
+
+.hpu-puzzle-block-inserter__positioner:not(:empty) + .hpu-puzzle-block-inserter__indentation-container {
+  height: 22px;
+}
+
+.hpu-puzzle-block-inserter__positioner {
+  left: 0;
+  position: absolute;
+  right: 0;
+  transition: left .2s;
+}
+
 /* .hpu-puzzle__attribute-target,
 .hpu-puzzle__dragged,
 .hpu-puzzle__block.hpu-puzzle__dragged {
   background-color: rgb(56, 61, 44);
 } */
 
-/* .hpu-puzzle__inserter {
-  height: 18px;
-  position: relative;
-} */
 
 /* .hpu-puzzle__attribute-target .hpu-puzzle__attribute-value {
   opacity: .1;
-} */
-
-/* .hpu-puzzle__positioner {
-  position: absolute;
-  left: 0;
-  right: 0;
-  transition: left .2s;
 } */

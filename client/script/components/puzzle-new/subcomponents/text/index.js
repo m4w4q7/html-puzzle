@@ -6,6 +6,8 @@ export class PuzzleTextComponent extends AbstractPuzzlePiece {
   constructor() {
     super();
     this._model = null;
+    this.indentation = null;
+    this.parentList = null;
   }
 
 
@@ -14,9 +16,19 @@ export class PuzzleTextComponent extends AbstractPuzzlePiece {
   }
 
 
+  get model() {
+    return this._model;
+  }
+
+
   set model(value) {
     this._model = value;
     this.textContent = `| ${value.text}`;
+  }
+
+
+  getContainedBlocks() {
+    return [this];
   }
 
 }

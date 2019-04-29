@@ -3,6 +3,7 @@ import { dragStates } from './enums.js';
 export class State {
 
   constructor() {
+    this._debug = false;
     this._data = {
       hoveredPiece: null,
       draggedPiece: null,
@@ -17,6 +18,11 @@ export class State {
 
   observe(field, callback, context) {
     if (!this._observers[field]) this._observers[field] = [];
+    const isAlreadyObserving = !!this._observers[field].find(observer => {
+      return observer.callback === callback && observer.context === context;
+    });
+    if (isAlreadyObserving) { return; }
+
     this._observers[field].push({ context, callback });
   }
 
@@ -29,7 +35,7 @@ export class State {
         get: () => this._data[field],
         set: value => {
           if (this._data[field] === value) { return; }
-          console.log('stateChange', field, value);
+          this._logChange(field, value);
           const oldValue = this._data[field];
           this._data[field] = value;
           this._notifyObservers(field, value, oldValue);
@@ -38,9 +44,18 @@ export class State {
     });
   }
 
+
   _notifyObservers(field, newValue, oldValue) {
     if (!this._observers[field]) { return; }
     this._observers[field].forEach(({ callback, context }) => callback.call(context, newValue, oldValue));
+  }
+
+
+  _logChange(field, value) {
+    if (!this._debug) { return; }
+    if (this._debug === '*' || (this._debug.includes && this._debug.includes(field))) {
+      console.log('state change', field, value);
+    }
   }
 
 }

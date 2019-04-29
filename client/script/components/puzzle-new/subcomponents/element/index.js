@@ -10,11 +10,18 @@ export class PuzzleElementComponent extends AbstractPuzzlePiece {
     super();
     this._model = null;
     this._blockListTransitionEndCallback = null;
+    this._indentation = 0;
+    this.parentList = null;
   }
 
 
   get pieceType() {
     return pieceTypes.element;
+  }
+
+
+  get model() {
+    return this._model;
   }
 
 
@@ -24,8 +31,26 @@ export class PuzzleElementComponent extends AbstractPuzzlePiece {
   }
 
 
+  get indentation() {
+    return this._indentation;
+  }
+
+
+  set indentation(value) {
+    if (this._indentation === value) { return; }
+    this._indentation = value;
+    this._applyIndentation();
+  }
+
+
   static get createTemplate() {
     return createTemplate;
+  }
+
+
+  connectedCallback() {
+    if (!super.connectedCallback()) { return; }
+    this._listenForChanges();
   }
 
 
@@ -54,6 +79,16 @@ export class PuzzleElementComponent extends AbstractPuzzlePiece {
   }
 
 
+  adoptBlock(block, previousBlock) {
+    this._nodes.blockList.adoptBlock(block, previousBlock);
+  }
+
+
+  getContainedBlocks() {
+    return [this, ...this._nodes.blockList.getContainedBlocks()];
+  }
+
+
   _registerBlockListTransitionEndCallback(callback) {
     if (!this._blockListTransitionEndCallback) {
       doOnNext(this._nodes.blockList, 'transitionend', () => {
@@ -70,8 +105,28 @@ export class PuzzleElementComponent extends AbstractPuzzlePiece {
   }
 
 
+  _applyIndentation() {
+    if (!this._nodes) { return; }
+    this._nodes.blockList.indentation = this._indentation + 1;
+  }
+
+
+  _listenForChanges() {
+    this._nodes.blockList.addEventListener('change', () => {
+      this._model.children = this._nodes.blockList.model;
+      this._emitChange();
+    });
+  }
+
+
+  _emitChange() {
+    this.dispatchEvent(new CustomEvent('change'));
+  }
+
+
   _render() {
     if (!this._nodes || !this._model) { return; }
+    this._applyIndentation();
     this._nodes.tagName.textContent = this._model.tagName;
     this._nodes.id.value = this._model.id;
     this._nodes.classList.value = this._model.classList;

@@ -24,6 +24,9 @@ export const clearElement = (element) => {
 };
 
 
+export const getLast = list => list[list.length - 1];
+
+
 export const fetchText = url => fetch(url).then(response => response.text());
 
 

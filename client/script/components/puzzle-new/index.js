@@ -10,6 +10,7 @@ import { PuzzleAttributeListComponent } from './subcomponents/attribute-list/ind
 import { PuzzleAttributeComponent } from './subcomponents/attribute/index.js';
 import { PuzzleAttributeValueComponent } from './subcomponents/attribute-value/index.js';
 import { PuzzleTextComponent } from './subcomponents/text/index.js';
+import { PuzzleBlockInserterComponent } from './subcomponents/block-inserter/index.js';
 import { MouseOverListener } from './event-listeners/mouse-over.js';
 import { MouseLeaveListener } from './event-listeners/mouse-leave.js';
 import { MouseDownListener } from './event-listeners/mouse-down.js';
@@ -17,6 +18,7 @@ import { MouseUpListener } from './event-listeners/mouse-up.js';
 import { MouseMoveListener } from './event-listeners/mouse-move.js';
 import { HoveredPieceObserver } from './state-observers/hovered-piece.js';
 import { DraggedPieceObserver } from './state-observers/dragged-piece.js';
+import { BlockDragAndDropHandler } from './state-observers/block-drag-and-drop-handler.js';
 
 
 
@@ -37,6 +39,7 @@ export class PuzzleComponent extends HTMLElement {
 
     this._hoveredPieceObserver = new HoveredPieceObserver(this._nodes.content, this._state);
     this._draggedPieceObserver = new DraggedPieceObserver(this._nodes.content, this._state);
+    this._blockDragAndDropHandler = new BlockDragAndDropHandler(this._nodes.content, this._state);
   }
 
 
@@ -63,6 +66,7 @@ export class PuzzleComponent extends HTMLElement {
     customElements.define('hpu-puzzle-attribute', PuzzleAttributeComponent);
     customElements.define('hpu-puzzle-attribute-value', PuzzleAttributeValueComponent);
     customElements.define('hpu-puzzle-text', PuzzleTextComponent);
+    customElements.define('hpu-puzzle-block-inserter', PuzzleBlockInserterComponent);
     customElements.define(name, PuzzleComponent);
   }
 
@@ -79,6 +83,7 @@ export class PuzzleComponent extends HTMLElement {
   _addStateObservers() {
     this._hoveredPieceObserver.observe();
     this._draggedPieceObserver.observe();
+    this._blockDragAndDropHandler.observe();
   }
 
 }

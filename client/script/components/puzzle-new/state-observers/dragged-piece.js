@@ -1,4 +1,5 @@
 import { pieceTypes, dragStates } from '../enums.js';
+import { reflow } from '../utils.js';
 
 export class DraggedPieceObserver {
 
@@ -31,6 +32,7 @@ export class DraggedPieceObserver {
       this._state.dragState = dragStates.drag;
     }
 
+    reflow(this._host);
     this._host.setAttribute('dragging', '');
     draggedPiece.setAttribute('dragged', '');
   }
@@ -47,6 +49,7 @@ export class DraggedPieceObserver {
       this._state.dragState = dragStates.hover;
     }
 
+    reflow(this._host);
     this._host.removeAttribute('dragging');
     previousDraggedPiece.removeAttribute('dragged', '');
   }

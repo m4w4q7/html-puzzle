@@ -1,4 +1,5 @@
 import { dragStates } from './enums.js';
+import { isEqualArray, get } from '../../utils.js';
 
 export class State {
 
@@ -16,14 +17,15 @@ export class State {
   }
 
 
-  observe(field, callback, context) {
+  observe(fields, callback, context) {
+    const [field, ...path] = Array.isArray(fields) ? fields : [fields];
     if (!this._observers[field]) this._observers[field] = [];
     const isAlreadyObserving = !!this._observers[field].find(observer => {
-      return observer.callback === callback && observer.context === context;
+      return observer.callback === callback && observer.context === context && isEqualArray(path, observer.path);
     });
     if (isAlreadyObserving) { return; }
 
-    this._observers[field].push({ context, callback });
+    this._observers[field].push({ path, context, callback });
   }
 
 
@@ -47,7 +49,12 @@ export class State {
 
   _notifyObservers(field, newValue, oldValue) {
     if (!this._observers[field]) { return; }
-    this._observers[field].forEach(({ callback, context }) => callback.call(context, newValue, oldValue));
+    this._observers[field].forEach(({ path, callback, context }) => {
+      const newValueAtPath = get(path, newValue);
+      const oldValueAtPath = get(path, oldValue);
+      if (newValueAtPath === oldValueAtPath) { return; }
+      callback.call(context, newValueAtPath, oldValueAtPath);
+    });
   }
 
 

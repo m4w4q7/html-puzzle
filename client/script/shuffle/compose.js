@@ -37,7 +37,12 @@ const addIds = (elements, ids) => {
 
 
 const addClasses = (elements, classes) => {
-  classes.forEach(className => getRandomElement(elements).classList.push(className));
+  const classGroups = createClassGroups(classes);
+
+  Object.values(classGroups).forEach(classGroup => {
+    const potentialHosts = [...elements];
+    classGroup.forEach(className => popRandomElement(potentialHosts).classList.push(className));
+  });
 };
 
 
@@ -59,6 +64,16 @@ const shuffleList = input => {
   }
   return output;
 };
+
+
+const createClassGroups = classes => classes.reduce((classGroups, className) => {
+  if (className in classGroups) {
+    classGroups[className].push(className);
+  } else {
+    classGroups[className] = [className];
+  }
+  return classGroups;
+}, {});
 
 
 const createAttributeGroups = (names, values) => {

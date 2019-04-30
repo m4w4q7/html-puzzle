@@ -15,7 +15,7 @@ export class PuzzleAttributeListComponent extends AbstractPuzzleSubcomponent {
 
 
   set value(value) {
-    this._attributes = value;
+    this._attributes = value.sort(([name1], [name2]) => name1 < name2 ? -1 : name1 > name2 ? 1 : 0);
     this._render();
   }
 

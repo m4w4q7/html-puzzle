@@ -15,7 +15,7 @@ export class PuzzleClassListComponent extends AbstractPuzzleSubcomponent {
 
 
   set value(value) {
-    this._value = value;
+    this._value = value.sort();
     this._render();
   }
 

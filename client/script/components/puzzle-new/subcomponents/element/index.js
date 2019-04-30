@@ -65,7 +65,7 @@ export class PuzzleElementComponent extends AbstractPuzzlePiece {
     this._registerBlockListTransitionEndCallback(callback);
 
     this._nodes.blockList.style.height = this._getBlockListFullHeight();
-    reflow(this._nodes.blockList);
+    reflow(this);
     this._nodes.blockList.style.height = '0';
   }
 
@@ -79,7 +79,7 @@ export class PuzzleElementComponent extends AbstractPuzzlePiece {
     });
 
     this._nodes.blockList.style.height = '0';
-    reflow(this._nodes.blockList);
+    reflow(this);
     this._nodes.blockList.style.height = this._getBlockListFullHeight();
   }
 
@@ -99,7 +99,7 @@ export class PuzzleElementComponent extends AbstractPuzzlePiece {
       doOnNext(this._nodes.blockList, 'transitionend', () => {
         this._blockListTransitionEndCallback();
         this._blockListTransitionEndCallback = null;
-      });
+      }, { predicate: event => event.propertyName === 'height' });
     }
     this._blockListTransitionEndCallback = callback;
   }

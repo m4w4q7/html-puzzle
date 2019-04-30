@@ -31,8 +31,8 @@ const addTexts = (rootChildren, elements, texts) => {
 
 
 const addIds = (elements, ids) => {
-  const elementsWithoutId = [...elements];
-  ids.forEach(id => popRandomElement(elementsWithoutId).id = id);
+  const potentialHosts = [...elements];
+  ids.forEach(id => popRandomElement(potentialHosts).id = id);
 };
 
 
@@ -42,8 +42,12 @@ const addClasses = (elements, classes) => {
 
 
 const addAttributes = (elements, attributeNames, attributeValues) => {
-  const attributes = shuffleList(attributeNames).map((name, index) => [name, attributeValues[index]]);
-  attributes.forEach(attribute => getRandomElement(elements).attributes.push(attribute));
+  const attributeGroups = createAttributeGroups(attributeNames, attributeValues);
+
+  Object.entries(attributeGroups).forEach(([name, valueList]) => {
+    const potentialHosts = [...elements];
+    valueList.forEach(value => popRandomElement(potentialHosts).attributes.push([name, value]));
+  });
 };
 
 
@@ -54,6 +58,19 @@ const shuffleList = input => {
     output.push(popRandomElement(list));
   }
   return output;
+};
+
+
+const createAttributeGroups = (names, values) => {
+  const unusedValues = [...values];
+  return names.reduce((attributeGroups, name) => {
+    if (name in attributeGroups) {
+      attributeGroups[name].push(popRandomElement(unusedValues));
+    } else {
+      attributeGroups[name] = [popRandomElement(unusedValues)];
+    }
+    return attributeGroups;
+  }, {});
 };
 
 

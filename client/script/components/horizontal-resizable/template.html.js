@@ -17,7 +17,7 @@ export default `
     }
 
     .horizontal-resizable__separator {
-      cursor: ew-resize;
+      cursor: col-resize;
       flex: 0 0 8px;
       margin: 0 12px;
       user-select: none;

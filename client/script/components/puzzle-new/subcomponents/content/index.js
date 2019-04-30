@@ -38,6 +38,11 @@ export class PuzzleContentComponent extends AbstractPuzzleSubcomponent {
   }
 
 
+  getBlock(index) {
+    return this._nodes.blockList.getContainedBlocks()[index];
+  }
+
+
   showBlockInserter(subject) {
     const blocks = this._nodes.blockList.getContainedBlocks();
     const line = blocks.indexOf(subject);

@@ -14,3 +14,9 @@ export const dragStates = {
   drag: 'drag',
   afterDrag: 'afterDrag'
 };
+
+export const highlightColors = {
+  neutral: Symbol('neutral'),
+  add: Symbol('add'),
+  none: Symbol('none')
+};

@@ -83,16 +83,16 @@ hpu-puzzle-text {
   height: 100%;
 }
 
-hpu-puzzle [hovered] {
+hpu-puzzle [highlight='neutral'] {
   background-color: rgb(66, 87, 108);
 }
 
-hpu-puzzle-element[hovered],
-hpu-puzzle-text[hovered] {
+hpu-puzzle-element[highlight='neutral'],
+hpu-puzzle-text[highlight='neutral'] {
   background-color: rgb(32, 42, 52);
 }
 
-hpu-puzzle [dragged] {
+hpu-puzzle [highlight='add'] {
   background-color: rgb(56, 61, 44);
 }
 
@@ -118,13 +118,6 @@ hpu-puzzle-block-inserter {
   right: 0;
   transition: left .2s;
 }
-
-/* .hpu-puzzle__attribute-target,
-.hpu-puzzle__dragged,
-.hpu-puzzle__block.hpu-puzzle__dragged {
-  background-color: rgb(56, 61, 44);
-} */
-
 
 /* .hpu-puzzle__attribute-target .hpu-puzzle__attribute-value {
   opacity: .1;

@@ -1,5 +1,4 @@
 import { dragStates } from '../enums.js';
-import { isBlock } from '../utils.js';
 
 export class MouseMoveListener {
 
@@ -10,14 +9,9 @@ export class MouseMoveListener {
 
 
   handleEvent(event) {
-    if (!this._isDraggingBlock()) { return; }
+    if (this._state.dragState !== dragStates.drag) { return; }
     const cursorPosition = this._calculateCursorPosition(event);
     this._updateCursorPosition(cursorPosition);
-  }
-
-
-  _isDraggingBlock() {
-    return this._state.dragState === dragStates.drag && isBlock(this._state.draggedPiece);
   }
 
 

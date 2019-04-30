@@ -1,4 +1,4 @@
-import { pick } from '../utils.js';
+import { pick, isEqualArray } from '../utils.js';
 
 export const calculateHint = (current, target) => {
   const targetFlatPieces = flattenPieces(target);
@@ -64,7 +64,3 @@ const isSamePiece = (piece1, piece2) => piece1.type === piece2.type && piece1.va
 
 const isAtSameLocation = (piece1, piece2) =>
   isEqualArray(piece1.path, piece2.path) && piece1.hostAttribute === piece2.hostAttribute;
-
-
-const isEqualArray = (array1, array2) =>
-  array1.length === array2.length && array1.every((element, index) => element === array2[index]);

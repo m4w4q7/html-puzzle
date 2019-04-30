@@ -16,9 +16,10 @@ import { MouseLeaveListener } from './event-listeners/mouse-leave.js';
 import { MouseDownListener } from './event-listeners/mouse-down.js';
 import { MouseUpListener } from './event-listeners/mouse-up.js';
 import { MouseMoveListener } from './event-listeners/mouse-move.js';
-import { HoveredPieceObserver } from './state-observers/hovered-piece.js';
-import { DraggedPieceObserver } from './state-observers/dragged-piece.js';
+import { HoverHighlightHandler } from './state-observers/hover-highlight-handler.js';
+import { DragTransitionHandler } from './state-observers/drag-transition-handler.js';
 import { BlockDragAndDropHandler } from './state-observers/block-drag-and-drop-handler.js';
+import { IdDragAndDropHandler } from './state-observers/id-drag-and-drop-handler.js';
 
 
 
@@ -37,9 +38,10 @@ export class PuzzleComponent extends HTMLElement {
     this._mouseUpListener = new MouseUpListener(this._nodes.content, this._state);
     this._mouseMoveListener = new MouseMoveListener(this._nodes.content, this._state);
 
-    this._hoveredPieceObserver = new HoveredPieceObserver(this._nodes.content, this._state);
-    this._draggedPieceObserver = new DraggedPieceObserver(this._nodes.content, this._state);
+    this._hoverHighlightHandler = new HoverHighlightHandler(this._nodes.content, this._state);
+    this._dragTransitionHandler = new DragTransitionHandler(this._nodes.content, this._state);
     this._blockDragAndDropHandler = new BlockDragAndDropHandler(this._nodes.content, this._state);
+    this._idDragAndDropHandler = new IdDragAndDropHandler(this._nodes.content, this._state);
   }
 
 
@@ -81,9 +83,10 @@ export class PuzzleComponent extends HTMLElement {
 
 
   _addStateObservers() {
-    this._hoveredPieceObserver.observe();
-    this._draggedPieceObserver.observe();
+    this._hoverHighlightHandler.observe();
+    this._dragTransitionHandler.observe();
     this._blockDragAndDropHandler.observe();
+    this._idDragAndDropHandler.observe();
   }
 
 }

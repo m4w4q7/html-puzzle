@@ -43,6 +43,11 @@ export class PuzzleElementComponent extends AbstractPuzzlePiece {
   }
 
 
+  get idPiece() {
+    return this._nodes && this._nodes.id;
+  }
+
+
   static get createTemplate() {
     return createTemplate;
   }
@@ -114,6 +119,10 @@ export class PuzzleElementComponent extends AbstractPuzzlePiece {
   _listenForChanges() {
     this._nodes.blockList.addEventListener('change', () => {
       this._model.children = this._nodes.blockList.model;
+      this._emitChange();
+    });
+    this._nodes.id.addEventListener('change', () => {
+      this._model.id = this._nodes.id.value;
       this._emitChange();
     });
   }

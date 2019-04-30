@@ -45,3 +45,12 @@ export const pick = (properties, object) => properties.reduce((result, property)
   if (property in object) { result[property] = object[property]; }
   return result;
 }, {});
+
+
+export const get = (path, object) => path.reduce((currentLevel, key) => {
+  return (currentLevel && typeof currentLevel === 'object') ? currentLevel[key] : undefined;
+}, object);
+
+
+export const isEqualArray = (array1, array2) =>
+  array1.length === array2.length && array1.every((element, index) => element === array2[index]);

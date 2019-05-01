@@ -25,9 +25,20 @@ export class PuzzleContentComponent extends AbstractPuzzleSubcomponent {
   }
 
 
+  get model() {
+    return this._model;
+  }
+
+
   set model(model) {
     this._model = model;
     this._render();
+  }
+
+
+  connectedCallback() {
+    if (!super.connectedCallback()) { return; }
+    this._listenForChanges();
   }
 
 
@@ -69,6 +80,11 @@ export class PuzzleContentComponent extends AbstractPuzzleSubcomponent {
     adopter.adoptBlock(this._inserter.subject, previousSibling);
     this._nodes.blockInserter.remove();
     this._clearInserter();
+  }
+
+
+  emitChange() {
+    this.dispatchEvent(new CustomEvent('change'));
   }
 
 
@@ -118,6 +134,13 @@ export class PuzzleContentComponent extends AbstractPuzzleSubcomponent {
 
   _clearInserter() {
     this._inserter = { subject: null, notDraggedBlock: null, line: null, minIndentation: null, maxIndentation: null };
+  }
+
+
+  _listenForChanges() {
+    this._nodes.blockList.addEventListener('change', () => {
+      this._model = this._nodes.blockList.model;
+    });
   }
 
 

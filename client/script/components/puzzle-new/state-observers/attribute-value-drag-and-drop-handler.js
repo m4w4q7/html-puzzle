@@ -94,6 +94,8 @@ export class AttributeValueDragAndDropHandler {
     this._previousTargetAttribute.highlight(highlightColors.none);
     this._previousTargetAttribute.valueComponent.highlight(highlightColors.none);
     draggedPiece.parentAttribute.applyValue(targetValue);
+
+    this._host.emitChange();
   }
 
 }

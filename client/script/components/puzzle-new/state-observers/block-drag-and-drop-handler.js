@@ -21,7 +21,10 @@ export class BlockDragAndDropHandler {
       this._lastDraggedPiece = this._state.draggedPiece;
       if (isBlock(this._state.draggedPiece)) { this._host.showBlockInserter(this._state.draggedPiece); }
     } else if (previousDragState === dragStates.drag) {
-      if (isBlock(this._lastDraggedPiece)) { this._host.adoptBlockInserterSubject(); }
+      if (isBlock(this._lastDraggedPiece)) {
+        this._host.adoptBlockInserterSubject();
+        this._host.emitChange();
+      }
     }
   }
 

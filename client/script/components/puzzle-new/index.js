@@ -34,6 +34,7 @@ export class PuzzleComponent extends HTMLElement {
     this._nodes = {
       content: createElement('hpu-puzzle-content')
     };
+    this._model = null;
 
     this._mouseOverListener = new MouseOverListener(this._nodes.content, this._state);
     this._mouseLeaveListener = new MouseLeaveListener(this._nodes.content, this._state);
@@ -48,10 +49,18 @@ export class PuzzleComponent extends HTMLElement {
     this._classDragAndDropHandler = new ClassDragAndDropHandler(this._nodes.content, this._state);
     this._attributeDragAndDropHandler = new AttributeDragAndDropHandler(this._nodes.content, this._state);
     this._attributeValueDragAndDropHandler = new AttributeValueDragAndDropHandler(this._nodes.content, this._state);
+
+    this._onChange = this._onChange.bind(this);
+  }
+
+
+  get model() {
+    return this._model;
   }
 
 
   set model(value) {
+    this._model = value;
     this._nodes.content.model = value;
   }
 
@@ -85,6 +94,8 @@ export class PuzzleComponent extends HTMLElement {
     this._nodes.content.addEventListener('mousedown', this._mouseDownListener);
     document.addEventListener('mouseup', this._mouseUpListener);
     this._nodes.content.addEventListener('mousemove', this._mouseMoveListener);
+
+    this._nodes.content.addEventListener('change', this._onChange);
   }
 
 
@@ -96,6 +107,12 @@ export class PuzzleComponent extends HTMLElement {
     this._classDragAndDropHandler.observe();
     this._attributeDragAndDropHandler.observe();
     this._attributeValueDragAndDropHandler.observe();
+  }
+
+
+  _onChange() {
+    this._model = this._nodes.content.model;
+    this.dispatchEvent(new CustomEvent('change', { detail: { model: this._model } }));
   }
 
 }

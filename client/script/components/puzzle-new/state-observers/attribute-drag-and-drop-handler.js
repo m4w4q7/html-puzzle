@@ -62,6 +62,8 @@ export class AttributeDragAndDropHandler extends AbstractElementPartDragAndDropH
   _onDragEnd(draggedPiece) {
     this._previousTargetAttributeList.applyPreview();
     draggedPiece.parentList.applyPreview();
+
+    this._host.emitChange();
   }
 
 }

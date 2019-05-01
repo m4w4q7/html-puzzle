@@ -31,6 +31,8 @@ export class IdDragAndDropHandler extends AbstractElementPartDragAndDropHandler 
   _onDragEnd(draggedPiece) {
     this._targetId.applyPreview();
     draggedPiece.applyPreview();
+
+    this._host.emitChange();
   }
 
 }

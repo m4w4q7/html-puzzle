@@ -59,6 +59,8 @@ export class ClassDragAndDropHandler extends AbstractElementPartDragAndDropHandl
   _onDragEnd(draggedPiece) {
     this._previousTargetClassList.applyPreview();
     draggedPiece.parentList.applyPreview();
+
+    this._host.emitChange();
   }
 
 }

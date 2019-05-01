@@ -40,12 +40,6 @@ export class PuzzleBlockListComponent extends AbstractPuzzleSubcomponent {
   }
 
 
-  connectedCallback() {
-    if (!super.connectedCallback()) { return; }
-    this._nodes.blocks = [];
-  }
-
-
   getContainedBlocks() {
     return this._nodes.blocks.map(block => block.getContainedBlocks()).flat();
   }

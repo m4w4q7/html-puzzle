@@ -20,7 +20,6 @@ export class PuzzleBlockInserterComponent extends AbstractPuzzleSubcomponent {
 
   connectedCallback() {
     if (super.connectedCallback()) {
-      this._nodes.indentations = [];
       this._nodes.positioner.addEventListener('transitionend', this._removeUnnecessaryIndentations);
     } else {
       this._removeUnnecessaryIndentations();

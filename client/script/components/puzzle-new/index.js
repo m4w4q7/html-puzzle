@@ -20,6 +20,7 @@ import { HoverHighlightHandler } from './state-observers/hover-highlight-handler
 import { DragTransitionHandler } from './state-observers/drag-transition-handler.js';
 import { BlockDragAndDropHandler } from './state-observers/block-drag-and-drop-handler.js';
 import { IdDragAndDropHandler } from './state-observers/id-drag-and-drop-handler.js';
+import { ClassDragAndDropHandler } from './state-observers/class-drag-and-drop-handler.js';
 
 
 
@@ -42,6 +43,7 @@ export class PuzzleComponent extends HTMLElement {
     this._dragTransitionHandler = new DragTransitionHandler(this._nodes.content, this._state);
     this._blockDragAndDropHandler = new BlockDragAndDropHandler(this._nodes.content, this._state);
     this._idDragAndDropHandler = new IdDragAndDropHandler(this._nodes.content, this._state);
+    this._classDragAndDropHandler = new ClassDragAndDropHandler(this._nodes.content, this._state);
   }
 
 
@@ -87,6 +89,7 @@ export class PuzzleComponent extends HTMLElement {
     this._dragTransitionHandler.observe();
     this._blockDragAndDropHandler.observe();
     this._idDragAndDropHandler.observe();
+    this._classDragAndDropHandler.observe();
   }
 
 }

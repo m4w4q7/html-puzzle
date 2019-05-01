@@ -43,8 +43,13 @@ export class PuzzleElementComponent extends AbstractPuzzlePiece {
   }
 
 
-  get idPiece() {
+  get idComponent() {
     return this._nodes && this._nodes.id;
+  }
+
+
+  get classListComponent() {
+    return this._nodes && this._nodes.classList;
   }
 
 
@@ -125,6 +130,10 @@ export class PuzzleElementComponent extends AbstractPuzzlePiece {
       this._model.id = this._nodes.id.value;
       this._emitChange();
     });
+    this._nodes.classList.addEventListener('change', () => {
+      this._model.classList = this._nodes.classList.model;
+      this._emitChange();
+    });
   }
 
 
@@ -138,7 +147,7 @@ export class PuzzleElementComponent extends AbstractPuzzlePiece {
     this._applyIndentation();
     this._nodes.tagName.textContent = this._model.tagName;
     this._nodes.id.value = this._model.id;
-    this._nodes.classList.value = this._model.classList;
+    this._nodes.classList.model = this._model.classList;
     this._nodes.attributeList.value = this._model.attributes;
     this._nodes.blockList.model = this._model.children;
   }

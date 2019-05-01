@@ -22,7 +22,7 @@ export class IdDragAndDropHandler extends AbstractElementPartDragAndDropHandler 
 
   _onDragMove(targetElement) {
     if (this._targetId !== this._draggedPiece) { this._targetId.cancelPreview(); }
-    this._targetId = targetElement.idPiece;
+    this._targetId = targetElement.idComponent;
     this._targetId.preview(this._draggedPiece.value, highlightColors.add);
     if (this._targetId !== this._draggedPiece) { this._draggedPiece.preview(this._targetId.value); }
   }

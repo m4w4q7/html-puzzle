@@ -5,6 +5,8 @@ export class AbstractPuzzlePiece extends AbstractPuzzleSubcomponent {
 
   highlight(color) {
     const colorValue = colorMap[color];
+    const currentColorValue = this.getAttribute('highlight');
+    if (currentColorValue === colorValue || (!colorValue && currentColorValue === null)) { return; }
     colorValue ? this.setAttribute('highlight', colorValue) : this.removeAttribute('highlight');
   }
 

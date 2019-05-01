@@ -9,6 +9,7 @@ export class PuzzleAttributeListComponent extends AbstractPuzzleSubcomponent {
     super();
     this._model = null;
     this._renderer = new AttributeListRenderer(this);
+    this._onAttributeChange = this._onAttributeChange.bind(this);
   }
 
   static get createTemplate() {
@@ -77,13 +78,19 @@ export class PuzzleAttributeListComponent extends AbstractPuzzleSubcomponent {
   }
 
 
+  _onAttributeChange() {
+    this._model = this._model.map(([name]) => this._nodes.attributes[name].model);
+    this._emitChange();
+  }
+
+
   _render() {
     if (!this._nodes || !this._model) { return; }
-    this._nodes = this._renderer.render(this._nodes, {
-      model: this._model,
-      preview: this._preview,
-      previewColor: this._previewColor
-    });
+    this._nodes = this._renderer.render(
+      this._nodes,
+      { model: this._model, preview: this._preview, previewColor: this._previewColor },
+      { onChange: this._onAttributeChange }
+    );
   }
 
 }

@@ -22,6 +22,7 @@ import { BlockDragAndDropHandler } from './state-observers/block-drag-and-drop-h
 import { IdDragAndDropHandler } from './state-observers/id-drag-and-drop-handler.js';
 import { ClassDragAndDropHandler } from './state-observers/class-drag-and-drop-handler.js';
 import { AttributeDragAndDropHandler } from './state-observers/attribute-drag-and-drop-handler.js';
+import { AttributeValueDragAndDropHandler } from './state-observers/attribute-value-drag-and-drop-handler.js';
 
 
 
@@ -46,6 +47,7 @@ export class PuzzleComponent extends HTMLElement {
     this._idDragAndDropHandler = new IdDragAndDropHandler(this._nodes.content, this._state);
     this._classDragAndDropHandler = new ClassDragAndDropHandler(this._nodes.content, this._state);
     this._attributeDragAndDropHandler = new AttributeDragAndDropHandler(this._nodes.content, this._state);
+    this._attributeValueDragAndDropHandler = new AttributeValueDragAndDropHandler(this._nodes.content, this._state);
   }
 
 
@@ -93,6 +95,7 @@ export class PuzzleComponent extends HTMLElement {
     this._idDragAndDropHandler.observe();
     this._classDragAndDropHandler.observe();
     this._attributeDragAndDropHandler.observe();
+    this._attributeValueDragAndDropHandler.observe();
   }
 
 }

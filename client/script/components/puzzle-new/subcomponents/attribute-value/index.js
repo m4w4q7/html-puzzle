@@ -5,12 +5,18 @@ export class PuzzleAttributeValueComponent extends AbstractPuzzlePiece {
 
   constructor() {
     super();
+    this.parentAttribute = null;
     this._value = null;
   }
 
 
   get pieceType() {
     return pieceTypes.attributeValue;
+  }
+
+
+  get value() {
+    return this._value;
   }
 
 

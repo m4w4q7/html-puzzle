@@ -1,6 +1,5 @@
 import { getListDifference } from '../../utils.js';
 import { createElement } from '../../../../utils.js';
-import { highlightColors } from '../../enums.js';
 
 export class AttributeListRenderer {
 
@@ -9,14 +8,17 @@ export class AttributeListRenderer {
     this._nodes = null;
     this._preview = null;
     this._previewColor = null;
+    this._eventHandlers = null;
     this._renderAttribute = this._renderAttribute.bind(this);
   }
 
 
-  render(nodes, { model, preview, previewColor }) {
+  render(nodes, { model, preview, previewColor }, eventHandlers) {
     this._nodes = { ...nodes, attributes: { ...nodes.attributes } };
     this._preview = preview;
     this._previewColor = previewColor;
+    this._eventHandlers = null;
+    this._eventHandlers = eventHandlers;
 
     const modelWithPreview = this._getModelWithPreview(model);
     modelWithPreview.forEach(this._renderAttribute);
@@ -88,7 +90,9 @@ export class AttributeListRenderer {
 
 
   _createAttribute() {
-    return createElement('hpu-puzzle-attribute', { parentList: this._host });
+    const attribute = createElement('hpu-puzzle-attribute', { parentList: this._host });
+    attribute.addEventListener('change', this._eventHandlers.onChange);
+    return attribute;
   }
 
 

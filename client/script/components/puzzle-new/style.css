@@ -108,6 +108,10 @@ hpu-puzzle [highlight='add'] {
   background-color: rgb(56, 61, 44);
 }
 
+hpu-puzzle-attribute[highlight='add'] hpu-puzzle-attribute-value[highlight='add'] {
+  opacity: .1;
+}
+
 hpu-puzzle-block-inserter {
   display: block;
 }
@@ -130,7 +134,3 @@ hpu-puzzle-block-inserter {
   right: 0;
   transition: left .2s;
 }
-
-/* .hpu-puzzle__attribute-target .hpu-puzzle__attribute-value {
-  opacity: .1;
-} */

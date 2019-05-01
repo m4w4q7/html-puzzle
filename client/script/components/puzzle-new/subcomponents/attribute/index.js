@@ -19,6 +19,11 @@ export class PuzzleAttributeComponent extends AbstractPuzzlePiece {
   }
 
 
+  get valueComponent() {
+    return this._nodes && this._nodes.value;
+  }
+
+
   get model() {
     return this._model;
   }
@@ -35,6 +40,12 @@ export class PuzzleAttributeComponent extends AbstractPuzzlePiece {
   }
 
 
+  connectedCallback() {
+    if (!super.connectedCallback()) { return; }
+    this._nodes.value.parentAttribute = this;
+  }
+
+
   preview(model, highlightColor = highlightColors.none) {
     this._preview = model;
     this._previewColor = highlightColor;
@@ -47,6 +58,18 @@ export class PuzzleAttributeComponent extends AbstractPuzzlePiece {
     this._preview = null;
     this._previewColor = highlightColors.none;
     this._render();
+  }
+
+
+  applyValue(value) {
+    this._model = [this._model[0], value];
+    this._render();
+    this._emitChange();
+  }
+
+
+  _emitChange() {
+    this.dispatchEvent(new CustomEvent('change'));
   }
 
 

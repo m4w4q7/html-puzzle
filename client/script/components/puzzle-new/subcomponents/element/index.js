@@ -53,6 +53,11 @@ export class PuzzleElementComponent extends AbstractPuzzlePiece {
   }
 
 
+  get attributeListComponent() {
+    return this._nodes && this._nodes.attributeList;
+  }
+
+
   static get createTemplate() {
     return createTemplate;
   }
@@ -122,18 +127,20 @@ export class PuzzleElementComponent extends AbstractPuzzlePiece {
 
 
   _listenForChanges() {
-    this._nodes.blockList.addEventListener('change', () => {
-      this._model.children = this._nodes.blockList.model;
-      this._emitChange();
-    });
-    this._nodes.id.addEventListener('change', () => {
-      this._model.id = this._nodes.id.value;
-      this._emitChange();
-    });
-    this._nodes.classList.addEventListener('change', () => {
-      this._model.classList = this._nodes.classList.model;
-      this._emitChange();
-    });
+    this._nodes.blockList
+      .addEventListener('change', () => this._updateModel('children', this._nodes.blockList.model));
+    this._nodes.id
+      .addEventListener('change', () => this._updateModel('id', this._nodes.id.value));
+    this._nodes.classList
+      .addEventListener('change', () => this._updateModel('classList', this._nodes.classList.model));
+    this._nodes.attributeList
+      .addEventListener('change', () => this._updateModel('attributes', this._nodes.attributeList.model));
+  }
+
+
+  _updateModel(field, value) {
+    this._model[field] = value;
+    this._emitChange();
   }
 
 
@@ -148,7 +155,7 @@ export class PuzzleElementComponent extends AbstractPuzzlePiece {
     this._nodes.tagName.textContent = this._model.tagName;
     this._nodes.id.value = this._model.id;
     this._nodes.classList.model = this._model.classList;
-    this._nodes.attributeList.value = this._model.attributes;
+    this._nodes.attributeList.model = this._model.attributes;
     this._nodes.blockList.model = this._model.children;
   }
 

@@ -38,7 +38,7 @@ export class PuzzleClassListComponent extends AbstractPuzzleSubcomponent {
     if (!this.has(value)) { return; }
     this._model = this._model.filter(className => className !== value);
     this._render();
-    this.dispatchEvent(new CustomEvent('change'));
+    this._emitChange();
   }
 
 
@@ -62,6 +62,11 @@ export class PuzzleClassListComponent extends AbstractPuzzleSubcomponent {
 
     if (!this.has(this._preview)) { this._model.splice(this._getIndex(this._preview), 0, this._preview); }
     this.cancelPreview();
+    this._emitChange();
+  }
+
+
+  _emitChange() {
     this.dispatchEvent(new CustomEvent('change'));
   }
 

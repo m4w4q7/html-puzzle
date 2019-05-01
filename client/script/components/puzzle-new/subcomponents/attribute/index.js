@@ -1,13 +1,16 @@
 import { pieceTypes } from '../../enums.js';
 import { AbstractPuzzlePiece } from '../abstract-puzzle-piece/index.js';
 import { createTemplate } from './template.js';
+import { highlightColors } from '../../enums.js';
 
 export class PuzzleAttributeComponent extends AbstractPuzzlePiece {
 
   constructor() {
     super();
-    this._name = null;
-    this._value = null;
+    this._model = null;
+    this._preview = null;
+    this._previewColor =
+    this.parentList = null;
   }
 
 
@@ -16,14 +19,13 @@ export class PuzzleAttributeComponent extends AbstractPuzzlePiece {
   }
 
 
-  set name(value) {
-    this._name = value;
-    this._render();
+  get model() {
+    return this._model;
   }
 
 
-  set value(value) {
-    this._value = value;
+  set model(value) {
+    this._model = value;
     this._render();
   }
 
@@ -33,11 +35,28 @@ export class PuzzleAttributeComponent extends AbstractPuzzlePiece {
   }
 
 
+  preview(model, highlightColor = highlightColors.none) {
+    this._preview = model;
+    this._previewColor = highlightColor;
+    this._render();
+  }
+
+
+  cancelPreview() {
+    if (this._preview === null) { return; }
+    this._preview = null;
+    this._previewColor = highlightColors.none;
+    this._render();
+  }
+
+
   _render() {
-    if (!this._nodes || this._name === null || this._value === null) { return; }
-    this._nodes.name.textContent = this._name;
-    this._nodes.valueContainer.style.display = this._value ? '' : 'none';
-    this._nodes.value.value = this._value;
+    if (!this._nodes || !(this._model || this._preview)) { return; }
+    const [name, value] = this._preview || this._model;
+    this._nodes.name.textContent = name;
+    this._nodes.valueContainer.style.display = value ? '' : 'none';
+    this._nodes.value.value = value;
+    this.highlight(this._previewColor);
   }
 
 }

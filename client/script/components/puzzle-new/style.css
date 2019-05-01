@@ -92,6 +92,18 @@ hpu-puzzle-text[highlight='neutral'] {
   background-color: rgb(32, 42, 52);
 }
 
+.hpu-puzzle-attribute-list__container:not(:empty):before {
+  content: '(';
+}
+
+.hpu-puzzle-attribute-list__container:not(:empty):after {
+  content: ')';
+}
+
+.hpu-puzzle-attribute-list__separated-attribute:not(:first-child):before {
+  content: ', ';
+}
+
 hpu-puzzle [highlight='add'] {
   background-color: rgb(56, 61, 44);
 }

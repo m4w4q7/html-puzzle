@@ -1,15 +1,8 @@
 import { createTemplateFactory } from '../../../../create-template-factory.js';
 
-const componentTemplateHtml =
-  `<span class="hpu-puzzle-attribute-list__wrapper" style="display: none;">` +
-    `(<span class="hpu-puzzle-attribute-list__attribute-container"></span>)` +
-  `</span>`;
-
+const componentTemplateHtml = `<span class="hpu-puzzle-attribute-list__container"></span>`;
 
 export const createComponentTemplate = createTemplateFactory(componentTemplateHtml, {
-  wrapper: '.hpu-puzzle-attribute-list__wrapper',
-  attributeContainer: '.hpu-puzzle-attribute-list__attribute-container',
+  container: '.hpu-puzzle-attribute-list__container',
+  attributes: () => ({})
 });
-
-
-export const createSeparator = createTemplateFactory(', ');

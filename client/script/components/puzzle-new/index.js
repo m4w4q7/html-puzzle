@@ -21,6 +21,7 @@ import { DragTransitionHandler } from './state-observers/drag-transition-handler
 import { BlockDragAndDropHandler } from './state-observers/block-drag-and-drop-handler.js';
 import { IdDragAndDropHandler } from './state-observers/id-drag-and-drop-handler.js';
 import { ClassDragAndDropHandler } from './state-observers/class-drag-and-drop-handler.js';
+import { AttributeDragAndDropHandler } from './state-observers/attribute-drag-and-drop-handler.js';
 
 
 
@@ -44,6 +45,7 @@ export class PuzzleComponent extends HTMLElement {
     this._blockDragAndDropHandler = new BlockDragAndDropHandler(this._nodes.content, this._state);
     this._idDragAndDropHandler = new IdDragAndDropHandler(this._nodes.content, this._state);
     this._classDragAndDropHandler = new ClassDragAndDropHandler(this._nodes.content, this._state);
+    this._attributeDragAndDropHandler = new AttributeDragAndDropHandler(this._nodes.content, this._state);
   }
 
 
@@ -90,6 +92,7 @@ export class PuzzleComponent extends HTMLElement {
     this._blockDragAndDropHandler.observe();
     this._idDragAndDropHandler.observe();
     this._classDragAndDropHandler.observe();
+    this._attributeDragAndDropHandler.observe();
   }
 
 }

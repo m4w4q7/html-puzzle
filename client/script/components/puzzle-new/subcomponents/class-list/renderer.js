@@ -15,7 +15,6 @@ export class ClassListRenderer {
 
   render(nodes, { model, preview, previewColor }) {
     this._nodes = { ...nodes, classes: { ...nodes.classes } };
-    this._nodes = { ...nodes };
     this._preview = preview;
     this._previewColor = previewColor;
 

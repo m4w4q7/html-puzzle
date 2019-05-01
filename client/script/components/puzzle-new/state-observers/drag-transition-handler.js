@@ -1,5 +1,4 @@
 import { pieceTypes, dragStates, highlightColors } from '../enums.js';
-import { reflow } from '../utils.js';
 
 export class DragTransitionHandler {
 
@@ -32,7 +31,6 @@ export class DragTransitionHandler {
       this._state.dragState = dragStates.drag;
     }
 
-    reflow(this._host);
     this._host.setAttribute('dragging', '');
     draggedPiece.highlight(highlightColors.add);
   }
@@ -49,7 +47,6 @@ export class DragTransitionHandler {
       this._state.dragState = dragStates.hover;
     }
 
-    reflow(this._host);
     this._host.removeAttribute('dragging');
     previousDraggedPiece.highlight(highlightColors.none);
     if (this._state.hoveredPiece) { this._state.hoveredPiece.highlight(highlightColors.neutral); }

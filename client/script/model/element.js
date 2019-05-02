@@ -24,6 +24,17 @@ export class Element {
   }
 
 
+  toOldModel() {
+    return {
+      'type': 'element',
+      'tagName': this._name,
+      'classList': this._classes.toOldModel(),
+      'attributes': this._attributes.toOldModel(),
+      'children': this._children.toOldModel()
+    };
+  }
+
+
   toString() {
     const element = `${this._name}${this._id}${this._classes}${this._attributes}`;
     const children = this._children.toString().split('\n').map(line => `  ${line}`).join('\n');

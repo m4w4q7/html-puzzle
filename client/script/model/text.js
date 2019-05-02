@@ -10,6 +10,11 @@ export class Text {
   }
 
 
+  toOldModel() {
+    return { type: 'text', text: this._value };
+  }
+
+
   toString() {
     return `TEXT: ${this._value}`;
   }

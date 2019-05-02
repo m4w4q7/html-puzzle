@@ -10,6 +10,11 @@ export class AttributeList {
   }
 
 
+  toOldModel() {
+    return this._attributes.map(attribute => attribute.toOldModel());
+  }
+
+
   toString() {
     return this._attributes.map(attribute => attribute.toString()).join('');
   }

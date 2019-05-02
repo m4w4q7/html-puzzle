@@ -10,6 +10,11 @@ export class ClassList {
   }
 
 
+  toOldModel() {
+    return [...this._classes];
+  }
+
+
   toString() {
     return this._classes.map(className => `.${className}`).join();
   }

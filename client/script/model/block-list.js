@@ -15,6 +15,11 @@ export class BlockList {
   }
 
 
+  toOldModel() {
+    return this._blocks.map(block => block.toOldModel());
+  }
+
+
   toString() {
     return this._blocks.map(block => block.toString()).join('\n');
   }

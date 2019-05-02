@@ -15,6 +15,11 @@ export class Attribute {
   }
 
 
+  toOldModel() {
+    return [this.name, this.value];
+  }
+
+
   toString() {
     return `[${this.name}="${this.value.replace('\\', '\\\\').replace('"', '\\"')}"]`;
   }

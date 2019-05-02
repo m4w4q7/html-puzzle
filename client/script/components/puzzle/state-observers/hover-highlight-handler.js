@@ -1,4 +1,4 @@
-import { dragStates, highlightColors } from '../enums.js';
+import { DragStates, HighlightColors } from '../enums.js';
 
 export class HoverHighlightHandler {
 
@@ -14,9 +14,9 @@ export class HoverHighlightHandler {
 
 
   _onHoveredPieceChange(hoveredPiece, previousHoveredPiece) {
-    if (this._state.dragState !== dragStates.hover) { return; }
-    if (hoveredPiece) { hoveredPiece.highlight(highlightColors.neutral); }
-    if (previousHoveredPiece) { previousHoveredPiece.highlight(highlightColors.none); }
+    if (this._state.dragState !== DragStates.HOVER) { return; }
+    if (hoveredPiece) { hoveredPiece.highlight(HighlightColors.NEUTRAL); }
+    if (previousHoveredPiece) { previousHoveredPiece.highlight(HighlightColors.NONE); }
   }
 
 }

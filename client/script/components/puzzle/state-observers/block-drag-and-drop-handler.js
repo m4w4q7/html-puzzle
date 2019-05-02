@@ -1,5 +1,5 @@
 import { isBlock } from '../utils.js';
-import { dragStates } from '../enums.js';
+import { DragStates } from '../enums.js';
 
 export class BlockDragAndDropHandler {
 
@@ -17,10 +17,10 @@ export class BlockDragAndDropHandler {
 
 
   _onDragStateChange(dragState, previousDragState) {
-    if (dragState === dragStates.drag) {
+    if (dragState === DragStates.DRAG) {
       this._lastDraggedPiece = this._state.draggedPiece;
       if (isBlock(this._state.draggedPiece)) { this._host.showBlockInserter(this._state.draggedPiece); }
-    } else if (previousDragState === dragStates.drag) {
+    } else if (previousDragState === DragStates.DRAG) {
       if (isBlock(this._lastDraggedPiece)) {
         this._host.adoptBlockInserterSubject();
         this._host.emitChange();

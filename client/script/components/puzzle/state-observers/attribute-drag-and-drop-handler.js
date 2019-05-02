@@ -1,4 +1,4 @@
-import { pieceTypes, highlightColors } from '../enums.js';
+import { PieceTypes, HighlightColors } from '../enums.js';
 import { AbstractElementPartDragAndDropHandler } from './abstract-element-part-drag-and-drop-handler.js';
 
 
@@ -11,7 +11,7 @@ export class AttributeDragAndDropHandler extends AbstractElementPartDragAndDropH
 
 
   get _handledPieceType() {
-    return pieceTypes.attribute;
+    return PieceTypes.ATTRIBUTE;
   }
 
 
@@ -28,7 +28,7 @@ export class AttributeDragAndDropHandler extends AbstractElementPartDragAndDropH
   _onDragStart(draggedPiece) {
     const newTargetAttributeList = draggedPiece.parentList;
 
-    newTargetAttributeList.preview(this._draggedModel, highlightColors.add);
+    newTargetAttributeList.preview(this._draggedModel, HighlightColors.ADD);
     newTargetAttributeList.remove(this._draggedModel[0]);
     this._previousTargetAttributeList = newTargetAttributeList;
   }
@@ -42,7 +42,7 @@ export class AttributeDragAndDropHandler extends AbstractElementPartDragAndDropH
       this._previousTargetAttributeList.cancelPreview();
     }
 
-    newTargetAttributeList.preview(this._draggedModel, highlightColors.add);
+    newTargetAttributeList.preview(this._draggedModel, HighlightColors.ADD);
 
     if (newTargetAttributeList !== this._draggedAttributeList) {
       if (newTargetAttributeList.has(this._draggedModel[0])) {

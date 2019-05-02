@@ -1,4 +1,4 @@
-import { pieceTypes, highlightColors } from '../enums.js';
+import { PieceTypes, HighlightColors } from '../enums.js';
 import { AbstractElementPartDragAndDropHandler } from './abstract-element-part-drag-and-drop-handler.js';
 
 
@@ -11,7 +11,7 @@ export class IdDragAndDropHandler extends AbstractElementPartDragAndDropHandler 
 
 
   get _handledPieceType() {
-    return pieceTypes.id;
+    return PieceTypes.ID;
   }
 
 
@@ -23,7 +23,7 @@ export class IdDragAndDropHandler extends AbstractElementPartDragAndDropHandler 
   _onDragMove(targetElement) {
     if (this._targetId !== this._draggedPiece) { this._targetId.cancelPreview(); }
     this._targetId = targetElement.idComponent;
-    this._targetId.preview(this._draggedPiece.value, highlightColors.add);
+    this._targetId.preview(this._draggedPiece.value, HighlightColors.ADD);
     if (this._targetId !== this._draggedPiece) { this._draggedPiece.preview(this._targetId.value); }
   }
 

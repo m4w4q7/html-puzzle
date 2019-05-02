@@ -1,5 +1,5 @@
 import { AbstractPuzzleSubcomponent } from '../abstract-puzzle-subcomponent/index.js';
-import { highlightColors } from '../../enums.js';
+import { HighlightColors } from '../../enums.js';
 import { reflow } from '../../utils.js';
 
 export class AbstractPuzzlePiece extends AbstractPuzzleSubcomponent {
@@ -17,6 +17,6 @@ export class AbstractPuzzlePiece extends AbstractPuzzleSubcomponent {
 
 
 const colorMap = {
-  [highlightColors.neutral]: 'neutral',
-  [highlightColors.add]: 'add',
+  [HighlightColors.NEUTRAL]: 'neutral',
+  [HighlightColors.ADD]: 'add',
 };

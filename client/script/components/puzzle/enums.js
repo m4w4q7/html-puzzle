@@ -1,22 +1,22 @@
-export const pieceTypes = {
-  text: 'text',
-  element: 'element',
-  id: 'id',
-  class: 'class',
-  attribute: 'attribute',
-  attributeValue: 'attributeValue'
+export const PieceTypes = {
+  TEXT: Symbol('text'),
+  ELEMENT: Symbol('element'),
+  ID: Symbol('id'),
+  CLASS: Symbol('class'),
+  ATTRIBUTE: Symbol('attribute'),
+  ATTRIBUTE_VALUE: Symbol('attributeValue')
 };
 
 
-export const dragStates = {
-  hover: 'hover',
-  beforeDrag: 'beforeDrag',
-  drag: 'drag',
-  afterDrag: 'afterDrag'
+export const DragStates = {
+  HOVER: Symbol('hover'),
+  BEFORE_DRAG: Symbol('beforeDrag'),
+  DRAG: Symbol('drag'),
+  AFTER_DRAG: Symbol('afterDrag')
 };
 
-export const highlightColors = {
-  neutral: Symbol('neutral'),
-  add: Symbol('add'),
-  none: Symbol('none')
+export const HighlightColors = {
+  NEUTRAL: Symbol('neutral'),
+  ADD: Symbol('add'),
+  NONE: Symbol('none')
 };

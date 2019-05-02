@@ -1,4 +1,4 @@
-import { dragStates } from '../enums.js';
+import { DragStates } from '../enums.js';
 
 export class MouseMoveListener {
 
@@ -9,7 +9,7 @@ export class MouseMoveListener {
 
 
   handleEvent(event) {
-    if (this._state.dragState !== dragStates.drag) { return; }
+    if (this._state.dragState !== DragStates.DRAG) { return; }
     const cursorPosition = this._calculateCursorPosition(event);
     this._updateCursorPosition(cursorPosition);
   }

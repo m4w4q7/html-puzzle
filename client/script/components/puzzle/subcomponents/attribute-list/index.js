@@ -1,6 +1,6 @@
 import { AbstractPuzzleSubcomponent } from '../abstract-puzzle-subcomponent/index.js';
 import { createComponentTemplate } from './template.js';
-import { highlightColors } from '../../enums.js';
+import { HighlightColors } from '../../enums.js';
 import { AttributeListRenderer } from './renderer.js';
 
 export class PuzzleAttributeListComponent extends AbstractPuzzleSubcomponent {
@@ -41,7 +41,7 @@ export class PuzzleAttributeListComponent extends AbstractPuzzleSubcomponent {
   }
 
 
-  preview(model, highlightColor = highlightColors.none) {
+  preview(model, highlightColor = HighlightColors.NONE) {
     this._preview = model;
     this._previewColor = highlightColor;
     this._render();
@@ -51,7 +51,7 @@ export class PuzzleAttributeListComponent extends AbstractPuzzleSubcomponent {
   cancelPreview() {
     if (this._preview === null) { return; }
     this._preview = null;
-    this._previewColor = highlightColors.none;
+    this._previewColor = HighlightColors.NONE;
     this._render();
   }
 

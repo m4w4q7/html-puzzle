@@ -1,4 +1,4 @@
-import { dragStates, pieceTypes } from '../enums.js';
+import { DragStates, PieceTypes } from '../enums.js';
 import { AbstractMemberAccessError } from '../../../abstract-member-access-error.js';
 
 
@@ -28,10 +28,10 @@ export class AbstractElementPartDragAndDropHandler {
 
 
   _onDragStateChange(dragState, previousDragState) {
-    if (dragState === dragStates.drag) {
+    if (dragState === DragStates.DRAG) {
       this._lastDraggedPiece = this._draggedPiece;
       if (this._isRelevantPiece(this._draggedPiece)) { this._onDragStart(this._draggedPiece); }
-    } else if (previousDragState === dragStates.drag) {
+    } else if (previousDragState === DragStates.DRAG) {
       if (this._isRelevantPiece(this._lastDraggedPiece)) { this._onDragEnd(this._lastDraggedPiece); }
     }
   }
@@ -45,7 +45,7 @@ export class AbstractElementPartDragAndDropHandler {
   _onLineChange(line) {
     if (!this._isRelevantPiece(this._draggedPiece)) { return; }
     const targetBlock = this._host.getBlock(line);
-    if (targetBlock.pieceType === pieceTypes.text) { return; }
+    if (targetBlock.pieceType === PieceTypes.TEXT) { return; }
     this._onDragMove(targetBlock);
   }
 

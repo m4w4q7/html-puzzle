@@ -1,7 +1,7 @@
 import { AbstractPuzzleSubcomponent } from '../abstract-puzzle-subcomponent/index.js';
 import { createTemplate } from './template.js';
 import { getListDifference } from '../../utils.js';
-import { pieceTypes } from '../../enums.js';
+import { PieceTypes } from '../../enums.js';
 import { minMax } from '../../../../utils.js';
 
 export class PuzzleContentComponent extends AbstractPuzzleSubcomponent {
@@ -94,7 +94,7 @@ export class PuzzleContentComponent extends AbstractPuzzleSubcomponent {
     const nextBlock = this._inserter.notDraggedBlocks[line];
     this._inserter.minIndentation = nextBlock ? nextBlock.indentation : 0;
     this._inserter.maxIndentation = previousBlock ?
-      previousBlock.indentation + (previousBlock.pieceType === pieceTypes.element ? 1 : 0) :
+      previousBlock.indentation + (previousBlock.pieceType === PieceTypes.ELEMENT ? 1 : 0) :
       0;
   }
 

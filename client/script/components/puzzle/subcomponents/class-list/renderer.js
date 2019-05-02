@@ -1,6 +1,6 @@
 import { getListDifference } from '../../utils.js';
 import { createElement } from '../../../../utils.js';
-import { highlightColors } from '../../enums.js';
+import { HighlightColors } from '../../enums.js';
 
 export class ClassListRenderer {
 
@@ -36,7 +36,7 @@ export class ClassListRenderer {
         this._nodes.classes[model[index - 1]].insertAdjacentElement('afterend', this._nodes.classes[className]);
       }
     }
-    const highlightColor = className === this._preview ? this._previewColor : highlightColors.none;
+    const highlightColor = className === this._preview ? this._previewColor : HighlightColors.NONE;
     this._nodes.classes[className].highlight(highlightColor);
   }
 

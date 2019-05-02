@@ -1,4 +1,4 @@
-import { pieceTypes } from '../../enums.js';
+import { PieceTypes } from '../../enums.js';
 import { reflow } from '../../utils.js';
 import { doOnNext } from '../../../../utils.js';
 import { AbstractPuzzlePiece } from '../abstract-puzzle-piece/index.js';
@@ -16,7 +16,7 @@ export class PuzzleElementComponent extends AbstractPuzzlePiece {
 
 
   get pieceType() {
-    return pieceTypes.element;
+    return PieceTypes.ELEMENT;
   }
 
 

@@ -1,4 +1,4 @@
-import { pieceTypes } from './enums.js';
+import { PieceTypes } from './enums.js';
 
 export const reflow = element => void element.clientWidth;
 
@@ -11,6 +11,6 @@ export const findAncestor = (element, container, callback) => {
 };
 
 export const isBlock = element => !!element &&
-  (element.pieceType === pieceTypes.element || element.pieceType === pieceTypes.text);
+  (element.pieceType === PieceTypes.ELEMENT || element.pieceType === PieceTypes.TEXT);
 
 export const getListDifference = (list, blacklist) => list.filter(item => !blacklist.includes(item));

@@ -1,4 +1,4 @@
-import { pieceTypes, highlightColors } from '../../enums.js';
+import { PieceTypes, HighlightColors } from '../../enums.js';
 import { AbstractPuzzlePiece } from '../abstract-puzzle-piece/index.js';
 
 export class PuzzleIdComponent extends AbstractPuzzlePiece {
@@ -11,7 +11,7 @@ export class PuzzleIdComponent extends AbstractPuzzlePiece {
 
 
   get pieceType() {
-    return pieceTypes.id;
+    return PieceTypes.ID;
   }
 
 
@@ -26,7 +26,7 @@ export class PuzzleIdComponent extends AbstractPuzzlePiece {
   }
 
 
-  preview(value, highlightColor = highlightColors.none) {
+  preview(value, highlightColor = HighlightColors.NONE) {
     this._preview = value;
     this._render();
     this.highlight(highlightColor);
@@ -36,7 +36,7 @@ export class PuzzleIdComponent extends AbstractPuzzlePiece {
   cancelPreview() {
     this._preview = null;
     this._render();
-    this.highlight(highlightColors.none);
+    this.highlight(HighlightColors.NONE);
   }
 
 

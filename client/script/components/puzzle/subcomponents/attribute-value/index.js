@@ -1,4 +1,4 @@
-import { pieceTypes } from '../../enums.js';
+import { PieceTypes } from '../../enums.js';
 import { AbstractPuzzlePiece } from '../abstract-puzzle-piece/index.js';
 
 export class PuzzleAttributeValueComponent extends AbstractPuzzlePiece {
@@ -11,7 +11,7 @@ export class PuzzleAttributeValueComponent extends AbstractPuzzlePiece {
 
 
   get pieceType() {
-    return pieceTypes.attributeValue;
+    return PieceTypes.ATTRIBUTE_VALUE;
   }
 
 

@@ -1,5 +1,5 @@
-import { dragStates } from '../enums.js';
-import { pieceTypes, highlightColors } from '../enums.js';
+import { DragStates } from '../enums.js';
+import { PieceTypes, HighlightColors } from '../enums.js';
 
 
 export class AttributeValueDragAndDropHandler {
@@ -35,10 +35,10 @@ export class AttributeValueDragAndDropHandler {
 
 
   _onDragStateChange(dragState, previousDragState) {
-    if (dragState === dragStates.drag) {
+    if (dragState === DragStates.DRAG) {
       this._lastDraggedPiece = this._draggedPiece;
       if (this._isRelevantPiece(this._draggedPiece)) { this._onDragStart(); }
-    } else if (previousDragState === dragStates.drag && this._isRelevantPiece(this._lastDraggedPiece)) {
+    } else if (previousDragState === DragStates.DRAG && this._isRelevantPiece(this._lastDraggedPiece)) {
       this._onDragEnd(this._lastDraggedPiece);
     }
   }
@@ -46,14 +46,14 @@ export class AttributeValueDragAndDropHandler {
 
   _getContainingAttribute(piece) {
     if (!piece) { return null; }
-    if (piece.pieceType === pieceTypes.attributeValue) { return piece.parentAttribute; }
-    if (piece.pieceType === pieceTypes.attribute) { return piece; }
+    if (piece.pieceType === PieceTypes.ATTRIBUTE_VALUE) { return piece.parentAttribute; }
+    if (piece.pieceType === PieceTypes.ATTRIBUTE) { return piece; }
     return null;
   }
 
 
   _isRelevantPiece(piece) {
-    return piece && piece.pieceType === pieceTypes.attributeValue;
+    return piece && piece.pieceType === PieceTypes.ATTRIBUTE_VALUE;
   }
 
 
@@ -73,13 +73,13 @@ export class AttributeValueDragAndDropHandler {
     if (newTargetAttribute === this._previousTargetAttribute) { return; }
 
     if (this._previousTargetAttribute) {
-      this._previousTargetAttribute.highlight(highlightColors.none);
-      this._previousTargetAttribute.valueComponent.highlight(highlightColors.none);
+      this._previousTargetAttribute.highlight(HighlightColors.NONE);
+      this._previousTargetAttribute.valueComponent.highlight(HighlightColors.NONE);
     }
 
     if (newTargetAttribute) {
-      newTargetAttribute.highlight(highlightColors.add);
-      newTargetAttribute.valueComponent.highlight(highlightColors.add);
+      newTargetAttribute.highlight(HighlightColors.ADD);
+      newTargetAttribute.valueComponent.highlight(HighlightColors.ADD);
     }
 
     this._previousTargetAttribute = newTargetAttribute;
@@ -91,8 +91,8 @@ export class AttributeValueDragAndDropHandler {
 
     const targetValue = this._previousTargetAttribute.model[1];
     this._previousTargetAttribute.applyValue(draggedPiece.value);
-    this._previousTargetAttribute.highlight(highlightColors.none);
-    this._previousTargetAttribute.valueComponent.highlight(highlightColors.none);
+    this._previousTargetAttribute.highlight(HighlightColors.NONE);
+    this._previousTargetAttribute.valueComponent.highlight(HighlightColors.NONE);
     draggedPiece.parentAttribute.applyValue(targetValue);
 
     this._host.emitChange();

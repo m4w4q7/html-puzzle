@@ -1,4 +1,4 @@
-import { pieceTypes, dragStates, highlightColors } from '../enums.js';
+import { PieceTypes, DragStates, HighlightColors } from '../enums.js';
 
 export class DragTransitionHandler {
 
@@ -24,32 +24,32 @@ export class DragTransitionHandler {
 
 
   _onDraggingPiece(draggedPiece) {
-    if (draggedPiece.pieceType === pieceTypes.element) {
-      this._state.dragState = dragStates.beforeDrag;
-      draggedPiece.hideChildren(() => this._state.dragState = dragStates.drag);
+    if (draggedPiece.pieceType === PieceTypes.ELEMENT) {
+      this._state.dragState = DragStates.BEFORE_DRAG;
+      draggedPiece.hideChildren(() => this._state.dragState = DragStates.DRAG);
     } else {
-      this._state.dragState = dragStates.drag;
+      this._state.dragState = DragStates.DRAG;
     }
 
     this._host.setAttribute('dragging', '');
-    draggedPiece.highlight(highlightColors.add);
+    draggedPiece.highlight(HighlightColors.ADD);
   }
 
 
   _onReleasingPiece(previousDraggedPiece) {
-    if (previousDraggedPiece.pieceType === pieceTypes.element) {
-      this._state.dragState = dragStates.afterDrag;
+    if (previousDraggedPiece.pieceType === PieceTypes.ELEMENT) {
+      this._state.dragState = DragStates.AFTER_DRAG;
       previousDraggedPiece.showChildren(() => {
         if (this._state.draggedPiece !== null) { return; }
-        this._state.dragState = dragStates.hover;
+        this._state.dragState = DragStates.HOVER;
       });
     } else {
-      this._state.dragState = dragStates.hover;
+      this._state.dragState = DragStates.HOVER;
     }
 
     this._host.removeAttribute('dragging');
-    previousDraggedPiece.highlight(highlightColors.none);
-    if (this._state.hoveredPiece) { this._state.hoveredPiece.highlight(highlightColors.neutral); }
+    previousDraggedPiece.highlight(HighlightColors.NONE);
+    if (this._state.hoveredPiece) { this._state.hoveredPiece.highlight(HighlightColors.NEUTRAL); }
   }
 
 }

@@ -1,4 +1,4 @@
-import { dragStates } from './enums.js';
+import { DragStates } from './enums.js';
 import { isEqualArray, get } from '../../utils.js';
 
 export class State {
@@ -8,7 +8,7 @@ export class State {
     this._data = {
       hoveredPiece: null,
       draggedPiece: null,
-      dragState: dragStates.hover,
+      dragState: DragStates.HOVER,
       characterDimensions: { width: 0, height: 0 },
       cursorPosition: { line: null, character: null },
     };

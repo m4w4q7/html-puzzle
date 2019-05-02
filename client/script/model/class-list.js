@@ -10,6 +10,11 @@ export class ClassList {
   }
 
 
+  isEmpty() {
+    return !this._classes.length;
+  }
+
+
   toOldModel() {
     return [...this._classes];
   }

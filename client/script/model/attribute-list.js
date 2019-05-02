@@ -1,11 +1,13 @@
 export class AttributeList {
 
   constructor(attributes) {
-    this._attributes = [...attributes].sort((a, b) => a.compareTo(b));
+    this._attributes = [...attributes];
+    this._sorted = false;
   }
 
 
   list() {
+    this._sort();
     return [...this._attributes];
   }
 
@@ -16,7 +18,15 @@ export class AttributeList {
 
 
   toString() {
+    this._sort();
     return this._attributes.map(attribute => attribute.toString()).join('');
+  }
+
+
+  _sort() {
+    if (this._sorted) { return; }
+    this._attributes.sort((a, b) => a.compareTo(b));
+    this._sorted = true;
   }
 
 }

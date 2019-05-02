@@ -1,11 +1,13 @@
 export class ClassList {
 
   constructor(classes) {
-    this._classes = [...classes].sort();
+    this._classes = [...classes];
+    this._sorted = false;
   }
 
 
   list() {
+    this._sort();
     return [...this._classes];
   }
 
@@ -21,7 +23,15 @@ export class ClassList {
 
 
   toString() {
+    this._sort();
     return this._classes.map(className => `.${className}`).join();
+  }
+
+
+  _sort() {
+    if (this._sorted) { return; }
+    this._classes.sort();
+    this._sorted = true;
   }
 
 }

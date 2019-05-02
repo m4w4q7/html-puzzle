@@ -26,17 +26,17 @@ import { Pug } from './pug/index.js';
   example.css.forEach(url => previews.forEach(preview => preview.addStyleSheet(url)));
   example.js.forEach(url => previews.forEach(preview => preview.addScript(url)));
 
-  const goal = Pug.parse(example.pug).toOldModel();
+  const goal = Pug.parse(example.pug);
   const initialModel = shuffle(goal);
-  puzzleComponent.model = initialModel;
-  goalPreviewComponent.model = goal;
-  currentPreviewComponent.model = initialModel;
+  puzzleComponent.model = initialModel.toOldModel();
+  goalPreviewComponent.model = goal.toOldModel();
+  currentPreviewComponent.model = initialModel.toOldModel();
   puzzleComponent.addEventListener('change', event => {
     currentPreviewComponent.model = event.detail.model;
-    if (isEqual(event.detail.model, goal)) { alert('Congratulations! 🙂👍'); }
+    if (isEqual(event.detail.model, goal.toOldModel())) { alert('Congratulations! 🙂👍'); }
 
     const startDate = new Date();
-    const hint = calculateHint(event.detail.model, goal);
+    const hint = calculateHint(event.detail.model, goal.toOldModel());
     console.log('hint', `duration: ${new Date() - startDate}ms`, JSON.stringify(hint, null, 2));
   });
 })();

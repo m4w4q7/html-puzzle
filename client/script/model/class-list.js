@@ -1,6 +1,6 @@
 export class ClassList {
 
-  constructor(classes) {
+  constructor(classes = []) {
     this._classes = [...classes];
     this._sorted = false;
   }
@@ -9,6 +9,12 @@ export class ClassList {
   list() {
     this._sort();
     return [...this._classes];
+  }
+
+
+  add(name) {
+    this._sorted = false;
+    this._classes.push(name);
   }
 
 

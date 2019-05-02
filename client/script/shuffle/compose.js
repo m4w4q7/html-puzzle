@@ -1,32 +1,36 @@
-import { getRandomElement, pushElementRandomly, popRandomElement } from './random.js';
+import { Element } from '../model/element.js';
+import { Text } from '../model/text.js';
+import { BlockList } from '../model/block-list.js';
+import { Attribute } from '../model/attribute.js';
+import { getRandomElement, popRandomElement, random } from './random.js';
 
-export const compose = ({ texts, tags, ids, classes, attributeNames, attributeValues }) => {
-  const { model, elements } = composeElements(tags);
-  addTexts(model, elements, texts);
+export const compose = ({ texts, elementNames, ids, classes, attributeNames, attributeValues }) => {
+  const { blockList, elements } = composeElements(elementNames);
+  addTexts(blockList, elements, texts);
   addIds(elements, ids);
   addClasses(elements, classes);
   addAttributes(elements, attributeNames, attributeValues);
-  return model;
+  return blockList;
 };
 
 
-const composeElements = tags => {
-  const elements = shuffleList(tags).map(createEmptyElement);
-  const model = [];
-  elements.reduce(addElement, [model]);
-  return { elements, model };
+const composeElements = elementNames => {
+  const elements = shuffleList(elementNames).map(name => new Element({ name }));
+  const rootBlockList = new BlockList();
+  elements.reduce(addElement, [rootBlockList]);
+  return { elements, blockList: rootBlockList };
 };
 
 
-const addElement = (childrenList, element) => {
-  pushElementRandomly(getRandomElement(childrenList), element);
-  return [...childrenList, element.children];
+const addElement = (blockLists, element) => {
+  addBlockAtRandomPosition(getRandomElement(blockLists), element);
+  return [...blockLists, element.children];
 };
 
 
-const addTexts = (rootChildren, elements, texts) => {
-  const childrenList = [rootChildren, ...elements.map(({ children }) => children)];
-  texts.forEach(text => pushElementRandomly(getRandomElement(childrenList), createText(text)));
+const addTexts = (rootBlockList, elements, texts) => {
+  const blockLists = [rootBlockList, ...elements.map(element => element.children)];
+  texts.forEach(text => addBlockAtRandomPosition(getRandomElement(blockLists), new Text(text)));
 };
 
 
@@ -41,7 +45,7 @@ const addClasses = (elements, classes) => {
 
   Object.values(classGroups).forEach(classGroup => {
     const potentialHosts = [...elements];
-    classGroup.forEach(className => popRandomElement(potentialHosts).classList.push(className));
+    classGroup.forEach(className => popRandomElement(potentialHosts).classList.add(className));
   });
 };
 
@@ -51,7 +55,7 @@ const addAttributes = (elements, attributeNames, attributeValues) => {
 
   Object.entries(attributeGroups).forEach(([name, valueList]) => {
     const potentialHosts = [...elements];
-    valueList.forEach(value => popRandomElement(potentialHosts).attributes.push([name, value]));
+    valueList.forEach(value => popRandomElement(potentialHosts).attributeList.add(new Attribute(name, value)));
   });
 };
 
@@ -64,6 +68,9 @@ const shuffleList = input => {
   }
   return output;
 };
+
+
+export const addBlockAtRandomPosition = (blockList, block) => blockList.add(block, random(blockList.length + 1));
 
 
 const createClassGroups = classes => classes.reduce((classGroups, className) => {
@@ -87,8 +94,3 @@ const createAttributeGroups = (names, values) => {
     return attributeGroups;
   }, {});
 };
-
-
-const createEmptyElement = tagName => ({ type: 'element', tagName, id: undefined, classList: [], attributes: [], children: [] });
-
-const createText = text => ({ type: 'text', text });

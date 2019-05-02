@@ -41,7 +41,7 @@ export class PuzzleBlockListComponent extends AbstractPuzzleSubcomponent {
 
 
   getContainedBlocks() {
-    return this._nodes.blocks.map(block => block.getContainedBlocks()).flat();
+    return this._nodes.blocks.flatMap(block => block.getContainedBlocks());
   }
 
 

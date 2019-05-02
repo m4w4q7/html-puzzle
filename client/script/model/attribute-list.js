@@ -1,6 +1,6 @@
 export class AttributeList {
 
-  constructor(attributes) {
+  constructor(attributes = []) {
     this._attributes = [...attributes];
     this._sorted = false;
   }
@@ -9,6 +9,12 @@ export class AttributeList {
   list() {
     this._sort();
     return [...this._attributes];
+  }
+
+
+  add(attribute) {
+    this._sorted = false;
+    this._attributes.push(attribute);
   }
 
 

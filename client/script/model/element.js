@@ -29,6 +29,11 @@ export class Element {
   }
 
 
+  set id(value) {
+    this._id = value;
+  }
+
+
   get classList() {
     return this._classList;
   }

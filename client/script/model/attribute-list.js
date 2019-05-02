@@ -6,7 +6,7 @@ export class AttributeList {
 
 
   list() {
-    return this._attributes;
+    return [...this._attributes];
   }
 
 

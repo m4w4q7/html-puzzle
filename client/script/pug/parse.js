@@ -39,8 +39,8 @@ const parseElementLine = line => {
     block: new Element({
       name: parseTagName(name),
       id: parseId(id),
-      classes: parseClasses(classes),
-      attributes: parseAttributes(attributes)
+      classList: parseClasses(classes),
+      attributeList: parseAttributes(attributes)
     })
   };
 };

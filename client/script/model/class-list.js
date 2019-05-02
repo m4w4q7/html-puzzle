@@ -6,7 +6,7 @@ export class ClassList {
 
 
   list() {
-    return this._classes;
+    return [...this._classes];
   }
 
 

@@ -1,8 +1,8 @@
 import { fetchExample } from './examples/fetch.js';
-import { parse } from './parse.js';
 import { shuffle } from './shuffle/index.js';
 import { doOnNext } from './utils.js';
 import { isEqual, calculateHint } from './model-utils/index.js';
+import { Pug } from './pug/index.js';
 
 (async function() {
   const exampleName = new URLSearchParams(window.location.search).get('id') || 'dropdown';
@@ -26,7 +26,7 @@ import { isEqual, calculateHint } from './model-utils/index.js';
   example.css.forEach(url => previews.forEach(preview => preview.addStyleSheet(url)));
   example.js.forEach(url => previews.forEach(preview => preview.addScript(url)));
 
-  const goal = parse(example.pug);
+  const goal = Pug.parse(example.pug).toOldModel();
   const initialModel = shuffle(goal);
   puzzleComponent.model = initialModel;
   goalPreviewComponent.model = goal;

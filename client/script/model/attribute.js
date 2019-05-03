@@ -25,6 +25,11 @@ export class Attribute {
   }
 
 
+  isEqual(attribute) {
+    return this.name === attribute.name && this.value === attribute.value;
+  }
+
+
   toString() {
     return `[${this.name}="${this.value.replace('\\', '\\\\').replace('"', '\\"')}"]`;
   }

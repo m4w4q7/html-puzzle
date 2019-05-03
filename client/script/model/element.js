@@ -71,6 +71,15 @@ export class Element {
   }
 
 
+  isEqual(element) {
+    return this.name === element.name &&
+      this.id === element.id &&
+      this.classList.isEqual(element.classList) &&
+      this.attributeList.isEqual(element.attributeList) &&
+      this.children.isEqual(element.children);
+  }
+
+
   toString() {
     const element = `${this._name}${this._id}${this._classList}${this._attributeList}`;
     const children = this._children.toString().split('\n').map(line => `  ${line}`).join('\n');

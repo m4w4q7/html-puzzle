@@ -1,3 +1,5 @@
+import { isEqualArray } from '../utils.js';
+
 export class ClassList {
 
   constructor(classes = []) {
@@ -46,6 +48,11 @@ export class ClassList {
 
   toOldModel() {
     return [...this._classes];
+  }
+
+
+  isEqual(classList) {
+    isEqualArray(this.list(), classList.list());
   }
 
 

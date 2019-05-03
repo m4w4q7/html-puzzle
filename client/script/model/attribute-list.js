@@ -1,3 +1,5 @@
+import { isEqualArray } from '../utils.js';
+
 export class AttributeList {
 
   constructor(attributes = []) {
@@ -55,6 +57,11 @@ export class AttributeList {
   toOldModel() {
     this._normalizeAttributes();
     return this._attributes.map(attribute => attribute.toOldModel());
+  }
+
+
+  isEqual(attributeList) {
+    isEqualArray(this.list(), attributeList.list(), (a, b) => a.isEqual(b));
   }
 
 

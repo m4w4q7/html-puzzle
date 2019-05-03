@@ -20,6 +20,11 @@ export class Text {
   }
 
 
+  isEqual(text) {
+    return this.content === text.content;
+  }
+
+
   toString() {
     return `TEXT: ${this._content}`;
   }

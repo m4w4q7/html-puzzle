@@ -1,4 +1,4 @@
-import { PieceTypes } from './enums.js';
+import { PieceTypes } from '../../enums/piece-types.js';
 
 export const reflow = element => void element.clientWidth;
 

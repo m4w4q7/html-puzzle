@@ -42,12 +42,6 @@ export const doOnNext = (element, eventName, callback, { predicate } = {}) => {
 };
 
 
-export const pick = (properties, object) => properties.reduce((result, property) => {
-  if (property in object) { result[property] = object[property]; }
-  return result;
-}, {});
-
-
 export const get = (path, object) => path.reduce((currentLevel, key) => {
   return (currentLevel && typeof currentLevel === 'object') ? currentLevel[key] : undefined;
 }, object);

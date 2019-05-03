@@ -1,6 +1,6 @@
 import { pageTemplate } from './page-template.js';
 import { Html } from '../../html/index.js';
-import { createElement, isEqualArray } from '../../utils.js';
+import { createElement } from '../../utils.js';
 
 
 export class PreviewComponent extends HTMLElement {

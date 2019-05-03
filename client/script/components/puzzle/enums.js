@@ -1,13 +1,3 @@
-export const PieceTypes = {
-  TEXT: Symbol('text'),
-  ELEMENT: Symbol('element'),
-  ID: Symbol('id'),
-  CLASS: Symbol('class'),
-  ATTRIBUTE: Symbol('attribute'),
-  ATTRIBUTE_VALUE: Symbol('attributeValue')
-};
-
-
 export const DragStates = {
   HOVER: Symbol('hover'),
   BEFORE_DRAG: Symbol('beforeDrag'),

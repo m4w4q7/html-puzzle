@@ -1,4 +1,5 @@
-import { DragStates, PieceTypes } from '../enums.js';
+import { DragStates } from '../enums.js';
+import { PieceTypes } from '../../../enums/piece-types.js';
 import { AbstractMemberAccessError } from '../../../abstract-member-access-error.js';
 
 

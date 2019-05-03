@@ -1,4 +1,4 @@
-import { PieceTypes } from '../../enums.js';
+import { PieceTypes } from '../../../../enums/piece-types.js';
 import { reflow } from '../../utils.js';
 import { doOnNext } from '../../../../utils.js';
 import { AbstractPuzzlePiece } from '../abstract-puzzle-piece/index.js';

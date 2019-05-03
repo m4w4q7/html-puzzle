@@ -1,4 +1,5 @@
-import { PieceTypes, HighlightColors } from '../../enums.js';
+import { HighlightColors } from '../../enums.js';
+import { PieceTypes } from '../../../../enums/piece-types.js';
 import { AbstractPuzzlePiece } from '../abstract-puzzle-piece/index.js';
 
 export class PuzzleIdComponent extends AbstractPuzzlePiece {

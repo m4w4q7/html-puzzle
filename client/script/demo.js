@@ -1,7 +1,7 @@
 import { fetchExample } from './examples/fetch.js';
 import { shuffle } from './shuffle/index.js';
 import { doOnNext } from './utils.js';
-import { calculateHint } from './model-utils/index.js';
+import { HintCalculator } from './hint/index.js';
 import { Pug } from './pug/index.js';
 
 (async function() {
@@ -31,12 +31,12 @@ import { Pug } from './pug/index.js';
   puzzleComponent.model = initialModel;
   goalPreviewComponent.model = goal;
   currentPreviewComponent.model = initialModel;
+  const hintCalculator = new HintCalculator(goal);
   puzzleComponent.addEventListener('change', event => {
     currentPreviewComponent.model = event.detail.model;
     if (goal.isEqual(event.detail.model)) { alert('Congratulations! 🙂👍'); }
 
-    const startDate = new Date();
-    const hint = calculateHint(event.detail.model.toOldModel(), goal.toOldModel());
-    console.log('hint', `duration: ${new Date() - startDate}ms`, JSON.stringify(hint, null, 2));
+    const hint = hintCalculator.getNext(event.detail.model);
+    console.log('hint', hint);
   });
 })();

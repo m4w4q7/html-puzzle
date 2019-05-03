@@ -1,4 +1,5 @@
-import { PieceTypes, DragStates, HighlightColors } from '../enums.js';
+import { DragStates, HighlightColors } from '../enums.js';
+import { PieceTypes } from '../../../enums/piece-types.js';
 
 export class DragTransitionHandler {
 

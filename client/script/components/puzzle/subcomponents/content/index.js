@@ -1,7 +1,7 @@
 import { AbstractPuzzleSubcomponent } from '../abstract-puzzle-subcomponent/index.js';
 import { createTemplate } from './template.js';
 import { getListDifference } from '../../utils.js';
-import { PieceTypes } from '../../enums.js';
+import { PieceTypes } from '../../../../enums/piece-types.js';
 import { minMax } from '../../../../utils.js';
 
 export class PuzzleContentComponent extends AbstractPuzzleSubcomponent {

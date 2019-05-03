@@ -23,7 +23,7 @@ export class PuzzleTextComponent extends AbstractPuzzlePiece {
 
   set model(value) {
     this._model = value;
-    this.textContent = `| ${value.text}`;
+    this.textContent = `| ${value.content}`;
   }
 
 

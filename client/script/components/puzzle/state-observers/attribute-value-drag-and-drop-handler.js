@@ -89,7 +89,7 @@ export class AttributeValueDragAndDropHandler {
   _onDragEnd(draggedPiece) {
     if (!this._previousTargetAttribute) { return; }
 
-    const targetValue = this._previousTargetAttribute.model[1];
+    const targetValue = this._previousTargetAttribute.model.value;
     this._previousTargetAttribute.applyValue(draggedPiece.value);
     this._previousTargetAttribute.highlight(HighlightColors.NONE);
     this._previousTargetAttribute.valueComponent.highlight(HighlightColors.NONE);

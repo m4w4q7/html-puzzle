@@ -60,8 +60,8 @@ export class PuzzleComponent extends HTMLElement {
 
 
   set model(value) {
-    this._model = value;
-    this._nodes.content.model = value;
+    this._model = value.clone();
+    this._nodes.content.model = this._model;
   }
 
 
@@ -111,7 +111,7 @@ export class PuzzleComponent extends HTMLElement {
 
 
   _onChange() {
-    this._model = this._nodes.content.model;
+    this._model = this._nodes.content.model.clone();
     this.dispatchEvent(new CustomEvent('change', { detail: { model: this._model } }));
   }
 

@@ -1,7 +1,6 @@
-import { PieceTypes } from '../../enums.js';
+import { PieceTypes, HighlightColors } from '../../enums.js';
 import { AbstractPuzzlePiece } from '../abstract-puzzle-piece/index.js';
 import { createTemplate } from './template.js';
-import { HighlightColors } from '../../enums.js';
 
 export class PuzzleAttributeComponent extends AbstractPuzzlePiece {
 
@@ -9,7 +8,7 @@ export class PuzzleAttributeComponent extends AbstractPuzzlePiece {
     super();
     this._model = null;
     this._preview = null;
-    this._previewColor =
+    this._previewColor = HighlightColors.NONE;
     this.parentList = null;
   }
 
@@ -62,7 +61,7 @@ export class PuzzleAttributeComponent extends AbstractPuzzlePiece {
 
 
   applyValue(value) {
-    this._model = [this._model[0], value];
+    this._model = this._model.clone({ value });
     this._render();
     this._emitChange();
   }
@@ -75,10 +74,10 @@ export class PuzzleAttributeComponent extends AbstractPuzzlePiece {
 
   _render() {
     if (!this._nodes || !(this._model || this._preview)) { return; }
-    const [name, value] = this._preview || this._model;
-    this._nodes.name.textContent = name;
-    this._nodes.valueContainer.style.display = value ? '' : 'none';
-    this._nodes.value.value = value;
+    const model = this._preview || this._model;
+    this._nodes.name.textContent = model.name;
+    this._nodes.valueContainer.style.display = model.value ? '' : 'none';
+    this._nodes.value.value = model.value;
     this.highlight(this._previewColor);
   }
 

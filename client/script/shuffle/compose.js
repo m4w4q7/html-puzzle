@@ -4,9 +4,9 @@ import { BlockList } from '../model/block-list.js';
 import { Attribute } from '../model/attribute.js';
 import { getRandomElement, popRandomElement, random } from './random.js';
 
-export const compose = ({ texts, elementNames, ids, classes, attributeNames, attributeValues }) => {
+export const compose = ({ textContents, elementNames, ids, classes, attributeNames, attributeValues }) => {
   const { blockList, elements } = composeElements(elementNames);
-  addTexts(blockList, elements, texts);
+  addTexts(blockList, elements, textContents);
   addIds(elements, ids);
   addClasses(elements, classes);
   addAttributes(elements, attributeNames, attributeValues);

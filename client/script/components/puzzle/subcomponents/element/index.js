@@ -63,12 +63,6 @@ export class PuzzleElementComponent extends AbstractPuzzlePiece {
   }
 
 
-  connectedCallback() {
-    if (!super.connectedCallback()) { return; }
-    this._listenForChanges();
-  }
-
-
   hideChildren(callback) {
     if (!this._nodes || !this._model || !this._model.children.length) { return void callback(); }
 
@@ -126,36 +120,13 @@ export class PuzzleElementComponent extends AbstractPuzzlePiece {
   }
 
 
-  _listenForChanges() {
-    this._nodes.blockList
-      .addEventListener('change', () => this._updateModel('children', this._nodes.blockList.model));
-    this._nodes.id
-      .addEventListener('change', () => this._updateModel('id', this._nodes.id.value));
-    this._nodes.classList
-      .addEventListener('change', () => this._updateModel('classList', this._nodes.classList.model));
-    this._nodes.attributeList
-      .addEventListener('change', () => this._updateModel('attributes', this._nodes.attributeList.model));
-  }
-
-
-  _updateModel(field, value) {
-    this._model[field] = value;
-    this._emitChange();
-  }
-
-
-  _emitChange() {
-    this.dispatchEvent(new CustomEvent('change'));
-  }
-
-
   _render() {
     if (!this._nodes || !this._model) { return; }
     this._applyIndentation();
-    this._nodes.tagName.textContent = this._model.tagName;
+    this._nodes.tagName.textContent = this._model.name;
     this._nodes.id.value = this._model.id;
     this._nodes.classList.model = this._model.classList;
-    this._nodes.attributeList.model = this._model.attributes;
+    this._nodes.attributeList.model = this._model.attributeList;
     this._nodes.blockList.model = this._model.children;
   }
 

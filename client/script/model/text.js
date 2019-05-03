@@ -1,22 +1,27 @@
 export class Text {
 
-  constructor(value) {
-    this._value = value;
+  constructor(content) {
+    this._content = content;
   }
 
 
-  get value() {
-    return this._value;
+  get content() {
+    return this._content;
+  }
+
+
+  clone() {
+    return new Text(this._content);
   }
 
 
   toOldModel() {
-    return { type: 'text', text: this._value };
+    return { type: 'text', text: this._content };
   }
 
 
   toString() {
-    return `TEXT: ${this._value}`;
+    return `TEXT: ${this._content}`;
   }
 
 }

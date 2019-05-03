@@ -3,7 +3,7 @@ import { Text } from '../model/text.js';
 
 export const decompose = (blockList) => {
   const blocks = blockList.listDeep();
-  const texts = blocks.filter(block => block instanceof Text).map(text => text.value);
+  const textContents = blocks.filter(block => block instanceof Text).map(text => text.content);
   const elements = blocks.filter(block => block instanceof Element);
   const elementNames = elements.map(element => element.name);
   const ids = elements.filter(element => element.id).map(element => element.id);
@@ -12,5 +12,5 @@ export const decompose = (blockList) => {
   const attributeNames = attributes.map(attribute => attribute.name);
   const attributeValues = attributes.map(attribute => attribute.value);
 
-  return { texts, elementNames, ids, classes, attributeNames, attributeValues };
+  return { textContents, elementNames, ids, classes, attributeNames, attributeValues };
 };

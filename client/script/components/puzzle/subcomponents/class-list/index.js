@@ -24,21 +24,20 @@ export class PuzzleClassListComponent extends AbstractPuzzleSubcomponent {
 
 
   set model(model) {
-    this._model = model.sort();
+    this._model = model;
     this._render();
   }
 
 
   has(value) {
-    return this._model.includes(value);
+    return this._model.has(value);
   }
 
 
   remove(value) {
     if (!this.has(value)) { return; }
-    this._model = this._model.filter(className => className !== value);
+    this._model.remove(value);
     this._render();
-    this._emitChange();
   }
 
 
@@ -59,21 +58,8 @@ export class PuzzleClassListComponent extends AbstractPuzzleSubcomponent {
 
   applyPreview() {
     if (this._preview === null) { return; }
-
-    if (!this.has(this._preview)) { this._model.splice(this._getIndex(this._preview), 0, this._preview); }
+    this._model.add(this._preview);
     this.cancelPreview();
-    this._emitChange();
-  }
-
-
-  _emitChange() {
-    this.dispatchEvent(new CustomEvent('change'));
-  }
-
-
-  _getIndex(value) {
-    const index = this._model.findIndex(className => className >= value);
-    return index === -1 ? this._model.length : index;
   }
 
 

@@ -36,12 +36,6 @@ export class PuzzleContentComponent extends AbstractPuzzleSubcomponent {
   }
 
 
-  connectedCallback() {
-    if (!super.connectedCallback()) { return; }
-    this._listenForChanges();
-  }
-
-
   getCharacterDimensions() {
     if (!this._nodes) { return { width: 0, height: 0 }; }
     const { width, height } = this._nodes.characterSpecimen.getBoundingClientRect();
@@ -134,13 +128,6 @@ export class PuzzleContentComponent extends AbstractPuzzleSubcomponent {
 
   _clearInserter() {
     this._inserter = { subject: null, notDraggedBlock: null, line: null, minIndentation: null, maxIndentation: null };
-  }
-
-
-  _listenForChanges() {
-    this._nodes.blockList.addEventListener('change', () => {
-      this._model = this._nodes.blockList.model;
-    });
   }
 
 

@@ -23,19 +23,19 @@ export class PuzzleAttributeListComponent extends AbstractPuzzleSubcomponent {
 
 
   set model(value) {
-    this._model = value.sort(([name1], [name2]) => name1 < name2 ? -1 : name1 > name2 ? 1 : 0);
+    this._model = value;
     this._render();
   }
 
 
   has(name) {
-    return !!this._model.find(attribute => attribute[0] === name);
+    return this._model.has(name);
   }
 
 
   remove(name) {
     if (!this.has(name)) { return; }
-    this._model = this._model.filter(attribute => attribute[0] !== name);
+    this._model.removeByName(name);
     this._render();
     this._emitChange();
   }
@@ -58,9 +58,7 @@ export class PuzzleAttributeListComponent extends AbstractPuzzleSubcomponent {
 
   applyPreview() {
     if (this._preview === null) { return; }
-
-    const hasPreviewedAttribute = this.has(this._preview[0]);
-    this._model.splice(this._getIndex(this._preview[0]), hasPreviewedAttribute ? 1 : 0, this._preview);
+    this._model.add(this._preview);
 
     this.cancelPreview();
     this._emitChange();
@@ -72,14 +70,8 @@ export class PuzzleAttributeListComponent extends AbstractPuzzleSubcomponent {
   }
 
 
-  _getIndex(name) {
-    const index = this._model.findIndex(attribute => attribute[0] >= name);
-    return index === -1 ? this._model.length : index;
-  }
-
-
   _onAttributeChange() {
-    this._model = this._model.map(([name]) => this._nodes.attributes[name].model);
+    this._model.listNames().forEach(name => this._model.add(this._nodes.attributes[name].model));
     this._emitChange();
   }
 

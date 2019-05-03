@@ -18,7 +18,7 @@ export class ClassListRenderer {
     this._preview = preview;
     this._previewColor = previewColor;
 
-    const modelWithPreview = (!preview || model.includes(preview)) ? model : [...model, preview].sort();
+    const modelWithPreview = this._preview ? model.listWithPreview(preview) : model.list();
     modelWithPreview.forEach(this._renderClass);
 
     const unusedClasses = getListDifference(Object.keys(this._nodes.classes), modelWithPreview);
@@ -27,13 +27,14 @@ export class ClassListRenderer {
   }
 
 
-  _renderClass(className, index, model) {
+  _renderClass(className, index, classesToRender) {
     if (!this._nodes.classes[className]) {
       this._nodes.classes[className] = this._createClass(className);
       if (index === 0) {
         this._nodes.container.insertAdjacentElement('afterbegin', this._nodes.classes[className]);
       } else {
-        this._nodes.classes[model[index - 1]].insertAdjacentElement('afterend', this._nodes.classes[className]);
+        const previousClass = this._nodes.classes[classesToRender[index - 1]];
+        previousClass.insertAdjacentElement('afterend', this._nodes.classes[className]);
       }
     }
     const highlightColor = className === this._preview ? this._previewColor : HighlightColors.NONE;

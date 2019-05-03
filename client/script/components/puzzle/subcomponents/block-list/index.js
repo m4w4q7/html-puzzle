@@ -1,6 +1,7 @@
 import { AbstractPuzzleSubcomponent } from '../abstract-puzzle-subcomponent/index.js';
 import { createTemplate } from './template.js';
 import { createElement, clearElement } from '../../../../utils.js';
+import { Element } from '../../../../model/element.js';
 
 export class PuzzleBlockListComponent extends AbstractPuzzleSubcomponent {
 
@@ -8,7 +9,6 @@ export class PuzzleBlockListComponent extends AbstractPuzzleSubcomponent {
     super();
     this._model = null;
     this._indentation = 0;
-    this._onBlockChange = this._onBlockChange.bind(this);
   }
 
 
@@ -46,26 +46,22 @@ export class PuzzleBlockListComponent extends AbstractPuzzleSubcomponent {
 
 
   releaseBlock(block) {
-    block.removeEventListener('change', this._onBlockChange);
     const index = this._nodes.blocks.indexOf(block);
     this._nodes.blocks.splice(index, 1);
-    this._model.splice(index, 1);
-    this._emitChange();
+    this._model.removeByIndex(index);
   }
 
 
   adoptBlock(block, previousBlock) {
     const index = this._nodes.blocks.indexOf(previousBlock) + 1;
     this._nodes.blocks.splice(index, 0, block);
-    this._model.splice(index, 0, block.model);
+    this._model.add(block.model, index);
 
     this._setupBlock(block);
 
     previousBlock ?
       previousBlock.insertAdjacentElement('afterend', block) :
       this._nodes.container.insertAdjacentElement('afterbegin', block);
-
-    this._emitChange();
   }
 
 
@@ -81,24 +77,11 @@ export class PuzzleBlockListComponent extends AbstractPuzzleSubcomponent {
 
 
   _createBlock(block) {
-    return createElement(block.type === 'element' ? 'hpu-puzzle-element' : 'hpu-puzzle-text', { model: block });
-  }
-
-
-  _onBlockChange(event) {
-    const index = this._nodes.blocks.indexOf(event.target);
-    this._model.splice(index, 1, event.target.model);
-    this._emitChange();
-  }
-
-
-  _emitChange() {
-    this.dispatchEvent(new CustomEvent('change'));
+    return createElement(block instanceof Element ? 'hpu-puzzle-element' : 'hpu-puzzle-text', { model: block });
   }
 
 
   _setupBlock(block) {
-    block.addEventListener('change', this._onBlockChange);
     block.indentation = this._indentation;
     block.parentList = this;
   }
@@ -107,7 +90,7 @@ export class PuzzleBlockListComponent extends AbstractPuzzleSubcomponent {
   _render() {
     if (!this._nodes || !this._model) { return; }
     this._nodes.container = clearElement(this._nodes.container);
-    this._nodes.blocks = this._model.map(blockModel => this._createBlock(blockModel));
+    this._nodes.blocks = this._model.list().map(blockModel => this._createBlock(blockModel));
     this._nodes.blocks.forEach(block => {
       this._setupBlock(block);
       this._nodes.container.appendChild(block);

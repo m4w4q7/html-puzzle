@@ -28,15 +28,15 @@ import { Pug } from './pug/index.js';
 
   const goal = Pug.parse(example.pug);
   const initialModel = shuffle(goal);
-  puzzleComponent.model = initialModel.toOldModel();
+  puzzleComponent.model = initialModel;
   goalPreviewComponent.model = goal.toOldModel();
   currentPreviewComponent.model = initialModel.toOldModel();
   puzzleComponent.addEventListener('change', event => {
-    currentPreviewComponent.model = event.detail.model;
-    if (isEqual(event.detail.model, goal.toOldModel())) { alert('Congratulations! 🙂👍'); }
+    currentPreviewComponent.model = event.detail.model.toOldModel();
+    if (isEqual(event.detail.model.toOldModel(), goal.toOldModel())) { alert('Congratulations! 🙂👍'); }
 
     const startDate = new Date();
-    const hint = calculateHint(event.detail.model, goal.toOldModel());
+    const hint = calculateHint(event.detail.model.toOldModel(), goal.toOldModel());
     console.log('hint', `duration: ${new Date() - startDate}ms`, JSON.stringify(hint, null, 2));
   });
 })();

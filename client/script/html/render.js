@@ -19,7 +19,7 @@ const renderAttributes = (element) => {
 };
 
 
-const renderText = text => escapeText(text.value);
+const renderText = text => escapeText(text.content);
 
 
 const escapeAttributeValue = value => value.replace('&', '&amp;').replace('"', '&quot;');

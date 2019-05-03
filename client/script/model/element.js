@@ -49,6 +49,17 @@ export class Element {
   }
 
 
+  clone() {
+    return new Element({
+      name: this._name,
+      id: this._id,
+      classList: this._classList.clone(),
+      attributeList: this._attributeList.clone(),
+      children: this._children.clone()
+    });
+  }
+
+
   toOldModel() {
     return {
       'type': 'element',

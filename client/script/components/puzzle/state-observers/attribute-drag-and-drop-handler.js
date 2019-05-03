@@ -1,3 +1,4 @@
+import { Attribute } from '../../../model/attribute.js';
 import { PieceTypes, HighlightColors } from '../enums.js';
 import { AbstractElementPartDragAndDropHandler } from './abstract-element-part-drag-and-drop-handler.js';
 
@@ -29,7 +30,7 @@ export class AttributeDragAndDropHandler extends AbstractElementPartDragAndDropH
     const newTargetAttributeList = draggedPiece.parentList;
 
     newTargetAttributeList.preview(this._draggedModel, HighlightColors.ADD);
-    newTargetAttributeList.remove(this._draggedModel[0]);
+    newTargetAttributeList.remove(this._draggedModel.name);
     this._previousTargetAttributeList = newTargetAttributeList;
   }
 
@@ -45,11 +46,11 @@ export class AttributeDragAndDropHandler extends AbstractElementPartDragAndDropH
     newTargetAttributeList.preview(this._draggedModel, HighlightColors.ADD);
 
     if (newTargetAttributeList !== this._draggedAttributeList) {
-      if (newTargetAttributeList.has(this._draggedModel[0])) {
-        this._draggedAttributeList.preview([
-          this._draggedModel[0],
-          newTargetAttributeList.model.find(([name]) => name === this._draggedModel[0])[1]
-        ]);
+      if (newTargetAttributeList.has(this._draggedModel.name)) {
+        this._draggedAttributeList.preview(new Attribute(
+          this._draggedModel.name,
+          newTargetAttributeList.model.getByName(this._draggedModel.name).value
+        ));
       } else {
         this._draggedAttributeList.cancelPreview();
       }

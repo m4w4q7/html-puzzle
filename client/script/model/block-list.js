@@ -3,7 +3,7 @@ import { Element } from './element.js';
 export class BlockList {
 
   constructor(blocks = []) {
-    this._blocks = blocks;
+    this._blocks = [...blocks];
   }
 
 
@@ -11,8 +11,14 @@ export class BlockList {
     return this._blocks.length;
   }
 
+
   add(block, index = this._blocks.length) {
     this._blocks.splice(index, 0, block);
+  }
+
+
+  removeByIndex(index) {
+    this._blocks.splice(index, 1);
   }
 
 
@@ -23,6 +29,17 @@ export class BlockList {
 
   listDeep() {
     return this._blocks.flatMap(block => block instanceof Element ? [block, ...block.children.listDeep()] : [block]);
+  }
+
+
+  indexOf(block) {
+    return this._blocks.indexOf(block);
+  }
+
+
+  clone() {
+    const blockClones = this._blocks.map(block => block.clone());
+    return new BlockList(blockClones);
   }
 
 

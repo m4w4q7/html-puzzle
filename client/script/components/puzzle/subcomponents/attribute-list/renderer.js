@@ -20,29 +20,15 @@ export class AttributeListRenderer {
     this._eventHandlers = null;
     this._eventHandlers = eventHandlers;
 
-    const modelWithPreview = this._getModelWithPreview(model);
-    modelWithPreview.forEach(this._renderAttribute);
+    const attributesToRender = this._preview ? model.listWithPreview(this._preview) : model.list();
+    attributesToRender.forEach(this._renderAttribute);
 
     const renderedAttributeNames = Object.keys(this._nodes.attributes);
-    const attributeNamesOfModelWithPreview = modelWithPreview.map(([name]) => name);
-    const unusedAttributeNames = getListDifference(renderedAttributeNames, attributeNamesOfModelWithPreview);
+    const namesOfAttributesToRender = attributesToRender.map(attribute => attribute.name);
+    const unusedAttributeNames = getListDifference(renderedAttributeNames, namesOfAttributesToRender);
     unusedAttributeNames.forEach(name => this._removeAttribute(name));
 
     return this._nodes;
-  }
-
-
-  _getModelWithPreview(model) {
-    if (!this._preview) {
-      return [...model];
-    }
-    const previewIndex = model.findIndex(([name]) => name === this._preview[0]);
-    if (previewIndex === -1) {
-      return [...model, this._preview].sort(([name1], [name2]) => name1 < name2 ? -1 : name1 > name2 ? 1 : 0);
-    }
-    const modelWithPreview = [...model];
-    modelWithPreview.splice(previewIndex, 1, this._preview);
-    return modelWithPreview;
   }
 
 
@@ -52,8 +38,8 @@ export class AttributeListRenderer {
   }
 
 
-  _renderAttribute(attribute, index, model) {
-    const attributeComponent = this._nodes.attributes[attribute[0]];
+  _renderAttribute(attribute, index, attributesToRender) {
+    const attributeComponent = this._nodes.attributes[attribute.name];
     if (attributeComponent) {
       if (this._isPreviewed(attribute)) {
         attributeComponent.preview(attribute, this._previewColor);
@@ -62,21 +48,21 @@ export class AttributeListRenderer {
         attributeComponent.cancelPreview();
       }
     } else {
-      this._renderNewAttribute(attribute, index, model);
+      this._renderNewAttribute(attribute, index, attributesToRender);
     }
   }
 
 
-  _renderNewAttribute(attribute, index, model) {
+  _renderNewAttribute(attribute, index, attributesToRender) {
     const newAttribute = this._createAttribute(attribute);
     if (!this._isPreviewed(attribute)) { newAttribute.model = attribute; }
-    this._nodes.attributes[attribute[0]] = newAttribute;
+    this._nodes.attributes[attribute.name] = newAttribute;
     const separatedAttribute = this._createSeparatedAttribute(newAttribute);
 
     if (index === 0) {
       this._nodes.container.insertAdjacentElement('afterbegin', separatedAttribute);
     } else {
-      const previousAttributeComponent = this._nodes.attributes[model[index - 1][0]];
+      const previousAttributeComponent = this._nodes.attributes[attributesToRender[index - 1].name];
       previousAttributeComponent.parentElement.insertAdjacentElement('afterend', separatedAttribute);
     }
 
@@ -85,7 +71,7 @@ export class AttributeListRenderer {
 
 
   _isPreviewed(attribute) {
-    return this._preview && attribute[0] === this._preview[0];
+    return this._preview && attribute.name === this._preview.name;
   }
 
 

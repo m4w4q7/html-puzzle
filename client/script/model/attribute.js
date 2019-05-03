@@ -15,6 +15,11 @@ export class Attribute {
   }
 
 
+  clone({ name = this.name, value = this.value } = {}) {
+    return new Attribute(name, value);
+  }
+
+
   toOldModel() {
     return [this.name, this.value];
   }

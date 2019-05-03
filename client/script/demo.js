@@ -31,12 +31,23 @@ import { Pug } from './pug/index.js';
   puzzleComponent.model = initialModel;
   goalPreviewComponent.model = goal;
   currentPreviewComponent.model = initialModel;
+
   const hintCalculator = new HintCalculator(goal);
+  let hint = null;
+  let hintsUsed = 0;
+  const hintCounter = document.querySelector('#hintCounter');
+  document.querySelector('#hintButton').addEventListener('click', () => {
+    if (!hint) {
+      hintsUsed++;
+      hintCounter.textContent = hintsUsed;
+      hint = hintCalculator.getNext(puzzleComponent.model);
+    }
+    console.log('hint', hint);
+  });
+
   puzzleComponent.addEventListener('change', event => {
+    hint = null;
     currentPreviewComponent.model = event.detail.model;
     if (goal.isEqual(event.detail.model)) { alert('Congratulations! 🙂👍'); }
-
-    const hint = hintCalculator.getNext(event.detail.model);
-    console.log('hint', hint);
   });
 })();

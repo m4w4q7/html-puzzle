@@ -27,10 +27,13 @@
     <hpu-top-menu></hpu-top-menu>
 
     <div class="page-content page-content--full-height" style="display: flex; flex-direction: column;">
+
       <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 16px">
         <div id="exerciseName" class="hpu-title">&nbsp;</div>
-        <div style="font-size: 20px">Time: <hpu-clock></hpu-clock></div>
+        <button id="hintButton" style="cursor: pointer;">Show hint (under construction)</button>
+        <div style="font-size: 20px">Hints: <span id="hintCounter">0</span>,&nbsp;&nbsp;&nbsp;Time: <hpu-clock></hpu-clock></div>
       </div>
+
       <hpu-horizontal-resizable ratio="0.66" style="flex: 1 0 0">
 
         <div class="puzzle-container" slot="left">

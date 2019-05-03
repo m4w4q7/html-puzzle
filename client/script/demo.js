@@ -29,10 +29,10 @@ import { Pug } from './pug/index.js';
   const goal = Pug.parse(example.pug);
   const initialModel = shuffle(goal);
   puzzleComponent.model = initialModel;
-  goalPreviewComponent.model = goal.toOldModel();
-  currentPreviewComponent.model = initialModel.toOldModel();
+  goalPreviewComponent.model = goal;
+  currentPreviewComponent.model = initialModel;
   puzzleComponent.addEventListener('change', event => {
-    currentPreviewComponent.model = event.detail.model.toOldModel();
+    currentPreviewComponent.model = event.detail.model;
     if (isEqual(event.detail.model.toOldModel(), goal.toOldModel())) { alert('Congratulations! 🙂👍'); }
 
     const startDate = new Date();

@@ -1,5 +1,5 @@
 import { pageTemplate } from './page-template.js';
-import { renderModel } from './render-model.js';
+import { Html } from '../../html/index.js';
 import { createElement } from '../../utils.js';
 
 
@@ -54,7 +54,7 @@ export class PreviewComponent extends HTMLElement {
 
   _render() {
     if (!this._model || !this._iframeBody) { return; }
-    this._iframeBody.innerHTML = renderModel(this._model);
+    this._iframeBody.innerHTML = Html.render(this._model);
   }
 
 

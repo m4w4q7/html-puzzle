@@ -1,30 +1,14 @@
 import { DragStates } from '../../enums.js';
 import { PieceTypes } from '../../../../enums/piece-types.js';
 import { AbstractMemberAccessError } from '../../../../abstract-member-access-error.js';
+import { AbstractDragAndDropHandler } from './abstract-drag-and-drop-handler.js';
 
 
-export class AbstractElementPartDragAndDropHandler {
-
-  constructor(host, state) {
-    this._host = host;
-    this._state = state;
-    this._lastDraggedPiece = null;
-  }
-
+export class AbstractElementPartDragAndDropHandler extends AbstractDragAndDropHandler {
 
   observe() {
-    this._state.observe('dragState', this._onDragStateChange, this);
+    super.observe();
     this._state.observe(['cursorPosition', 'line'], this._onLineChange, this);
-  }
-
-
-  get _draggedPiece() {
-    return this._state.draggedPiece;
-  }
-
-
-  get _handledPieceType() {
-    throw new AbstractMemberAccessError();
   }
 
 
@@ -38,30 +22,15 @@ export class AbstractElementPartDragAndDropHandler {
   }
 
 
-  _isRelevantPiece(piece) {
-    return piece && piece.pieceType === this._handledPieceType;
-  }
-
-
   _onLineChange(line) {
-    if (!this._isRelevantPiece(this._draggedPiece)) { return; }
+    if (!this._draggedPiece || !this._isRelevantPiece(this._draggedPiece)) { return; }
     const targetBlock = this._host.getBlock(line);
     if (targetBlock.pieceType === PieceTypes.TEXT) { return; }
     this._onDragMove(targetBlock);
   }
 
 
-  _onDragStart(draggedPiece) {
-    throw new AbstractMemberAccessError();
-  }
-
-
   _onDragMove(targetElement) {
-    throw new AbstractMemberAccessError();
-  }
-
-
-  _onDragEnd(draggedPiece) {
     throw new AbstractMemberAccessError();
   }
 

@@ -11,11 +11,6 @@ export class ClassDragAndDropHandler extends AbstractElementPartDragAndDropHandl
   }
 
 
-  get _handledPieceType() {
-    return PieceTypes.CLASS;
-  }
-
-
   get _draggedValue() {
     return this._draggedPiece.value;
   }
@@ -23,6 +18,11 @@ export class ClassDragAndDropHandler extends AbstractElementPartDragAndDropHandl
 
   get _draggedClassList() {
     return this._draggedPiece.parentList;
+  }
+
+
+  _isRelevantPiece(piece) {
+    return piece.pieceType === PieceTypes.CLASS;
   }
 
 

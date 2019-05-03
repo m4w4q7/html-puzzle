@@ -1,26 +1,19 @@
-import { DragStates } from '../../enums.js';
 import { HighlightColors } from '../../enums.js';
 import { PieceTypes } from '../../../../enums/piece-types.js';
+import { AbstractDragAndDropHandler } from './abstract-drag-and-drop-handler.js';
 
 
-export class AttributeValueDragAndDropHandler {
+export class AttributeValueDragAndDropHandler extends AbstractDragAndDropHandler {
 
-  constructor(host, state) {
-    this._host = host;
-    this._state = state;
-    this._lastDraggedPiece = null;
+  constructor(...args) {
+    super(...args);
     this._previousTargetAttribute = null;
   }
 
 
   observe() {
-    this._state.observe('dragState', this._onDragStateChange, this);
+    super.observe();
     this._state.observe('hoveredPiece', this._onHoveredPieceChange, this);
-  }
-
-
-  get _draggedPiece() {
-    return this._state.draggedPiece;
   }
 
 
@@ -35,13 +28,8 @@ export class AttributeValueDragAndDropHandler {
   }
 
 
-  _onDragStateChange(dragState, previousDragState) {
-    if (dragState === DragStates.DRAG) {
-      this._lastDraggedPiece = this._draggedPiece;
-      if (this._isRelevantPiece(this._draggedPiece)) { this._onDragStart(); }
-    } else if (previousDragState === DragStates.DRAG && this._isRelevantPiece(this._lastDraggedPiece)) {
-      this._onDragEnd(this._lastDraggedPiece);
-    }
+  _isRelevantPiece(piece) {
+    return piece.pieceType === PieceTypes.ATTRIBUTE_VALUE;
   }
 
 
@@ -53,13 +41,8 @@ export class AttributeValueDragAndDropHandler {
   }
 
 
-  _isRelevantPiece(piece) {
-    return piece && piece.pieceType === PieceTypes.ATTRIBUTE_VALUE;
-  }
-
-
   _onHoveredPieceChange() {
-    if (!this._isRelevantPiece(this._draggedPiece)) { return; }
+    if (!this._draggedPiece || !this._isRelevantPiece(this._draggedPiece)) { return; }
     this._onDragMove();
   }
 

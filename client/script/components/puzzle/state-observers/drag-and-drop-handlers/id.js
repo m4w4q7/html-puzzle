@@ -11,8 +11,8 @@ export class IdDragAndDropHandler extends AbstractElementPartDragAndDropHandler 
   }
 
 
-  get _handledPieceType() {
-    return PieceTypes.ID;
+  _isRelevantPiece(piece) {
+    return piece.pieceType === PieceTypes.ID;
   }
 
 

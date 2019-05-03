@@ -12,11 +12,6 @@ export class AttributeDragAndDropHandler extends AbstractElementPartDragAndDropH
   }
 
 
-  get _handledPieceType() {
-    return PieceTypes.ATTRIBUTE;
-  }
-
-
   get _draggedModel() {
     return this._draggedPiece.model;
   }
@@ -24,6 +19,11 @@ export class AttributeDragAndDropHandler extends AbstractElementPartDragAndDropH
 
   get _draggedAttributeList() {
     return this._draggedPiece.parentList;
+  }
+
+
+  _isRelevantPiece(piece) {
+    return piece.pieceType === PieceTypes.ATTRIBUTE;
   }
 
 

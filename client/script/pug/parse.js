@@ -58,7 +58,7 @@ const parseClasses = classes => new ClassList(classes.split('.').slice(1));
 
 const parseAttributes = attributes => {
   const matches = [...attributes.matchAll(new RegExp(groupedAttribute, 'g'))];
-  attributes = matches.map(([_, name, value = '']) => new Attribute(name, value));
+  attributes = matches.map(([_, name, value = '']) => new Attribute(name, unescapeAttributeValue(value)));
   return new AttributeList(attributes);
 };
 
@@ -72,3 +72,5 @@ const buildTree = (currentBlockListsPerLevel, { level, block }) => {
 const textLineRegexp = new RegExp(groupedTextLine);
 
 const elementLineRegexp = new RegExp(groupedElementLine);
+
+const unescapeAttributeValue = value => value.replace('\\\\', '\\').replace(`\\'`, `'`);

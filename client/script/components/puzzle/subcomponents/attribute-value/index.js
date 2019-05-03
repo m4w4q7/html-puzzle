@@ -22,7 +22,12 @@ export class PuzzleAttributeValueComponent extends AbstractPuzzlePiece {
 
   set value(value) {
     this._value = value;
-    this.textContent = value ? `'${value}'` : '';
+    this.textContent = value ? `'${this._escapeValue(value)}'` : '';
+  }
+
+
+  _escapeValue(value) {
+    return value.replace('\\', '\\\\').replace(`'`, `\\'`);
   }
 
 }

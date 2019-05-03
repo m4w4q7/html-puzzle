@@ -68,6 +68,12 @@ export class PuzzleElementComponent extends AbstractPuzzlePiece {
   }
 
 
+  connectedCallback() {
+    if (!super.connectedCallback()) { return; }
+    this._listenForChanges();
+  }
+
+
   getBlockByPath(path) {
     return this._nodes.blockList.getBlockByPath(path);
   }
@@ -127,6 +133,11 @@ export class PuzzleElementComponent extends AbstractPuzzlePiece {
   _applyIndentation() {
     if (!this._nodes) { return; }
     this._nodes.blockList.indentation = this._indentation + 1;
+  }
+
+
+  _listenForChanges() {
+    this._nodes.id.addEventListener('change', () => this._model.id = this._nodes.id.value);
   }
 
 

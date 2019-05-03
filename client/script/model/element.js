@@ -76,7 +76,8 @@ export class Element {
 
 
   toString() {
-    const element = `${this._name}${this._id}${this._classList}${this._attributeList}`;
+    const id = this._id || `#${this._id}`;
+    const element = `${this._name}${id}${this._classList}${this._attributeList}`;
     const children = this._children.toString().split('\n').map(line => `  ${line}`).join('\n');
     return children.trim() ? `${element}\n${children}` : element;
   }

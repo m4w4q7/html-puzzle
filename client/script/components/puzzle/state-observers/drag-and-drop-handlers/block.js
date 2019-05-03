@@ -1,5 +1,5 @@
-import { isBlock } from '../utils.js';
-import { DragStates } from '../enums.js';
+import { isBlock } from '../../utils.js';
+import { DragStates } from '../../enums.js';
 
 export class BlockDragAndDropHandler {
 

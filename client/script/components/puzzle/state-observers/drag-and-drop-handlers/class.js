@@ -1,6 +1,6 @@
-import { HighlightColors } from '../enums.js';
-import { PieceTypes } from '../../../enums/piece-types.js';
-import { AbstractElementPartDragAndDropHandler } from './abstract-element-part-drag-and-drop-handler.js';
+import { HighlightColors } from '../../enums.js';
+import { PieceTypes } from '../../../../enums/piece-types.js';
+import { AbstractElementPartDragAndDropHandler } from './abstract-element-part.js';
 
 
 export class ClassDragAndDropHandler extends AbstractElementPartDragAndDropHandler {

@@ -11,7 +11,7 @@ export class PuzzleContentComponent extends AbstractPuzzleSubcomponent {
     this._model = null;
     this._inserter = {
       subject: null,
-      notDraggedBlock: null,
+      notDraggedBlocks: null,
       line: null,
       minIndentation: null,
       maxIndentation: null,
@@ -137,7 +137,7 @@ export class PuzzleContentComponent extends AbstractPuzzleSubcomponent {
 
 
   _clearInserter() {
-    this._inserter = { subject: null, notDraggedBlock: null, line: null, minIndentation: null, maxIndentation: null };
+    this._inserter = { subject: null, notDraggedBlocks: null, line: null, minIndentation: null, maxIndentation: null };
   }
 
 

@@ -18,11 +18,11 @@ import { MouseUpListener } from './event-listeners/mouse-up.js';
 import { MouseMoveListener } from './event-listeners/mouse-move.js';
 import { HoverHighlightHandler } from './state-observers/hover-highlight-handler.js';
 import { DragTransitionHandler } from './state-observers/drag-transition-handler.js';
-import { BlockDragAndDropHandler } from './state-observers/block-drag-and-drop-handler.js';
-import { IdDragAndDropHandler } from './state-observers/id-drag-and-drop-handler.js';
-import { ClassDragAndDropHandler } from './state-observers/class-drag-and-drop-handler.js';
-import { AttributeDragAndDropHandler } from './state-observers/attribute-drag-and-drop-handler.js';
-import { AttributeValueDragAndDropHandler } from './state-observers/attribute-value-drag-and-drop-handler.js';
+import { BlockDragAndDropHandler } from './state-observers/drag-and-drop-handlers/block.js';
+import { IdDragAndDropHandler } from './state-observers/drag-and-drop-handlers/id.js';
+import { ClassDragAndDropHandler } from './state-observers/drag-and-drop-handlers/class.js';
+import { AttributeDragAndDropHandler } from './state-observers/drag-and-drop-handlers/attribute.js';
+import { AttributeValueDragAndDropHandler } from './state-observers/drag-and-drop-handlers/attribute-value.js';
 import { HintHandler } from './state-observers/hint-handler.js';
 
 

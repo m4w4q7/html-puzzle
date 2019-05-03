@@ -15,7 +15,7 @@ export class Piece {
 
 
   isInCorrectPlace(reference) {
-    return isEqualArray(this.path, reference.path);
+    return this.isSame(reference) && isEqualArray(this.path, reference.path);
   }
 
 }

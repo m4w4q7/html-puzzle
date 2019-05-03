@@ -49,13 +49,19 @@ export class Element {
   }
 
 
-  clone() {
+  clone({
+    name = this._name,
+    id = this._id,
+    classList = this._classList.clone(),
+    attributeList = this._attributeList.clone(),
+    children = this._children.clone()
+  } = {}) {
     return new Element({
-      name: this._name,
-      id: this._id,
-      classList: this._classList.clone(),
-      attributeList: this._attributeList.clone(),
-      children: this._children.clone()
+      name: name,
+      id: id,
+      classList: classList instanceof ClassList ? classList : new ClassList(classList),
+      attributeList: attributeList instanceof AttributeList ? attributeList : new AttributeList(attributeList),
+      children: children instanceof BlockList ? children : new BlockList(children)
     });
   }
 

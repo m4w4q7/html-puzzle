@@ -23,6 +23,7 @@ import { IdDragAndDropHandler } from './state-observers/id-drag-and-drop-handler
 import { ClassDragAndDropHandler } from './state-observers/class-drag-and-drop-handler.js';
 import { AttributeDragAndDropHandler } from './state-observers/attribute-drag-and-drop-handler.js';
 import { AttributeValueDragAndDropHandler } from './state-observers/attribute-value-drag-and-drop-handler.js';
+import { HintHandler } from './state-observers/hint-handler.js';
 
 
 
@@ -49,6 +50,7 @@ export class PuzzleComponent extends HTMLElement {
     this._classDragAndDropHandler = new ClassDragAndDropHandler(this._nodes.content, this._state);
     this._attributeDragAndDropHandler = new AttributeDragAndDropHandler(this._nodes.content, this._state);
     this._attributeValueDragAndDropHandler = new AttributeValueDragAndDropHandler(this._nodes.content, this._state);
+    this._hintHandler = new HintHandler(this._nodes.content, this._state);
 
     this._onChange = this._onChange.bind(this);
   }
@@ -62,6 +64,16 @@ export class PuzzleComponent extends HTMLElement {
   set model(value) {
     this._model = value.clone();
     this._nodes.content.model = this._model;
+  }
+
+
+  showHint(hint) {
+    this._state.hint = hint;
+  }
+
+
+  hideHint() {
+    this._state.hint = null;
   }
 
 
@@ -107,6 +119,7 @@ export class PuzzleComponent extends HTMLElement {
     this._classDragAndDropHandler.observe();
     this._attributeDragAndDropHandler.observe();
     this._attributeValueDragAndDropHandler.observe();
+    this._hintHandler.observe();
   }
 
 

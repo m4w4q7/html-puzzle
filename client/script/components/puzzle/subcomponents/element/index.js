@@ -58,8 +58,18 @@ export class PuzzleElementComponent extends AbstractPuzzlePiece {
   }
 
 
+  get blockListComponent() {
+    return this._nodes.blockList;
+  }
+
+
   static get createTemplate() {
     return createTemplate;
+  }
+
+
+  getBlockByPath(path) {
+    return this._nodes.blockList.getBlockByPath(path);
   }
 
 

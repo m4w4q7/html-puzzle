@@ -19,4 +19,5 @@ export class AbstractPuzzlePiece extends AbstractPuzzleSubcomponent {
 const colorMap = {
   [HighlightColors.NEUTRAL]: 'neutral',
   [HighlightColors.ADD]: 'add',
+  [HighlightColors.REMOVE]: 'remove',
 };

@@ -36,13 +36,14 @@ import { Pug } from './pug/index.js';
   let hint = null;
   let hintsUsed = 0;
   const hintCounter = document.querySelector('#hintCounter');
-  document.querySelector('#hintButton').addEventListener('click', () => {
+  document.querySelector('#hintButton').addEventListener('mousedown', () => {
     if (!hint) {
       hintsUsed++;
       hintCounter.textContent = hintsUsed;
       hint = hintCalculator.getNext(puzzleComponent.model);
     }
-    console.log('hint', hint);
+    puzzleComponent.showHint(hint);
+    doOnNext(document, 'mouseup', () => puzzleComponent.hideHint());
   });
 
   puzzleComponent.addEventListener('change', event => {

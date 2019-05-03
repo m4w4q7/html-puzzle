@@ -36,6 +36,16 @@ export class PuzzleContentComponent extends AbstractPuzzleSubcomponent {
   }
 
 
+  get blockListComponent() {
+    return this._nodes.blockList;
+  }
+
+
+  getBlockByPath(path) {
+    return this._nodes.blockList.getBlockByPath(path);
+  }
+
+
   getCharacterDimensions() {
     if (!this._nodes) { return { width: 0, height: 0 }; }
     const { width, height } = this._nodes.characterSpecimen.getBoundingClientRect();

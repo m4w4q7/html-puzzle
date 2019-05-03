@@ -33,6 +33,11 @@ export class PuzzleAttributeListComponent extends AbstractPuzzleSubcomponent {
   }
 
 
+  getAttributeComponentByName(name) {
+    return this._nodes.attributes[name];
+  }
+
+
   remove(name) {
     if (!this.has(name)) { return; }
     this._model.removeByName(name);

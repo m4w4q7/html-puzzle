@@ -49,8 +49,8 @@ export class AttributeList {
 
   clone() {
     this._normalizeAttributes();
-    const attributeColnes = this._attributes.map(attribute => attribute.clone());
-    return new AttributeList(attributeColnes);
+    const attributeClones = this._attributes.map(attribute => attribute.clone());
+    return new AttributeList(attributeClones);
   }
 
 

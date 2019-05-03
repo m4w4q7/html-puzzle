@@ -8,5 +8,6 @@ export const DragStates = {
 export const HighlightColors = {
   NEUTRAL: Symbol('neutral'),
   ADD: Symbol('add'),
+  REMOVE: Symbol('remove'),
   NONE: Symbol('none')
 };

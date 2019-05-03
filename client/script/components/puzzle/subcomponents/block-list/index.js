@@ -2,6 +2,7 @@ import { AbstractPuzzleSubcomponent } from '../abstract-puzzle-subcomponent/inde
 import { createTemplate } from './template.js';
 import { createElement, clearElement } from '../../../../utils.js';
 import { Element } from '../../../../model/element.js';
+import { HighlightColors } from '../../enums.js';
 
 export class PuzzleBlockListComponent extends AbstractPuzzleSubcomponent {
 
@@ -45,6 +46,13 @@ export class PuzzleBlockListComponent extends AbstractPuzzleSubcomponent {
   }
 
 
+  getBlockByPath(path) {
+    const [index, ...subpath] = path;
+    const block = this._nodes.blocks[index];
+    return subpath.length ? block.getBlockByPath(subpath) : block;
+  }
+
+
   releaseBlock(block) {
     const index = this._nodes.blocks.indexOf(block);
     this._nodes.blocks.splice(index, 1);
@@ -67,6 +75,26 @@ export class PuzzleBlockListComponent extends AbstractPuzzleSubcomponent {
 
   hostBlockInserter(inserter, nextBlock) {
     this._nodes.container.insertBefore(inserter, nextBlock || null);
+  }
+
+
+  preview(index, model, highlightColor = HighlightColors.NONE) {
+    if (this._nodes.preview) { this.cancelPreview(); }
+    const newModel = model instanceof Element ? model.clone({ children: [] }) : model.clone();
+    this._nodes.preview = this._createBlock(newModel);
+    if (index) {
+      this._nodes.blocks[index - 1].insertAdjacentElement('afterend', this._nodes.preview);
+    } else {
+      this._nodes.container.insertAdjacentElement('afterbegin', this._nodes.preview);
+    }
+    this._nodes.preview.highlight(highlightColor);
+  }
+
+
+  cancelPreview() {
+    if (!this._nodes.preview) { return; }
+    this._nodes.preview.remove();
+    this._nodes.preview = null;
   }
 
 

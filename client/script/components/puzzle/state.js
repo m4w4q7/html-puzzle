@@ -11,6 +11,7 @@ export class State {
       dragState: DragStates.HOVER,
       characterDimensions: { width: 0, height: 0 },
       cursorPosition: { line: null, character: null },
+      hint: null,
     };
     this._observers = {};
     this._createSettersAndGetters();

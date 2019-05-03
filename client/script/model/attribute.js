@@ -20,11 +20,6 @@ export class Attribute {
   }
 
 
-  toOldModel() {
-    return [this.name, this.value];
-  }
-
-
   isEqual(attribute) {
     return this.name === attribute.name && this.value === attribute.value;
   }

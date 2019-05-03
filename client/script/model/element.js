@@ -60,17 +60,6 @@ export class Element {
   }
 
 
-  toOldModel() {
-    return {
-      'type': 'element',
-      'tagName': this._name,
-      'classList': this._classList.toOldModel(),
-      'attributes': this._attributeList.toOldModel(),
-      'children': this._children.toOldModel()
-    };
-  }
-
-
   isEqual(element) {
     return this.name === element.name &&
       this.id === element.id &&

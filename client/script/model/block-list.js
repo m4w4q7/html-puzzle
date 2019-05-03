@@ -44,11 +44,6 @@ export class BlockList {
   }
 
 
-  toOldModel() {
-    return this._blocks.map(block => block.toOldModel());
-  }
-
-
   isEqual(blockList) {
     isEqualArray(this.list(), blockList.list(), (a, b) => a.isEqual(b));
   }

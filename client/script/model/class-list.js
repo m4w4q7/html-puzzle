@@ -46,11 +46,6 @@ export class ClassList {
   }
 
 
-  toOldModel() {
-    return [...this._classes];
-  }
-
-
   isEqual(classList) {
     isEqualArray(this.list(), classList.list());
   }

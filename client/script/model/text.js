@@ -15,11 +15,6 @@ export class Text {
   }
 
 
-  toOldModel() {
-    return { type: 'text', text: this._content };
-  }
-
-
   isEqual(text) {
     return this.content === text.content;
   }

@@ -47,7 +47,7 @@ export class ClassList {
 
 
   isEqual(classList) {
-    isEqualArray(this.list(), classList.list());
+    return isEqualArray(this.list(), classList.list());
   }
 
 

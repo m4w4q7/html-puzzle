@@ -45,7 +45,7 @@ export class BlockList {
 
 
   isEqual(blockList) {
-    isEqualArray(this.list(), blockList.list(), (a, b) => a.isEqual(b));
+    return isEqualArray(this.list(), blockList.list(), (a, b) => a.isEqual(b));
   }
 
 

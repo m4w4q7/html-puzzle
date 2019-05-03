@@ -55,7 +55,7 @@ export class AttributeList {
 
 
   isEqual(attributeList) {
-    isEqualArray(this.list(), attributeList.list(), (a, b) => a.isEqual(b));
+    return isEqualArray(this.list(), attributeList.list(), (a, b) => a.isEqual(b));
   }
 
 

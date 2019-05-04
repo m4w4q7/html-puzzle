@@ -1,5 +1,6 @@
 import { PieceTypes } from '../../../../enums/piece-types.js';
 import { AbstractPuzzlePiece } from '../abstract-puzzle-piece/index.js';
+import { findAncestor } from '../../utils.js';
 
 export class PuzzleClassComponent extends AbstractPuzzlePiece {
 
@@ -23,6 +24,11 @@ export class PuzzleClassComponent extends AbstractPuzzlePiece {
   set value(value) {
     this._value = value;
     this.textContent = value ? `.${value}` : '';
+  }
+
+
+  get elementHost() {
+    return findAncestor(this, node => node.pieceType === PieceTypes.ELEMENT);
   }
 
 }

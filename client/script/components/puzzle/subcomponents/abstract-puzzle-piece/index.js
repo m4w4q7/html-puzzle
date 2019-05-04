@@ -20,4 +20,5 @@ const colorMap = {
   [HighlightColors.NEUTRAL]: 'neutral',
   [HighlightColors.ADD]: 'add',
   [HighlightColors.REMOVE]: 'remove',
+  [HighlightColors.CONTAINER]: 'container',
 };

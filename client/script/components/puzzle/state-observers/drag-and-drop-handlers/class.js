@@ -27,6 +27,7 @@ export class ClassDragAndDropHandler extends AbstractElementPartDragAndDropHandl
 
 
   _onDragStart(draggedPiece) {
+    super._onDragStart(draggedPiece);
     const newTargetClassList = draggedPiece.parentList;
 
     newTargetClassList.preview(this._draggedValue, HighlightColors.ADD);
@@ -36,6 +37,7 @@ export class ClassDragAndDropHandler extends AbstractElementPartDragAndDropHandl
 
 
   _onDragMove(targetElement) {
+    super._onDragMove(targetElement);
     const newTargetClassList = targetElement.classListComponent;
     if (newTargetClassList === this._previousTargetClassList) { return; }
 
@@ -58,6 +60,7 @@ export class ClassDragAndDropHandler extends AbstractElementPartDragAndDropHandl
 
 
   _onDragEnd(draggedPiece) {
+    super._onDragEnd(draggedPiece);
     this._previousTargetClassList.applyPreview();
     draggedPiece.parentList.applyPreview();
 

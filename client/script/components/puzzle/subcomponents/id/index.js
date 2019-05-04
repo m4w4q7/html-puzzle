@@ -1,6 +1,7 @@
 import { HighlightColors } from '../../enums.js';
 import { PieceTypes } from '../../../../enums/piece-types.js';
 import { AbstractPuzzlePiece } from '../abstract-puzzle-piece/index.js';
+import { findAncestor } from '../../utils.js';
 
 export class PuzzleIdComponent extends AbstractPuzzlePiece {
 
@@ -24,6 +25,11 @@ export class PuzzleIdComponent extends AbstractPuzzlePiece {
   set value(value) {
     this._value = value;
     this._render();
+  }
+
+
+  get elementHost() {
+    return findAncestor(this, node => node.pieceType === PieceTypes.ELEMENT);
   }
 
 

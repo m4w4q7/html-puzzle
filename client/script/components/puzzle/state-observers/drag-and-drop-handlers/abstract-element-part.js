@@ -1,7 +1,6 @@
-import { DragStates } from '../../enums.js';
 import { PieceTypes } from '../../../../enums/piece-types.js';
-import { AbstractMemberAccessError } from '../../../../abstract-member-access-error.js';
 import { AbstractDragAndDropHandler } from './abstract-drag-and-drop-handler.js';
+import { HighlightColors } from '../../enums.js';
 
 
 export class AbstractElementPartDragAndDropHandler extends AbstractDragAndDropHandler {
@@ -9,16 +8,7 @@ export class AbstractElementPartDragAndDropHandler extends AbstractDragAndDropHa
   observe() {
     super.observe();
     this._state.observe(['cursorPosition', 'line'], this._onLineChange, this);
-  }
-
-
-  _onDragStateChange(dragState, previousDragState) {
-    if (dragState === DragStates.DRAG) {
-      this._lastDraggedPiece = this._draggedPiece;
-      if (this._isRelevantPiece(this._draggedPiece)) { this._onDragStart(this._draggedPiece); }
-    } else if (previousDragState === DragStates.DRAG) {
-      if (this._isRelevantPiece(this._lastDraggedPiece)) { this._onDragEnd(this._lastDraggedPiece); }
-    }
+    this._highlightedElement = null;
   }
 
 
@@ -26,12 +16,30 @@ export class AbstractElementPartDragAndDropHandler extends AbstractDragAndDropHa
     if (!this._draggedPiece || !this._isRelevantPiece(this._draggedPiece)) { return; }
     const targetBlock = this._host.getBlock(line);
     if (targetBlock.pieceType === PieceTypes.TEXT) { return; }
+    this._highlightLine(targetBlock);
     this._onDragMove(targetBlock);
   }
 
 
+  _highlightLine(element) {
+    if (this._highlightedElement) { this._highlightedElement.highlight(HighlightColors.NONE); }
+    if (element) { element.highlight(HighlightColors.CONTAINER); }
+    this._highlightedElement = element;
+  }
+
+
+  _onDragStart(draggedPiece) {
+    this._highlightLine(draggedPiece.elementHost);
+  }
+
+
   _onDragMove(targetElement) {
-    throw new AbstractMemberAccessError();
+    this._highlightLine(targetElement);
+  }
+
+
+  _onDragEnd(draggedPiece) {
+    this._highlightLine(null);
   }
 
 }

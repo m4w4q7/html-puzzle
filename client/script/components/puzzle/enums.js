@@ -9,5 +9,6 @@ export const HighlightColors = {
   NEUTRAL: Symbol('neutral'),
   ADD: Symbol('add'),
   REMOVE: Symbol('remove'),
+  CONTAINER: Symbol('container'),
   NONE: Symbol('none')
 };

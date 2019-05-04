@@ -17,11 +17,13 @@ export class IdDragAndDropHandler extends AbstractElementPartDragAndDropHandler 
 
 
   _onDragStart(draggedPiece) {
+    super._onDragStart(draggedPiece);
     this._targetId = draggedPiece;
   }
 
 
   _onDragMove(targetElement) {
+    super._onDragMove(targetElement);
     if (this._targetId !== this._draggedPiece) { this._targetId.cancelPreview(); }
     this._targetId = targetElement.idComponent;
     this._targetId.preview(this._draggedPiece.value, HighlightColors.ADD);
@@ -30,6 +32,7 @@ export class IdDragAndDropHandler extends AbstractElementPartDragAndDropHandler 
 
 
   _onDragEnd(draggedPiece) {
+    super._onDragEnd(draggedPiece);
     this._targetId.applyPreview();
     draggedPiece.applyPreview();
 

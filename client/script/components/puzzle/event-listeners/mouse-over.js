@@ -9,7 +9,7 @@ export class MouseOverListener {
 
 
   handleEvent({ target }) {
-    this._state.hoveredPiece = findAncestor(target, this._host, this._isPuzzlePiece);
+    this._state.hoveredPiece = findAncestor(target, this._isPuzzlePiece, this._host);
   }
 
 

@@ -28,6 +28,7 @@ export class AttributeDragAndDropHandler extends AbstractElementPartDragAndDropH
 
 
   _onDragStart(draggedPiece) {
+    super._onDragStart(draggedPiece);
     const newTargetAttributeList = draggedPiece.parentList;
 
     newTargetAttributeList.preview(this._draggedModel, HighlightColors.ADD);
@@ -37,6 +38,7 @@ export class AttributeDragAndDropHandler extends AbstractElementPartDragAndDropH
 
 
   _onDragMove(targetElement) {
+    super._onDragMove(targetElement);
     const newTargetAttributeList = targetElement.attributeListComponent;
     if (newTargetAttributeList === this._previousTargetAttributeList) { return; }
 
@@ -62,6 +64,7 @@ export class AttributeDragAndDropHandler extends AbstractElementPartDragAndDropH
 
 
   _onDragEnd(draggedPiece) {
+    super._onDragEnd(draggedPiece);
     this._previousTargetAttributeList.applyPreview();
     draggedPiece.parentList.applyPreview();
 

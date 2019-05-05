@@ -2,6 +2,7 @@ import { AbstractPuzzleSubcomponent } from '../abstract-puzzle-subcomponent/inde
 import { createTemplate } from './template.js';
 import { ClassListRenderer } from './renderer.js';
 import { HighlightColors } from '../../enums.js';
+import { PuzzleClassComponent } from '../class/index.js';
 
 export class PuzzleClassListComponent extends AbstractPuzzleSubcomponent {
 
@@ -70,6 +71,11 @@ export class PuzzleClassListComponent extends AbstractPuzzleSubcomponent {
       preview: this._preview,
       previewColor: this._previewColor
     });
+  }
+
+
+  static get dependencies() {
+    return [PuzzleClassComponent];
   }
 
 

@@ -3,6 +3,8 @@ import { createTemplate } from './template.js';
 import { getListDifference } from '../../utils.js';
 import { PieceTypes } from '../../../../enums/piece-types.js';
 import { minMax } from '../../../../utils.js';
+import { PuzzleBlockListComponent } from '../block-list/index.js';
+import { PuzzleBlockInserterComponent } from '../block-inserter/index.js';
 
 export class PuzzleContentComponent extends AbstractPuzzleSubcomponent {
 
@@ -144,6 +146,11 @@ export class PuzzleContentComponent extends AbstractPuzzleSubcomponent {
   _render() {
     if (!this._nodes || !this._model) { return; }
     this._nodes.blockList.model = this._model;
+  }
+
+
+  static get dependencies() {
+    return [PuzzleBlockListComponent, PuzzleBlockInserterComponent];
   }
 
 

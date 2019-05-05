@@ -3,6 +3,8 @@ import { createTemplate } from './template.js';
 import { createElement, clearElement } from '../../../../utils.js';
 import { Element } from '../../../../model/element.js';
 import { HighlightColors } from '../../enums.js';
+import { PuzzleElementComponent } from '../element/index.js';
+import { PuzzleTextComponent } from '../text/index.js';
 
 export class PuzzleBlockListComponent extends AbstractPuzzleSubcomponent {
 
@@ -123,6 +125,11 @@ export class PuzzleBlockListComponent extends AbstractPuzzleSubcomponent {
       this._setupBlock(block);
       this._nodes.container.appendChild(block);
     });
+  }
+
+
+  static get dependencies() {
+    return [PuzzleElementComponent, PuzzleTextComponent];
   }
 
 

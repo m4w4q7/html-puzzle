@@ -2,6 +2,7 @@ import { AbstractPuzzleSubcomponent } from '../abstract-puzzle-subcomponent/inde
 import { createComponentTemplate } from './template.js';
 import { HighlightColors } from '../../enums.js';
 import { AttributeListRenderer } from './renderer.js';
+import { PuzzleAttributeComponent } from '../attribute/index.js';
 
 export class PuzzleAttributeListComponent extends AbstractPuzzleSubcomponent {
 
@@ -89,6 +90,12 @@ export class PuzzleAttributeListComponent extends AbstractPuzzleSubcomponent {
       { onChange: this._onAttributeChange }
     );
   }
+
+
+  static get dependencies() {
+    return [PuzzleAttributeComponent];
+  }
+
 
   static get tagName() {
     return 'hpu-puzzle-attribute-list';

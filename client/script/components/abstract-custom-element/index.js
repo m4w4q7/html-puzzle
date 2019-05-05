@@ -20,9 +20,10 @@ export class AbstractCustomElement extends HTMLElement {
   }
 
 
-  static define() {
-    if (customElements.get(this.tagName)) { return; }
-    this.dependencies.forEach(Element => Element.define());
+  static define(dependencyChain = []) {
+    if (customElements.get(this.tagName) || dependencyChain.includes(this)) { return; }
+    const childDependencyChain = [...dependencyChain, this];
+    this.dependencies.forEach(Element => Element.define(childDependencyChain));
     customElements.define(this.tagName, this);
   }
 

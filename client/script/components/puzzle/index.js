@@ -1,16 +1,6 @@
 import { createElement } from '../../utils.js';
 import { State } from './state.js';
 import { PuzzleContentComponent } from './subcomponents/content/index.js';
-import { PuzzleBlockListComponent } from './subcomponents/block-list/index.js';
-import { PuzzleElementComponent } from './subcomponents/element/index.js';
-import { PuzzleIdComponent } from './subcomponents/id/index.js';
-import { PuzzleClassListComponent } from './subcomponents/class-list/index.js';
-import { PuzzleClassComponent } from './subcomponents/class/index.js';
-import { PuzzleAttributeListComponent } from './subcomponents/attribute-list/index.js';
-import { PuzzleAttributeComponent } from './subcomponents/attribute/index.js';
-import { PuzzleAttributeValueComponent } from './subcomponents/attribute-value/index.js';
-import { PuzzleTextComponent } from './subcomponents/text/index.js';
-import { PuzzleBlockInserterComponent } from './subcomponents/block-inserter/index.js';
 import { MouseOverListener } from './event-listeners/mouse-over.js';
 import { MouseLeaveListener } from './event-listeners/mouse-leave.js';
 import { MouseDownListener } from './event-listeners/mouse-down.js';
@@ -114,17 +104,13 @@ export class PuzzleComponent extends AbstractCustomElement {
   }
 
 
-  static get tagName() {
-    return 'hpu-puzzle';
+  static get dependencies() {
+    return [PuzzleContentComponent];
   }
 
 
-  static get dependencies() {
-    return [
-      PuzzleContentComponent, PuzzleBlockListComponent, PuzzleElementComponent, PuzzleIdComponent,
-      PuzzleClassListComponent, PuzzleClassComponent, PuzzleAttributeListComponent, PuzzleAttributeComponent,
-      PuzzleAttributeValueComponent, PuzzleTextComponent, PuzzleBlockInserterComponent
-    ];
+  static get tagName() {
+    return 'hpu-puzzle';
   }
 
 }

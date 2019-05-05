@@ -3,6 +3,7 @@ import { PieceTypes } from '../../../../enums/piece-types.js';
 import { AbstractPuzzlePiece } from '../abstract-puzzle-piece/index.js';
 import { createTemplate } from './template.js';
 import { findAncestor } from '../../utils.js';
+import { PuzzleAttributeValueComponent } from '../attribute-value/index.js';
 
 export class PuzzleAttributeComponent extends AbstractPuzzlePiece {
 
@@ -86,6 +87,11 @@ export class PuzzleAttributeComponent extends AbstractPuzzlePiece {
     this._nodes.valueContainer.style.display = model.value ? '' : 'none';
     this._nodes.value.value = model.value;
     this.highlight(this._previewColor);
+  }
+
+
+  static get dependencies() {
+    return [PuzzleAttributeValueComponent];
   }
 
 

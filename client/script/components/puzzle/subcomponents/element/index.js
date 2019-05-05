@@ -3,6 +3,10 @@ import { reflow } from '../../utils.js';
 import { doOnNext } from '../../../../utils.js';
 import { AbstractPuzzlePiece } from '../abstract-puzzle-piece/index.js';
 import { createTemplate } from './template.js';
+import { PuzzleBlockListComponent } from '../block-list/index.js';
+import { PuzzleIdComponent } from '../id/index.js';
+import { PuzzleClassListComponent } from '../class-list/index.js';
+import { PuzzleAttributeListComponent } from '../attribute-list/index.js';
 
 export class PuzzleElementComponent extends AbstractPuzzlePiece {
 
@@ -149,6 +153,11 @@ export class PuzzleElementComponent extends AbstractPuzzlePiece {
     this._nodes.classList.model = this._model.classList;
     this._nodes.attributeList.model = this._model.attributeList;
     this._nodes.blockList.model = this._model.children;
+  }
+
+
+  static get dependencies() {
+    return [PuzzleIdComponent, PuzzleClassListComponent, PuzzleAttributeListComponent, PuzzleBlockListComponent];
   }
 
 

@@ -12,22 +12,22 @@
 
     <script type="module">
       import { TopMenuComponent } from './script/components/top-menu/index.js';
+      import { ListPageComponent } from './script/components/list-page/index.js';
       TopMenuComponent.define();
+      ListPageComponent.define();
     </script>
 
   </head>
   <body>
     <hpu-top-menu></hpu-top-menu>
-    <div class="page-content page-content--full-height" style="display: flex; flex-direction: column;">
-      <div style="margin-bottom: 48px; color: var(--gray)">
-        <i>Under construction!</i>
-      </div>
-      <div>Examples:</div>
-      <ul>
-        <li><a href="play.html?id=dropdown">Dropdown</a></li>
-        <li><a href="play.html?id=basic">Basic example to demonstrate puzzle parts</a></li>
-        <li><a href="play.html?id=text-styles">Another basic example to demonstrate previews</a></li>
-      </ul>
-    </div>
+    <hpu-list-page></hpu-list-page>
+
+    <script>
+      const pageTagName = 'hpu-list-page';
+      customElements.whenDefined(pageTagName).then(() => {
+        document.querySelector(pageTagName).onActivate();
+      });
+    </script>
+
   </body>
 </html>

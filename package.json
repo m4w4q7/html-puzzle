@@ -16,11 +16,12 @@
   "license": "UNLICENSED",
   "homepage": "https://bitbucket.org/m4w4q7/thesis-spike#readme",
   "devDependencies": {
-    "eslint": "5.14.1",
-    "nodemon": "1.18.11"
+    "eslint": "5.16.0",
+    "nodemon": "1.19.0"
   },
   "dependencies": {
     "koa": "2.7.0",
+    "koa-mount": "4.0.0",
     "koa-static": "5.0.0"
   },
   "engines": {

@@ -4,7 +4,7 @@ import { PuzzleComponent } from '../puzzle/index.js';
 import { PreviewComponent } from '../preview/index.js';
 import { ClockComponent } from '../clock/index.js';
 import { createTemplate } from './template.js';
-import { fetchExample } from '../../examples/fetch.js';
+import { fetchExercise } from '../../fetch-exercise.js';
 import { doOnNext } from '../../utils.js';
 import { Pug } from '../../pug/index.js';
 import { shuffle } from '../../shuffle/index.js';
@@ -19,17 +19,17 @@ export class PlayPageComponent extends AbstractCustomElement {
 
 
   async onActivate() {
-    const exampleName = new URLSearchParams(window.location.search).get('id') || 'dropdown';
-    const example = await fetchExample(exampleName);
+    const exerciseName = new URLSearchParams(window.location.search).get('id') || 'dropdown';
+    const exercise = await fetchExercise(exerciseName);
 
-    this._nodes.exerciseNameElement.textContent = example.name;
+    this._nodes.exerciseNameElement.textContent = exercise.name;
 
     doOnNext(this._nodes.puzzleComponent, 'mousedown', () => this._nodes.clockComponent.start());
 
-    this._nodes.goalPreviewComponent.assets = { css: example.css, js: example.js };
-    this._nodes.currentPreviewComponent.assets = { css: example.css, js: example.js };
+    this._nodes.goalPreviewComponent.assets = { css: exercise.css, js: exercise.js };
+    this._nodes.currentPreviewComponent.assets = { css: exercise.css, js: exercise.js };
 
-    const goal = Pug.parse(example.pug);
+    const goal = Pug.parse(exercise.pug);
     const initialModel = shuffle(goal);
     this._nodes.puzzleComponent.model = initialModel;
     this._nodes.goalPreviewComponent.model = goal;

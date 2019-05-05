@@ -1,6 +1,7 @@
 const { join } = require('path');
 const Koa = require('koa');
 const createStaticMiddleware = require('koa-static');
+const mount = require('koa-mount');
 const config = require('./config');
 
 
@@ -19,8 +20,11 @@ class Server {
 
 
   _addMiddlewares() {
-    const staticRoot = join(__dirname, '../client');
-    this._app.use(createStaticMiddleware(staticRoot));
+    const clientRoot = join(__dirname, '../client');
+    this._app.use(createStaticMiddleware(clientRoot));
+
+    const exercisesRoot = join(__dirname, '../exercises');
+    this._app.use(mount('/exercise', createStaticMiddleware(exercisesRoot)));
   }
 
 }

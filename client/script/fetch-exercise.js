@@ -1,9 +1,9 @@
-import { fetchText } from '../utils.js';
+import { fetchText } from './utils.js';
 
-const exampleRoot = 'script/examples';
+const exerciseRoot = 'exercise';
 
 
-export const fetchExample = async (name) => {
+export const fetchExercise = async (name) => {
   const resolveUrl = resolveCurrentDirectory(name);
   const configUrl = resolveUrl('./index.json');
   const config = JSON.parse(await fetchText(configUrl));
@@ -16,4 +16,4 @@ export const fetchExample = async (name) => {
 };
 
 
-const resolveCurrentDirectory = (name) => (url) => url.replace(/^\.\//, `${exampleRoot}/${name}/`);
+const resolveCurrentDirectory = (name) => (url) => url.replace(/^\.\//, `${exerciseRoot}/${name}/`);

@@ -5,7 +5,7 @@ export default `
   <div style="margin-bottom: 48px; color: var(--gray)">
     <i>Under construction!</i>
   </div>
-  <div>Examples:</div>
+  <div>Exercises:</div>
   <ul>
     <li><a href="play.html?id=dropdown">Dropdown</a></li>
     <li><a href="play.html?id=basic">Basic example to demonstrate puzzle parts</a></li>

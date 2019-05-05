@@ -1,5 +1,8 @@
 import { DragStates } from '../enums.js';
 
+const PRIMARY_MOUSE_BUTTON_BIT_MASK = 1;
+
+
 export class MouseMoveListener {
 
   constructor(host, state) {
@@ -10,6 +13,10 @@ export class MouseMoveListener {
 
   handleEvent(event) {
     if (this._state.dragState !== DragStates.DRAG) { return; }
+    if (!this._isPrimaryMouseButtonDown(event)) {
+      this._state.draggedPiece = null;
+      return;
+    }
     const cursorPosition = this._calculateCursorPosition(event);
     this._updateCursorPosition(cursorPosition);
   }
@@ -28,6 +35,11 @@ export class MouseMoveListener {
     const oldValue = this._state.cursorPosition;
     if (oldValue.line === newValue.line && oldValue.character === newValue.character) { return; }
     this._state.cursorPosition = newValue;
+  }
+
+
+  _isPrimaryMouseButtonDown(event) {
+    return event.buttons & PRIMARY_MOUSE_BUTTON_BIT_MASK;
   }
 
 }

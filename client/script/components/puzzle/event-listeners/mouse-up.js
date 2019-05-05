@@ -6,7 +6,8 @@ export class MouseUpListener {
   }
 
 
-  handleEvent() {
+  handleEvent(event) {
+    if (event.button !== 0) { return; }
     this._state.draggedPiece = null;
   }
 

@@ -1,4 +1,4 @@
-import { groupedTextLine, groupedElementLine, groupedAttribute } from './expressions.js';
+import { groupedTextLine, groupedElementLine, groupedAttribute } from './patterns.js';
 import { BlockList } from '../model/block-list.js';
 import { Text } from '../model/text.js';
 import { Element } from '../model/element.js';

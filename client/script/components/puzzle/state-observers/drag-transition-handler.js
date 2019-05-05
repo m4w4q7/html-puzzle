@@ -32,7 +32,7 @@ export class DragTransitionHandler {
       this._state.dragState = DragStates.DRAG;
     }
 
-    this._host.setAttribute('dragging', '');
+    this._host.showDraggedState(true);
     draggedPiece.highlight(HighlightColors.ADD);
   }
 
@@ -48,7 +48,7 @@ export class DragTransitionHandler {
       this._state.dragState = DragStates.HOVER;
     }
 
-    this._host.removeAttribute('dragging');
+    this._host.showDraggedState(false);
     previousDraggedPiece.highlight(HighlightColors.NONE);
     if (this._state.hoveredPiece) { this._state.hoveredPiece.highlight(HighlightColors.NEUTRAL); }
   }

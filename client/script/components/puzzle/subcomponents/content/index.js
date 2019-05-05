@@ -43,6 +43,15 @@ export class PuzzleContentComponent extends AbstractPuzzleSubcomponent {
   }
 
 
+  showDraggedState(state) {
+    if (state) {
+      this.setAttribute('dragging', '');
+    } else {
+      this.removeAttribute('dragging');
+    }
+  }
+
+
   getBlockByPath(path) {
     return this._nodes.blockList.getBlockByPath(path);
   }

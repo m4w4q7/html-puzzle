@@ -44,13 +44,16 @@ export class PreviewComponent extends AbstractCustomElement {
 
 
   _renderIframe() {
+    const iframe = createElement('iframe');
     if (this._nodes.iframe) {
-      this._nodes.iframe.remove();
+      this.replaceChild(iframe, this._nodes.iframe);
       this._nodes.iframeBody = null;
+    } else {
+      this.appendChild(iframe);
     }
-    this._nodes.iframe = createElement('iframe');
-    this.appendChild(this._nodes.iframe);
-    const contentDocument = this._nodes.iframe.contentDocument;
+
+    this._nodes.iframe = iframe;
+    const contentDocument = iframe.contentDocument;
     contentDocument.open('text/html', 'replace');
     contentDocument.write(renderDocument(this._assets));
     contentDocument.close();

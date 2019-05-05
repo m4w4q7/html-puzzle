@@ -9,4 +9,5 @@ export const createTemplate = createTemplateFactory(htmlTemplate, {
   exerciseNameElement: '#exerciseName',
   hintCounter: '#hintCounter',
   hintButton: '#hintButton',
+  documentationLinkButton: '#documentationLinkButton',
 });

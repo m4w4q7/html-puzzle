@@ -39,6 +39,7 @@ a, a:active, a:visited {
 
 .hpu-button {
   color: var(--light-gray-1);
+  display: inline-block;
   height: 32px;
   line-height: 32px;
   padding: 0 8px;
@@ -47,6 +48,11 @@ a, a:active, a:visited {
   background-color: transparent;
   font-family: 'Roboto', sans-serif;
   font-size: 16px;
+  text-decoration: none;
+}
+
+.hpu-button+.hpu-button {
+  margin-left: 8px;
 }
 
 .hpu-button:hover {

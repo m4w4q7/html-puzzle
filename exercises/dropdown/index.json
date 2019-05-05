@@ -2,5 +2,6 @@
   "name": "Dropdown",
   "pug": "./index.pug",
   "css": ["https://redirector.eservice.emarsys.net/ui/latest/css/app.css"],
-  "js": ["https://redirector.eservice.emarsys.net/ui/latest/js/app.js"]
+  "js": ["https://redirector.eservice.emarsys.net/ui/latest/js/app.js"],
+  "documentation": "https://redirector.eservice.emarsys.net/ui/latest/doc/dropdown.html"
 }

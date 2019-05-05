@@ -22,6 +22,8 @@ export class PlayPageComponent extends AbstractCustomElement {
     const exerciseName = new URLSearchParams(window.location.search).get('id') || 'dropdown';
     const exercise = await fetchExercise(exerciseName);
 
+    this._initDocumentation(exercise);
+
     this._nodes.exerciseNameElement.textContent = exercise.name;
 
     doOnNext(this._nodes.puzzleComponent, 'mousedown', () => this._nodes.clockComponent.start());
@@ -54,6 +56,14 @@ export class PlayPageComponent extends AbstractCustomElement {
       this._nodes.currentPreviewComponent.model = event.detail.model;
       if (goal.isEqual(event.detail.model)) { alert('Congratulations! 🙂👍'); }
     });
+  }
+
+
+  _initDocumentation({ documentation: url }) {
+    if (!url) { return; }
+    const link = this._nodes.documentationLinkButton;
+    link.href = url;
+    link.style.display = '';
   }
 
 

@@ -17,8 +17,12 @@ export default `
 
   <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 16px">
     <div id="exerciseName" class="hpu-title">&nbsp;</div>
-    <button id="hintButton" style="cursor: pointer;">Show hint (under construction)</button>
     <div style="font-size: 20px">Hints: <span id="hintCounter">0</span>,&nbsp;&nbsp;&nbsp;Time: <hpu-clock></hpu-clock></div>
+  </div>
+
+  <div style="margin-bottom: 8px">
+      <a id="documentationLinkButton" class="hpu-button" style="display: none;" target="_blank">Documentation</a>
+      <button id="hintButton" class="hpu-button">Hint</button>
   </div>
 
   <hpu-horizontal-resizable ratio="0.66" style="flex: 1 0 0">

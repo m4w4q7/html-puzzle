@@ -88,4 +88,9 @@ export class PuzzleAttributeComponent extends AbstractPuzzlePiece {
     this.highlight(this._previewColor);
   }
 
+
+  static get tagName() {
+    return 'hpu-puzzle-attribute';
+  }
+
 }

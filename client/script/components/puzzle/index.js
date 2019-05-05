@@ -24,10 +24,11 @@ import { ClassDragAndDropHandler } from './state-observers/drag-and-drop-handler
 import { AttributeDragAndDropHandler } from './state-observers/drag-and-drop-handlers/attribute.js';
 import { AttributeValueDragAndDropHandler } from './state-observers/drag-and-drop-handlers/attribute-value.js';
 import { HintHandler } from './state-observers/hint-handler.js';
+import { AbstractCustomElement } from '../abstract-custom-element/index.js';
 
 
 
-export class PuzzleComponent extends HTMLElement {
+export class PuzzleComponent extends AbstractCustomElement {
 
   constructor() {
     super();
@@ -84,22 +85,6 @@ export class PuzzleComponent extends HTMLElement {
   }
 
 
-  static define(name) {
-    customElements.define('hpu-puzzle-content', PuzzleContentComponent);
-    customElements.define('hpu-puzzle-block-list', PuzzleBlockListComponent);
-    customElements.define('hpu-puzzle-element', PuzzleElementComponent);
-    customElements.define('hpu-puzzle-id', PuzzleIdComponent);
-    customElements.define('hpu-puzzle-class-list', PuzzleClassListComponent);
-    customElements.define('hpu-puzzle-class', PuzzleClassComponent);
-    customElements.define('hpu-puzzle-attribute-list', PuzzleAttributeListComponent);
-    customElements.define('hpu-puzzle-attribute', PuzzleAttributeComponent);
-    customElements.define('hpu-puzzle-attribute-value', PuzzleAttributeValueComponent);
-    customElements.define('hpu-puzzle-text', PuzzleTextComponent);
-    customElements.define('hpu-puzzle-block-inserter', PuzzleBlockInserterComponent);
-    customElements.define(name, PuzzleComponent);
-  }
-
-
   _addEventListeners() {
     this._nodes.content.addEventListener('mouseover', this._mouseOverListener);
     this._nodes.content.addEventListener('mouseleave', this._mouseLeaveListener);
@@ -126,6 +111,20 @@ export class PuzzleComponent extends HTMLElement {
   _onChange() {
     this._model = this._nodes.content.model.clone();
     this.dispatchEvent(new CustomEvent('change', { detail: { model: this._model } }));
+  }
+
+
+  static get tagName() {
+    return 'hpu-puzzle';
+  }
+
+
+  static get dependencies() {
+    return [
+      PuzzleContentComponent, PuzzleBlockListComponent, PuzzleElementComponent, PuzzleIdComponent,
+      PuzzleClassListComponent, PuzzleClassComponent, PuzzleAttributeListComponent, PuzzleAttributeComponent,
+      PuzzleAttributeValueComponent, PuzzleTextComponent, PuzzleBlockInserterComponent
+    ];
   }
 
 }

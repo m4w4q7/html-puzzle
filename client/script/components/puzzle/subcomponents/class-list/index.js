@@ -72,4 +72,9 @@ export class PuzzleClassListComponent extends AbstractPuzzleSubcomponent {
     });
   }
 
+
+  static get tagName() {
+    return 'hpu-puzzle-class-list';
+  }
+
 }

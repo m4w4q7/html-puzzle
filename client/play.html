@@ -3,53 +3,35 @@
   <head>
     <meta charset="utf-8" />
     <title>HTML Puzzle</title>
-    <script type="module" src="script/main.js"></script>
-    <script type="module" src="script/demo.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="style/variables.css">
+    <link rel="stylesheet" type="text/css" href="style/common.css">
+
+    <script type="module">
+      import { TopMenuComponent } from './script/components/top-menu/index.js';
+      import { PlayPageComponent } from './script/components/play-page/index.js';
+
+      TopMenuComponent.define();
+      PlayPageComponent.define();
+    </script>
 
     <style>
-      @import 'style/variables.css';
-      @import 'style/common.css';
       @import 'script/components/top-menu/style.css';
       @import 'script/components/puzzle/style.css';
       @import 'script/components/preview/style.css';
-
-      .puzzle-container {
-        background-color: rgb(30, 30, 30);
-        height: 100%;
-        padding: 16px;
-        width: max-content;
-        min-width: 100%;
-      }
     </style>
 
   </head>
   <body>
     <hpu-top-menu></hpu-top-menu>
+    <hpu-play-page></hpu-play-page>
 
-    <div class="page-content page-content--full-height" style="display: flex; flex-direction: column;">
+    <script>
+      const pageName = 'hpu-play-page';
+      customElements.whenDefined(pageName).then(() => {
+        document.querySelector(pageName).onActivate();
+      });
+    </script>
 
-      <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 16px">
-        <div id="exerciseName" class="hpu-title">&nbsp;</div>
-        <button id="hintButton" style="cursor: pointer;">Show hint (under construction)</button>
-        <div style="font-size: 20px">Hints: <span id="hintCounter">0</span>,&nbsp;&nbsp;&nbsp;Time: <hpu-clock></hpu-clock></div>
-      </div>
-
-      <hpu-horizontal-resizable ratio="0.66" style="flex: 1 0 0">
-
-        <div class="puzzle-container" slot="left">
-          <hpu-puzzle></hpu-puzzle>
-        </div>
-
-        <div slot="right" style="display: flex; flex-direction: column; height: 100%">
-          <div>Current:</div>
-          <hpu-preview style="flex: 1 0 0"id='currentPreview'></hpu-preview>
-          <div style="margin-top: 16px">Goal:</div>
-          <hpu-preview style="flex: 1 0 0" id='goalPreview'></hpu-preview>
-
-        </div>
-        </div>
-
-      </hpu-horizontal-resizable>
-    </div>
   </body>
 </html>

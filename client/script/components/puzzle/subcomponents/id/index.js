@@ -60,4 +60,9 @@ export class PuzzleIdComponent extends AbstractPuzzlePiece {
     this.textContent = value ? `#${value}` : '';
   }
 
+
+  static get tagName() {
+    return 'hpu-puzzle-id';
+  }
+
 }

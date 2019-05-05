@@ -1,19 +1,19 @@
-import template from './template.html.js';
+import { createTemplate } from './template.js';
 import { doOnNext, minMax } from '../../utils.js';
+import { AbstractCustomElement } from '../abstract-custom-element/index.js';
 
-const separatorWidth = 32;
+const SEPARATOR_WIDTH = 32;
 
-export class HorizontalResizableComponent extends HTMLElement {
+export class HorizontalResizableComponent extends AbstractCustomElement {
 
   constructor() {
     super();
-    this.attachShadow({ mode: 'open' });
-    this.shadowRoot.innerHTML = template;
+    this._attachShadowedTemplate(createTemplate);
     this._startResizing = this._startResizing.bind(this);
     this._stopResizing = this._stopResizing.bind(this);
     this._onSeparatorDrag = this._onSeparatorDrag.bind(this);
     this._applyRatio = this._applyRatio.bind(this);
-    this._dom = {
+    this._nodes = {
       leftPane: this.shadowRoot.querySelector('.horizontal-resizable__left-pane'),
       rightPane: this.shadowRoot.querySelector('.horizontal-resizable__right-pane'),
       separator: this.shadowRoot.querySelector('.horizontal-resizable__separator')
@@ -41,15 +41,15 @@ export class HorizontalResizableComponent extends HTMLElement {
 
 
   connectedCallback() {
-    this._dom.separator.addEventListener('mousedown', this._startResizing);
-    this._dom.separator.addEventListener('dblclick', this._applyRatio);
+    this._nodes.separator.addEventListener('mousedown', this._startResizing);
+    this._nodes.separator.addEventListener('dblclick', this._applyRatio);
   }
 
 
   _applyRatio() {
     const percentage = this._ratio * 100;
-    this._dom.leftPane.style.width = `calc(${percentage}% - ${separatorWidth / 2}px)`;
-    this._dom.rightPane.style.width = `calc(${100 - percentage}% - ${separatorWidth / 2}px)`;
+    this._nodes.leftPane.style.width = `calc(${percentage}% - ${SEPARATOR_WIDTH / 2}px)`;
+    this._nodes.rightPane.style.width = `calc(${100 - percentage}% - ${SEPARATOR_WIDTH / 2}px)`;
   }
 
 
@@ -57,24 +57,29 @@ export class HorizontalResizableComponent extends HTMLElement {
     doOnNext(document, 'mouseup', this._stopResizing);
     document.addEventListener('mousemove', this._onSeparatorDrag);
     document.body.style.cursor = 'ew-resize';
-    this._dom.leftPane.classList.add('horizontal-resizable__overlayed');
-    this._dom.rightPane.classList.add('horizontal-resizable__overlayed');
+    this._nodes.leftPane.classList.add('horizontal-resizable__overlayed');
+    this._nodes.rightPane.classList.add('horizontal-resizable__overlayed');
   }
 
 
   _stopResizing() {
     document.removeEventListener('mousemove', this._onSeparatorDrag);
     document.body.style.cursor = '';
-    this._dom.leftPane.classList.remove('horizontal-resizable__overlayed');
-    this._dom.rightPane.classList.remove('horizontal-resizable__overlayed');
+    this._nodes.leftPane.classList.remove('horizontal-resizable__overlayed');
+    this._nodes.rightPane.classList.remove('horizontal-resizable__overlayed');
   }
 
 
   _onSeparatorDrag({ clientX }) {
     const { left, width } = this.getBoundingClientRect();
-    const leftPaneWidth = minMax(clientX - left - (separatorWidth / 2), 0, width - separatorWidth);
-    this._dom.leftPane.style.width = `${leftPaneWidth}px`;
-    this._dom.rightPane.style.width = `${width - leftPaneWidth - separatorWidth}px`;
+    const leftPaneWidth = minMax(clientX - left - (SEPARATOR_WIDTH / 2), 0, width - SEPARATOR_WIDTH);
+    this._nodes.leftPane.style.width = `${leftPaneWidth}px`;
+    this._nodes.rightPane.style.width = `${width - leftPaneWidth - SEPARATOR_WIDTH}px`;
+  }
+
+
+  static get tagName() {
+    return 'hpu-horizontal-resizable';
   }
 
 }

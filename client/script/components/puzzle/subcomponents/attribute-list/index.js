@@ -90,4 +90,8 @@ export class PuzzleAttributeListComponent extends AbstractPuzzleSubcomponent {
     );
   }
 
+  static get tagName() {
+    return 'hpu-puzzle-attribute-list';
+  }
+
 }

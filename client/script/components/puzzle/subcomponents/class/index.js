@@ -31,4 +31,9 @@ export class PuzzleClassComponent extends AbstractPuzzlePiece {
     return findAncestor(this, node => node.pieceType === PieceTypes.ELEMENT);
   }
 
+
+  static get tagName() {
+    return 'hpu-puzzle-class';
+  }
+
 }

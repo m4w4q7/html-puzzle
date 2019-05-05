@@ -67,4 +67,9 @@ export class PuzzleBlockInserterComponent extends AbstractPuzzleSubcomponent {
     this._nodes.indentations.splice(this._indentation)[0].remove();
   }
 
+
+  static get tagName() {
+    return 'hpu-puzzle-block-inserter';
+  }
+
 }

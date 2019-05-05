@@ -125,4 +125,9 @@ export class PuzzleBlockListComponent extends AbstractPuzzleSubcomponent {
     });
   }
 
+
+  static get tagName() {
+    return 'hpu-puzzle-block-list';
+  }
+
 }

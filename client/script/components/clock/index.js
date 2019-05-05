@@ -1,4 +1,6 @@
-export class ClockComponent extends HTMLElement {
+import { AbstractCustomElement } from '../abstract-custom-element/index.js';
+
+export class ClockComponent extends AbstractCustomElement {
 
   constructor() {
     super();
@@ -42,6 +44,11 @@ export class ClockComponent extends HTMLElement {
     const elapsedTime = new Date() - this._startDate;
     this._showTime(elapsedTime / 1000);
     this._timeoutId = setTimeout(this._tick, 1000 - (elapsedTime % 1000));
+  }
+
+
+  static get tagName() {
+    return 'hpu-clock';
   }
 
 }

@@ -1,8 +1,9 @@
 import { createTemplateFactory } from '../../../../create-template-factory.js';
+import { AbstractCustomElement } from '../../../abstract-custom-element/index.js';
 const createTemplate = createTemplateFactory();
 
 
-export class AbstractPuzzleSubcomponent extends HTMLElement {
+export class AbstractPuzzleSubcomponent extends AbstractCustomElement {
 
   constructor() {
     super();

@@ -30,4 +30,9 @@ export class PuzzleAttributeValueComponent extends AbstractPuzzlePiece {
     return value.replace('\\', '\\\\').replace(`'`, `\\'`);
   }
 
+
+  static get tagName() {
+    return 'hpu-puzzle-attribute-value';
+  }
+
 }

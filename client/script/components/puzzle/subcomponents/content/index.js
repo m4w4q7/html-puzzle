@@ -146,4 +146,9 @@ export class PuzzleContentComponent extends AbstractPuzzleSubcomponent {
     this._nodes.blockList.model = this._model;
   }
 
+
+  static get tagName() {
+    return 'hpu-puzzle-content';
+  }
+
 }

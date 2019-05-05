@@ -3,17 +3,17 @@
   <head>
     <meta charset="utf-8" />
     <title>HTML Puzzle</title>
-    <script type="module" src="script/main.js"></script>
 
     <style>
       @import 'style/variables.css';
       @import 'style/common.css';
       @import 'script/components/top-menu/style.css';
-
-      a, a:active, a:visited {
-        color: currentColor;
-      }
     </style>
+
+    <script type="module">
+      import { TopMenuComponent } from './script/components/top-menu/index.js';
+      TopMenuComponent.define();
+    </script>
 
   </head>
   <body>

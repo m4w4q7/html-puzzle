@@ -2,9 +2,10 @@ import { renderDocument } from './page-template.js';
 import { Html } from '../../html/index.js';
 import { createElement } from '../../utils.js';
 import { createTemplateFactory } from '../../create-template-factory.js';
+import { AbstractCustomElement } from '../abstract-custom-element/index.js';
 
 
-export class PreviewComponent extends HTMLElement {
+export class PreviewComponent extends AbstractCustomElement {
 
   constructor() {
     super();
@@ -87,6 +88,11 @@ export class PreviewComponent extends HTMLElement {
     const modelHtml = Html.render(this._model);
     const fragment = createTemplateFactory(modelHtml)().content;
     this._nodes.iframeBody.appendChild(fragment);
+  }
+
+
+  static get tagName() {
+    return 'hpu-preview';
   }
 
 }

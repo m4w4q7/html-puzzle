@@ -1,6 +1,7 @@
 import template from './template.html.js';
+import { AbstractCustomElement } from '../abstract-custom-element/index.js';
 
-export class TopMenuComponent extends HTMLElement {
+export class TopMenuComponent extends AbstractCustomElement {
 
   constructor() {
     super();
@@ -12,6 +13,11 @@ export class TopMenuComponent extends HTMLElement {
 
     this._dom.logo.addEventListener('click', () => location.assign('index.html'));
     this._dom.loginButton.addEventListener('click', () => location.assign('login.html'));
+  }
+
+
+  static get tagName() {
+    return 'hpu-top-menu';
   }
 
 }

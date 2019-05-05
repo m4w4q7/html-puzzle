@@ -31,4 +31,9 @@ export class PuzzleTextComponent extends AbstractPuzzlePiece {
     return [this];
   }
 
+
+  static get tagName() {
+    return 'hpu-puzzle-text';
+  }
+
 }

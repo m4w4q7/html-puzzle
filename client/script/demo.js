@@ -22,9 +22,9 @@ import { Pug } from './pug/index.js';
 
   doOnNext(puzzleComponent, 'mousedown', () => clockComponent.start());
 
-  const previews = [goalPreviewComponent, currentPreviewComponent];
-  example.css.forEach(url => previews.forEach(preview => preview.addStyleSheet(url)));
-  example.js.forEach(url => previews.forEach(preview => preview.addScript(url)));
+  [goalPreviewComponent, currentPreviewComponent].forEach(preview => {
+    preview.assets = { css: example.css, js: example.js };
+  });
 
   const goal = Pug.parse(example.pug);
   const initialModel = shuffle(goal);

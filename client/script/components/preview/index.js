@@ -1,66 +1,92 @@
-import { pageTemplate } from './page-template.js';
+import { renderDocument } from './page-template.js';
 import { Html } from '../../html/index.js';
 import { createElement } from '../../utils.js';
+import { createTemplateFactory } from '../../create-template-factory.js';
 
 
 export class PreviewComponent extends HTMLElement {
 
   constructor() {
     super();
-    this._iframe = document.createElement('iframe');
-    this._iframeBody = null;
+    this._onIframeContentLoaded = this._onIframeContentLoaded.bind(this);
     this._model = null;
+    this._assets = { css: [], js: [] };
+    this._nodes = {
+      iframe: null,
+      iframeBody: null,
+      protected: []
+    };
     this._setReady = null;
-    this._whenReady = new Promise(resolve => this._setReady = resolve);
   }
 
 
-  connectedCallback() {
-    this.appendChild(this._iframe);
-    const contentDocument = this._iframe.contentDocument;
-    contentDocument.open();
-    contentDocument.write(pageTemplate);
-    contentDocument.close();
-
-    if (contentDocument.readyState === 'loading') {
-      this._iframe.contentWindow.addEventListener('DOMContentLoaded', this._setReady);
-    } else {
-      this._setReady();
-    }
-
-    this._whenReady.then(() => {
-      this._iframeBody = this._iframe.contentDocument.body;
-      this._render();
-    });
+  set assets({ css = [], js = [] }) {
+    this._assets = { css, js };
+    this._renderIframe();
   }
 
 
   set model(value) {
     this._model = value;
-    this._render();
+    this._renderContent();
   }
 
 
-  async addStyleSheet(url) {
-    await this._addToHead(createElement('link', { rel: 'stylesheet' , href: url }));
+  connectedCallback() {
+    this._renderIframe();
   }
 
 
-  async addScript(url) {
-    await this._addToHead(createElement('script', { src: url }));
-
+  refresh() {
+    this._renderIframe();
   }
 
 
-  _render() {
-    if (!this._model || !this._iframeBody) { return; }
-    this._iframeBody.innerHTML = Html.render(this._model);
+  _renderIframe() {
+    if (this._nodes.iframe) {
+      this._nodes.iframe.remove();
+      this._nodes.iframeBody = null;
+    }
+    this._nodes.iframe = createElement('iframe');
+    this.appendChild(this._nodes.iframe);
+    const contentDocument = this._nodes.iframe.contentDocument;
+    contentDocument.open('text/html', 'replace');
+    contentDocument.write(renderDocument(this._assets));
+    contentDocument.close();
+
+    if (contentDocument.readyState === 'loading') {
+      this._nodes.iframe.contentWindow.addEventListener('DOMContentLoaded', this._onIframeContentLoaded);
+    } else {
+      this._onIframeContentLoaded();
+    }
   }
 
 
-  async _addToHead(element) {
-    await this._whenReady;
-    this._iframe.contentDocument.head.appendChild(element);
+  _onIframeContentLoaded() {
+    this._nodes.iframeBody = this._nodes.iframe.contentDocument.body;
+    this._protectSkeleton();
+    this._renderContent();
+  }
+
+
+  _protectSkeleton() {
+    this._nodes.protected = [...this._nodes.iframeBody.childNodes];
+  }
+
+
+  _clearSkeleton() {
+    [...this._nodes.iframeBody.childNodes].forEach(node => {
+      if (!this._nodes.protected.includes(node)) { node.remove(); }
+    });
+  }
+
+
+  _renderContent() {
+    if (!this._model || !this._nodes.iframeBody) { return; }
+    this._clearSkeleton();
+    const modelHtml = Html.render(this._model);
+    const fragment = createTemplateFactory(modelHtml)().content;
+    this._nodes.iframeBody.appendChild(fragment);
   }
 
 }

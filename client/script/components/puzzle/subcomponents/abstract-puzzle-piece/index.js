@@ -1,6 +1,7 @@
 import { AbstractPuzzleSubcomponent } from '../abstract-puzzle-subcomponent/index.js';
 import { HighlightColors } from '../../enums.js';
 import { reflow } from '../../utils.js';
+import { AbstractMemberAccessError } from '../../../../abstract-member-access-error.js';
 
 export class AbstractPuzzlePiece extends AbstractPuzzleSubcomponent {
 
@@ -11,6 +12,11 @@ export class AbstractPuzzlePiece extends AbstractPuzzleSubcomponent {
 
     reflow(this);
     colorValue ? this.setAttribute('highlight', colorValue) : this.removeAttribute('highlight');
+  }
+
+
+  get pieceType() {
+    throw new AbstractMemberAccessError();
   }
 
 }

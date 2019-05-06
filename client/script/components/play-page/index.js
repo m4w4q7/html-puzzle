@@ -32,7 +32,7 @@ export class PlayPageComponent extends AbstractCustomElement {
     const originalModel = Pug.parse(exercise.pug);
     const shuffledModel = shuffle(originalModel);
 
-    this._initPreviews(originalModel, shuffledModel);
+    this._initPreviews(exercise, originalModel, shuffledModel);
     this._initHint(originalModel);
     this._initPuzzle(originalModel, shuffledModel);
   }

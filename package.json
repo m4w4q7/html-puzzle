@@ -2,10 +2,11 @@
   "name": "html-puzzle",
   "version": "1.0.0",
   "description": "",
+  "type": "module",
   "main": "server/index.js",
   "scripts": {
-    "start": "node server/index.js",
-    "start:dev": "nodemon server/index.js",
+    "start": "node --experimental-modules server/index.mjs",
+    "start:dev": "nodemon --experimental-modules server/index.mjs",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -16,6 +17,7 @@
   "license": "UNLICENSED",
   "homepage": "https://bitbucket.org/m4w4q7/thesis-spike#readme",
   "devDependencies": {
+    "babel-eslint": "10.0.1",
     "eslint": "5.16.0",
     "nodemon": "1.19.0"
   },

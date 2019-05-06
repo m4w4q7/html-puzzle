@@ -1,3 +1,3 @@
-module.exports = {
+export const config = {
   port: process.env.PORT || 5500
 };

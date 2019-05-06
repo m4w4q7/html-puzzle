@@ -15,6 +15,7 @@ export class PlayPageComponent extends AbstractCustomElement {
   constructor() {
     super();
     this._attachShadowedTemplate(createTemplate);
+    this._hint = null;
   }
 
 
@@ -28,34 +29,12 @@ export class PlayPageComponent extends AbstractCustomElement {
 
     doOnNext(this._nodes.puzzleComponent, 'mousedown', () => this._nodes.clockComponent.start());
 
-    this._nodes.goalPreviewComponent.assets = { css: exercise.css, js: exercise.js };
-    this._nodes.currentPreviewComponent.assets = { css: exercise.css, js: exercise.js };
+    const originalModel = Pug.parse(exercise.pug);
+    const shuffledModel = shuffle(originalModel);
 
-    const goal = Pug.parse(exercise.pug);
-    const initialModel = shuffle(goal);
-    this._nodes.puzzleComponent.model = initialModel;
-    this._nodes.goalPreviewComponent.model = goal;
-    this._nodes.currentPreviewComponent.model = initialModel;
-
-    const hintCalculator = new HintCalculator(goal);
-    let hint = null;
-    let hintsUsed = 0;
-
-    this._nodes.hintButton.addEventListener('mousedown', () => {
-      if (!hint) {
-        hintsUsed++;
-        this._nodes.hintCounter.textContent = hintsUsed;
-        hint = hintCalculator.getNext(this._nodes.puzzleComponent.model);
-      }
-      this._nodes.puzzleComponent.showHint(hint);
-      doOnNext(document, 'mouseup', () => this._nodes.puzzleComponent.hideHint());
-    });
-
-    this._nodes.puzzleComponent.addEventListener('change', event => {
-      hint = null;
-      this._nodes.currentPreviewComponent.model = event.detail.model;
-      if (goal.isEqual(event.detail.model)) { alert('Congratulations! 🙂👍'); }
-    });
+    this._initPreviews(originalModel, shuffledModel);
+    this._initHint(originalModel);
+    this._initPuzzle(originalModel, shuffledModel);
   }
 
 
@@ -64,6 +43,42 @@ export class PlayPageComponent extends AbstractCustomElement {
     const link = this._nodes.documentationLinkButton;
     link.href = url;
     link.style.display = '';
+  }
+
+
+  _initPreviews(exercise, originalModel, shuffledModel) {
+    this._nodes.goalPreviewComponent.assets = { css: exercise.css, js: exercise.js };
+    this._nodes.currentPreviewComponent.assets = { css: exercise.css, js: exercise.js };
+
+    this._nodes.goalPreviewComponent.model = originalModel;
+    this._nodes.currentPreviewComponent.model = shuffledModel;
+  }
+
+
+  _initHint(goal) {
+    const hintCalculator = new HintCalculator(goal);
+    let hintsUsed = 0;
+
+    this._nodes.hintButton.addEventListener('mousedown', () => {
+      if (!this._hint) {
+        hintsUsed++;
+        this._nodes.hintCounter.textContent = hintsUsed;
+        this._hint = hintCalculator.getNext(this._nodes.puzzleComponent.model);
+      }
+      this._nodes.puzzleComponent.showHint(this._hint);
+      doOnNext(document, 'mouseup', () => this._nodes.puzzleComponent.hideHint());
+    });
+  }
+
+
+  _initPuzzle(goalModel, initialModel) {
+    this._nodes.puzzleComponent.model = initialModel;
+
+    this._nodes.puzzleComponent.addEventListener('change', event => {
+      this._hint = null;
+      this._nodes.currentPreviewComponent.model = event.detail.model;
+      if (goalModel.isEqual(event.detail.model)) { alert('Congratulations! 🙂👍'); }
+    });
   }
 
 

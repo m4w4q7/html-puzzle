@@ -1,8 +1,8 @@
 import { createOpenIdClient } from '../create-openid-client.js';
 import { config } from '../../../config.js';
 
-const path = 'authenticate/google/callback';
-export const redirectUrl = Object.assign(new URL(config.hostUrl), { port: config.port, pathname: path }).href;
+const CALLBACK_PATH = 'authenticate/google/callback';
+export const redirectUrl = Object.assign(new URL(config.hostUrl), { pathname: CALLBACK_PATH }).href;
 
 const client = createOpenIdClient({
   discoveryUrl: 'https://accounts.google.com',

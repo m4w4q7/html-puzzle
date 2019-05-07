@@ -1,9 +1,7 @@
-import { join } from 'path';
 import Koa from 'koa';
-import createStaticMiddleware from 'koa-static';
 import mount from 'koa-mount';
 import { config } from './config.mjs';
-import { fileURLToPath } from 'url';
+import { clientAssetMiddleware, exercisesMiddleware } from './middlewares/index.mjs';
 
 
 export class Server {
@@ -21,14 +19,8 @@ export class Server {
 
 
   _addMiddlewares() {
-    const clientRoot = join(dirname, '../client');
-    this._app.use(createStaticMiddleware(clientRoot));
-
-    const exercisesRoot = join(dirname, '../exercises');
-    this._app.use(mount('/exercise', createStaticMiddleware(exercisesRoot)));
+    this._app.use(mount('/exercise', exercisesMiddleware));
+    this._app.use(clientAssetMiddleware);
   }
 
 }
-
-
-const dirname = join(fileURLToPath(import.meta.url), '..');

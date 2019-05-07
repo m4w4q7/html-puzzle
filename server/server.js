@@ -1,7 +1,7 @@
 import Koa from 'koa';
 import mount from 'koa-mount';
-import { config } from './config.mjs';
-import { clientAssetMiddleware, exercisesMiddleware, authenticationMiddleware } from './middlewares/index.mjs';
+import { config } from './config.js';
+import { clientAssetMiddleware, exercisesMiddleware, authenticationMiddleware } from './middlewares/index.js';
 
 
 export class Server {

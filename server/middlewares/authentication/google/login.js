@@ -1,4 +1,4 @@
-import { getClient, redirectUrl } from './client.mjs';
+import { getClient, redirectUrl } from './client.js';
 
 
 export default async (context) => {

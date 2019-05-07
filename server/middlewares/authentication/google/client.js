@@ -1,5 +1,5 @@
-import { createOpenIdClient } from '../create-openid-client.mjs';
-import { config } from '../../../config.mjs';
+import { createOpenIdClient } from '../create-openid-client.js';
+import { config } from '../../../config.js';
 
 const path = 'authenticate/google/callback';
 export const redirectUrl = Object.assign(new URL(config.hostUrl), { port: config.port, pathname: path }).href;

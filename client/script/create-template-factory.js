@@ -1,8 +1,8 @@
 import { createDocumentFragment } from './utils.js';
 
-export const createTemplateFactory = (htmlTemplate = '', factories = {}) => {
+export const createTemplateFactory = (htmlTemplate = '', factories = {}, locals = {}) => {
   const container = document.createElement('div');
-  container.innerHTML = htmlTemplate;
+  container.innerHTML = typeof htmlTemplate === 'function' ? htmlTemplate(locals) : htmlTemplate;
   const documentFragment = createDocumentFragment(Array.from(container.childNodes));
 
   return () => {

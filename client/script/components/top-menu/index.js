@@ -1,18 +1,13 @@
-import template from './template.html.js';
+import { createTemplate } from './template.js';
 import { AbstractCustomElement } from '../abstract-custom-element/index.js';
 
 export class TopMenuComponent extends AbstractCustomElement {
 
   constructor() {
     super();
-    this.innerHTML = template;
-    this._dom = {
-      logo: this.querySelector('.hpu-logo'),
-      loginButton: this.querySelector('.hpu-top-menu__login-button')
-    };
-
-    this._dom.logo.addEventListener('click', () => location.assign('index.html'));
-    this._dom.loginButton.addEventListener('click', () => location.assign('login.html'));
+    this._attachShadowedTemplate(createTemplate);
+    this._nodes.logo.addEventListener('click', () => location.assign('index.html'));
+    this._nodes.loginButton.addEventListener('click', () => location.assign('/authenticate/google/login'));
   }
 
 

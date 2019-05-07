@@ -6,8 +6,7 @@ export default ({ currentPath }) => `
     <div class="hpu-logo">
       <div>&lt;<span class="hpu-logo__name">html-puzzle</span>&gt;</div>
     </div>
-    <div class="hpu-top-menu__login-button hpu-button">
-      <div>Login</div>
-    </div>
+
+    <hpu-profile-menu></hpu-profile-menu>
   </div>
 `;

@@ -1,5 +1,6 @@
 import { createTemplate } from './template.js';
 import { AbstractCustomElement } from '../abstract-custom-element/index.js';
+import { ProfileMenuComponent } from '../profile-menu/index.js';
 
 export class TopMenuComponent extends AbstractCustomElement {
 
@@ -7,7 +8,11 @@ export class TopMenuComponent extends AbstractCustomElement {
     super();
     this._attachShadowedTemplate(createTemplate);
     this._nodes.logo.addEventListener('click', () => location.assign('index.html'));
-    this._nodes.loginButton.addEventListener('click', () => location.assign('/authenticate/google/login'));
+  }
+
+
+  static get dependencies() {
+    return [ProfileMenuComponent];
   }
 
 

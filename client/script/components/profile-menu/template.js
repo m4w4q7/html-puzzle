@@ -2,9 +2,9 @@ import { createTemplateFactory } from '../../create-template-factory.js';
 import htmlTemplate from './template.html.js';
 
 export const createTemplate = createTemplateFactory(htmlTemplate, {
+  loginButtonContainer: '.login-button-container',
   loginButton: '.login-button',
   profileMenu: '.profile-menu',
-  nameContainer: '.name-container',
-}, {
-  currentPath: new URL('./', import.meta.url).href
+  name: '.name',
+  signOutButton: '.profile-menu__sign-out',
 });

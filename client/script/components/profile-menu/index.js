@@ -6,17 +6,36 @@ export class ProfileMenuComponent extends AbstractCustomElement {
   constructor() {
     super();
     this._attachShadowedTemplate(createTemplate);
-    this._nodes.loginButton.addEventListener('click', () => location.assign('/authenticate/google/login'));
+    this._nodes.loginButton.addEventListener('click', () => this._signIn());
+    this._nodes.signOutButton.addEventListener('click', () => this._signOut());
   }
 
 
   connectedCallback() {
+    this._render();
+  }
+
+
+  _signIn() {
+    location.assign('/authenticate/google/login');
+  }
+
+
+  _signOut() {
+    document.cookie = 'email=; expires=Thu, 01 Jan 1970 00:00:00 GMT';
+    this._render();
+  }
+
+
+  _render() {
     const name = this._getName();
     if (name) {
-      this._nodes.nameContainer.innerText = name;
+      this._nodes.name.innerText = name;
       this._nodes.profileMenu.style.display = '';
+      this._nodes.loginButtonContainer.style.display = 'none';
     } else {
-      this._nodes.loginButton.style.display = '';
+      this._nodes.profileMenu.style.display = 'none';
+      this._nodes.loginButtonContainer.style.display = '';
     }
   }
 

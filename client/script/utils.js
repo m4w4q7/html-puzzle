@@ -49,3 +49,10 @@ export const get = (path, object) => path.reduce((currentLevel, key) => {
 
 export const isEqualArray = (array1, array2, comparator) => array1.length === array2.length &&
   array1.every((element, index) => comparator ? comparator(element, array2[index]) : element === array2[index]);
+
+
+export const matchAll = function* (input, pattern) {
+  let match;
+  // eslint-disable-next-line no-cond-assign
+  while (match = pattern.exec(input)) { yield match; }
+};

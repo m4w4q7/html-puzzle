@@ -5,6 +5,7 @@ import { Element } from '../model/element.js';
 import { ClassList } from '../model/class-list.js';
 import { AttributeList } from '../model/attribute-list.js';
 import { Attribute } from '../model/attribute.js';
+import { matchAll } from '../utils.js';
 
 export const parse = (input) => {
   return input
@@ -57,7 +58,7 @@ const parseId = id => id && id.slice(1);
 const parseClasses = classes => new ClassList(classes.split('.').slice(1));
 
 const parseAttributes = attributes => {
-  const matches = [...attributes.matchAll(new RegExp(groupedAttribute, 'g'))];
+  const matches = [...matchAll(attributes, new RegExp(groupedAttribute, 'g'))];
   attributes = matches.map(([_, name, value = '']) => new Attribute(name, unescapeAttributeValue(value)));
   return new AttributeList(attributes);
 };

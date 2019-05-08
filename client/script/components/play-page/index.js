@@ -14,71 +14,87 @@ export class PlayPageComponent extends AbstractCustomElement {
 
   constructor() {
     super();
+    this._onHint = this._onHint.bind(this);
+    this._onPuzzleChange = this._onPuzzleChange.bind(this);
     this._attachShadowedTemplate(createTemplate);
     this._hint = null;
+    this._hintsUsed = 0;
+    this._hintCalculator = null;
+    this._originalModel = null;
   }
 
 
-  async onActivate() {
-    const exerciseName = new URLSearchParams(window.location.search).get('id') || 'dropdown';
+  async onActivate(params) {
+    const exerciseName = params.get('exercise') || 'dropdown';
     const exercise = await fetchExercise(exerciseName);
 
     this._initDocumentation(exercise);
 
-    this._nodes.exerciseNameElement.textContent = exercise.name;
+    this._nodes.exerciseName.textContent = exercise.name;
 
-    doOnNext(this._nodes.puzzleComponent, 'mousedown', () => this._nodes.clockComponent.start());
+    doOnNext(this._nodes.puzzle, 'mousedown', () => this._nodes.clock.start());
 
-    const originalModel = Pug.parse(exercise.pug);
-    const shuffledModel = shuffle(originalModel);
+    this._originalModel = Pug.parse(exercise.pug);
+    const shuffledModel = shuffle(this._originalModel);
 
-    this._initPreviews(exercise, originalModel, shuffledModel);
-    this._initHint(originalModel);
-    this._initPuzzle(originalModel, shuffledModel);
+    this._initPreviews(exercise, this._originalModel, shuffledModel);
+    this._initHint(this._originalModel);
+    this._initPuzzle(shuffledModel);
   }
 
 
-  _initDocumentation({ documentation: url }) {
-    if (!url) { return; }
+  async onDeactivate() {
+    this._nodes.clock.clear();
+    this._hint = null;
+  }
+
+
+  _initDocumentation({ documentation: url = '' }) {
     const link = this._nodes.documentationLinkButton;
     link.href = url;
-    link.style.display = '';
+    link.style.display = url ? '' : 'none';
   }
 
 
   _initPreviews(exercise, originalModel, shuffledModel) {
-    this._nodes.goalPreviewComponent.assets = { css: exercise.css, js: exercise.js };
-    this._nodes.currentPreviewComponent.assets = { css: exercise.css, js: exercise.js };
+    this._nodes.goalPreview.assets = { css: exercise.css, js: exercise.js };
+    this._nodes.currentPreview.assets = { css: exercise.css, js: exercise.js };
 
-    this._nodes.goalPreviewComponent.model = originalModel;
-    this._nodes.currentPreviewComponent.model = shuffledModel;
+    this._nodes.goalPreview.model = originalModel;
+    this._nodes.currentPreview.model = shuffledModel;
   }
 
 
   _initHint(goal) {
-    const hintCalculator = new HintCalculator(goal);
-    let hintsUsed = 0;
-
-    this._nodes.hintButton.addEventListener('mousedown', () => {
-      if (!this._hint) {
-        hintsUsed++;
-        this._nodes.hintCounter.textContent = hintsUsed;
-        this._hint = hintCalculator.getNext(this._nodes.puzzleComponent.model);
-      }
-      this._nodes.puzzleComponent.showHint(this._hint);
-      doOnNext(document, 'mouseup', () => this._nodes.puzzleComponent.hideHint());
-    });
+    this._hint = null;
+    this._hintsUsed = 0;
+    this._nodes.hintCounter.textContent = this._hintsUsed;
+    this._hintCalculator = new HintCalculator(goal);
+    this._nodes.hintButton.addEventListener('mousedown', this._onHint);
   }
 
 
-  _initPuzzle(goalModel, initialModel) {
-    this._nodes.puzzleComponent.model = initialModel;
+  _onHint() {
+    if (!this._hint) {
+      this._hintsUsed++;
+      this._nodes.hintCounter.textContent = this._hintsUsed;
+      this._hint = this._hintCalculator.getNext(this._nodes.puzzle.model);
+    }
+    this._nodes.puzzle.showHint(this._hint);
+    doOnNext(document, 'mouseup', () => this._nodes.puzzle.hideHint());
+  }
 
-    this._nodes.puzzleComponent.addEventListener('change', event => {
-      this._hint = null;
-      this._nodes.currentPreviewComponent.model = event.detail.model;
-      if (goalModel.isEqual(event.detail.model)) { alert('Congratulations! 🙂👍'); }
-    });
+
+  _initPuzzle(shuffledModel) {
+    this._nodes.puzzle.model = shuffledModel;
+    this._nodes.puzzle.addEventListener('change', this._onPuzzleChange);
+  }
+
+
+  _onPuzzleChange(event) {
+    this._hint = null;
+    this._nodes.currentPreview.model = event.detail.model;
+    if (this._originalModel.isEqual(event.detail.model)) { alert('Congratulations! 🙂👍'); }
   }
 
 

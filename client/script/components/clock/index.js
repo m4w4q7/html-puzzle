@@ -23,6 +23,13 @@ export class ClockComponent extends AbstractCustomElement {
   }
 
 
+  clear() {
+    this.stop();
+    this._startDate = null;
+    this._showTime(0);
+  }
+
+
   get time() {
     return this._startDate && new Date() - this._startDate;
   }

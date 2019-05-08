@@ -4,30 +4,23 @@
     <meta charset="utf-8" />
     <title>HTML Puzzle</title>
 
-    <style>
-      @import 'style/variables.css';
-      @import 'style/common.css';
-      @import 'script/components/top-menu/style.css';
-    </style>
+    <link rel="preload" as="style" href="script/components/puzzle/style.css">
+    <link rel="preload" as="style" href="script/components/preview/style.css">
+
+    <link rel="stylesheet" type="text/css" href="style/variables.css">
+    <link rel="stylesheet" type="text/css" href="style/common.css">
+    <link rel="stylesheet" type="text/css" href="script/components/router/style.css">
 
     <script type="module">
       import { TopMenuComponent } from './script/components/top-menu/index.js';
-      import { ListPageComponent } from './script/components/list-page/index.js';
+      import { RouterComponent } from './script/components/router/index.js';
       TopMenuComponent.define();
-      ListPageComponent.define();
+      RouterComponent.define();
     </script>
 
   </head>
   <body>
     <hpu-top-menu></hpu-top-menu>
-    <hpu-list-page></hpu-list-page>
-
-    <script>
-      const pageTagName = 'hpu-list-page';
-      customElements.whenDefined(pageTagName).then(() => {
-        document.querySelector(pageTagName).onActivate();
-      });
-    </script>
-
+    <hpu-router></hpu-router>
   </body>
 </html>

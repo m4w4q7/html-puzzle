@@ -12,6 +12,9 @@ export class ListPageComponent extends AbstractCustomElement {
   async onActivate() {}
 
 
+  async onDeactivate() {}
+
+
   static get tagName() {
     return 'hpu-list-page';
   }

@@ -7,9 +7,9 @@ export default `
   </div>
   <div>Exercises:</div>
   <ul>
-    <li><a href="play.html?id=dropdown">Dropdown</a></li>
-    <li><a href="play.html?id=basic">Basic example to demonstrate puzzle parts</a></li>
-    <li><a href="play.html?id=text-styles">Another basic example to demonstrate previews</a></li>
+    <li><a href="#play?exercise=dropdown">Dropdown</a></li>
+    <li><a href="#play?exercise=basic">Basic example to demonstrate puzzle parts</a></li>
+    <li><a href="#play?exercise=text-styles">Another basic example to demonstrate previews</a></li>
   </ul>
 </div>
 `;

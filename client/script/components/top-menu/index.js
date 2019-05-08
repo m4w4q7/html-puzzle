@@ -7,7 +7,7 @@ export class TopMenuComponent extends AbstractCustomElement {
   constructor() {
     super();
     this._attachShadowedTemplate(createTemplate);
-    this._nodes.logo.addEventListener('click', () => location.assign('index.html'));
+    this._nodes.logo.addEventListener('click', () => location.assign('#'));
   }
 
 

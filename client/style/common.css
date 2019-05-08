@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto');
 
-html {
+html,
+:host {
   box-sizing: border-box;
 }
 
@@ -22,19 +23,18 @@ a, a:active, a:visited {
 }
 
 .page-content {
-  margin-top: 48px;
   padding: 24px 32px 32px 32px;
 }
 
 .page-content--centered {
   align-items: center;
   display: flex;
-  height: calc(100vh - 48px);
+  height: 100%;
   justify-content: center;
 }
 
 .page-content--full-height {
-  height: calc(100vh - 48px);
+  height: 100%;
 }
 
 .hpu-button {

@@ -15,8 +15,9 @@ class Users {
 
 
   async listNamesByPrefix(namePrefix) {
-    const nameRegExp = new RegExp(escapeForRegexp(namePrefix));
-    return this._collection.find({ name: nameRegExp }, { name: 1 }).toArray();
+    const nameRegExp = new RegExp(`^${escapeForRegexp(namePrefix)}`);
+    const result = await this._collection.find({ name: nameRegExp }, { name: 1 }).toArray();
+    return result.map(user => user.name);
   }
 
 

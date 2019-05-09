@@ -3,21 +3,15 @@ import { config } from '../config.js';
 
 
 export const registerGracefulShutdown = (server, database) => {
-  setTimeout(shutDownForcefully, config.shutdownTimeout * 1000);
   handledSignals.forEach(signal => process.on(signal, () => {
     console.log(`${signal} recieved. Attempting graceful shutdown...`);
     shutDownGracefully(server, database);
+    setTimeout(shutDownForcefully, config.shutdownTimeout * 1000);
   }));
 };
 
 
 const handledSignals = ['SIGINT', 'SIGTERM'];
-
-
-const shutDownForcefully = () => {
-  console.log(`Graceful shutdown timed out. Shutting down forcefully...`);
-  process.exit(1);
-};
 
 
 const shutDownGracefully = async (server, database) => {
@@ -27,4 +21,10 @@ const shutDownGracefully = async (server, database) => {
   console.log('Server closed successfully.');
   console.log('Exiting...');
   process.exit(0);
+};
+
+
+const shutDownForcefully = () => {
+  console.log(`Graceful shutdown timed out. Shutting down forcefully...`);
+  process.exit(1);
 };

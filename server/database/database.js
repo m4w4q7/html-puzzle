@@ -26,6 +26,11 @@ export class Database {
     this._db = this._client.db();
   }
 
+
+  async close() {
+    await this._client.close();
+  }
+
 }
 
 

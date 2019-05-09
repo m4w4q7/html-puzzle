@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import Koa from 'koa';
 import mount from 'koa-mount';
 import { config } from './config.js';
@@ -8,13 +9,19 @@ export class Server {
 
   constructor() {
     this._app = new Koa();
+    this._server = null;
     this._addMiddlewares();
   }
 
 
   listen() {
-    this._app.listen(config.port);
+    this._server = this._app.listen(config.port);
     console.log(`Listening on port ${config.port}`);
+  }
+
+
+  async close() {
+    return new Promise((resolve, reject) => this._server.close(error => error ? reject(error) : resolve()));
   }
 
 

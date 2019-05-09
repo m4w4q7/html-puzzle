@@ -2,7 +2,9 @@
 import Koa from 'koa';
 import mount from 'koa-mount';
 import { config } from './config.js';
-import { clientAssetMiddleware, exercisesMiddleware, authenticationMiddleware } from './middlewares/index.js';
+import {
+  clientAssetMiddleware, exercisesMiddleware, authenticationMiddleware, apiMiddleware
+} from './middlewares/index.js';
 
 
 export class Server {
@@ -28,6 +30,7 @@ export class Server {
   _addMiddlewares() {
     this._app.use(mount('/authenticate', authenticationMiddleware));
     this._app.use(mount('/exercise', exercisesMiddleware));
+    this._app.use(mount('/api', apiMiddleware));
     this._app.use(clientAssetMiddleware);
   }
 

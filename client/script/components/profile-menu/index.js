@@ -21,8 +21,8 @@ export class ProfileMenuComponent extends AbstractCustomElement {
   }
 
 
-  _signOut() {
-    document.cookie = 'name=; expires=Thu, 01 Jan 1970 00:00:00 GMT';
+  async _signOut() {
+    await fetch('/api/signout');
     this._render();
   }
 

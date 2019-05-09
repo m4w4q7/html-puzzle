@@ -1,7 +1,6 @@
 import { AbstractCustomElement } from '../abstract-custom-element/index.js';
 import { ListPageComponent } from '../pages/list/index.js';
 import { PlayPageComponent } from '../pages/play/index.js';
-import { ProfilePageComponent } from '../pages/profile/index.js';
 import { createTemplate } from './template.js';
 
 

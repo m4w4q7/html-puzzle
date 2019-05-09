@@ -1,18 +1,12 @@
-import { AbstractCustomElement } from '../abstract-custom-element/index.js';
+import { AbstractPageComponent } from '../abstract-page/index.js';
 import { createTemplate } from './template.js';
 
-export class ListPageComponent extends AbstractCustomElement {
+export class ListPageComponent extends AbstractPageComponent {
 
   constructor() {
     super();
     this._attachShadowedTemplate(createTemplate);
   }
-
-
-  async onActivate() {}
-
-
-  async onDeactivate() {}
 
 
   static get tagName() {

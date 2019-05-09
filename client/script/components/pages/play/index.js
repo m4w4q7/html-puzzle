@@ -1,16 +1,16 @@
-import { AbstractCustomElement } from '../abstract-custom-element/index.js';
-import { HorizontalResizableComponent } from '../horizontal-resizable/index.js';
-import { PuzzleComponent } from '../puzzle/index.js';
-import { PreviewComponent } from '../preview/index.js';
-import { ClockComponent } from '../clock/index.js';
+import { AbstractPageComponent } from '../abstract-page/index.js';
+import { HorizontalResizableComponent } from '../../horizontal-resizable/index.js';
+import { PuzzleComponent } from '../../puzzle/index.js';
+import { PreviewComponent } from '../../preview/index.js';
+import { ClockComponent } from '../../clock/index.js';
 import { createTemplate } from './template.js';
-import { fetchExercise } from '../../fetch-exercise.js';
-import { doOnNext } from '../../utils.js';
-import { Pug } from '../../pug/index.js';
-import { shuffle } from '../../shuffle/index.js';
-import { HintCalculator } from '../../hint/index.js';
+import { fetchExercise } from '../../../fetch-exercise.js';
+import { doOnNext } from '../../../utils.js';
+import { Pug } from '../../../pug/index.js';
+import { shuffle } from '../../../shuffle/index.js';
+import { HintCalculator } from '../../../hint/index.js';
 
-export class PlayPageComponent extends AbstractCustomElement {
+export class PlayPageComponent extends AbstractPageComponent {
 
   constructor() {
     super();

@@ -1,6 +1,7 @@
 import { AbstractCustomElement } from '../abstract-custom-element/index.js';
-import { ListPageComponent } from '../list-page/index.js';
-import { PlayPageComponent } from '../play-page/index.js';
+import { ListPageComponent } from '../pages/list/index.js';
+import { PlayPageComponent } from '../pages/play/index.js';
+import { ProfilePageComponent } from '../pages/profile/index.js';
 import { createTemplate } from './template.js';
 
 
@@ -30,14 +31,6 @@ export class RouterComponent extends AbstractCustomElement {
     if (previousPage) { previousPage.style.display = 'none'; }
     currentPage.style.display = '';
     if (previousPage) { await previousPage.onDeactivate(); }
-  }
-
-
-  _createPages() {
-    return {
-      list: document.createElement('hpu-list-page'),
-      play: document.createElement('hpu-play-page'),
-    };
   }
 
 

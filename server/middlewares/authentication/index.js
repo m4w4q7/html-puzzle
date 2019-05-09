@@ -1,8 +1,8 @@
-import compose from 'koa-compose';
-import route from 'koa-route';
+import Router from 'koa-router';
 import { googleLogin, googleCallback } from './google/index.js';
 
-export const authenticationMiddleware = compose([
-  route.get('/google/login', googleLogin),
-  route.get('/google/callback', googleCallback),
-]);
+
+export const authenticationMiddleware = new Router()
+  .get('/google/login', googleLogin)
+  .get('/google/callback', googleCallback)
+  .routes();

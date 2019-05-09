@@ -16,9 +16,9 @@ const handledSignals = ['SIGINT', 'SIGTERM'];
 
 const shutDownGracefully = async (server, database) => {
   await database.close();
-  console.log('Database closed successfully.');
+  console.log('Database closed successfully');
   await server.close();
-  console.log('Server closed successfully.');
+  console.log('Server closed successfully');
   console.log('Exiting...');
   process.exit(0);
 };

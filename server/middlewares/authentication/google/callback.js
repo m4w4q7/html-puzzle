@@ -2,13 +2,17 @@
 import { getClient, redirectUrl } from './client.js';
 import { renderJsRedirect } from '../../../utils/render-js-redirect.js';
 import { users } from '../../../database/dao/users.js';
+import { createAuthToken } from '../../../utils/create-auth-token.js';
+import { config } from '../../../config.js';
 
 export default async (context) => {
   const client = await getClient();
   const tokenSet = await client.authorizationCallback(redirectUrl, context.request.query);
   const user = await getOrCreateUser(tokenSet.claims.sub, tokenSet.claims.email);
 
-  context.cookies.set('name', user.name, { httpOnly: false });
+  const maxAge = config.sessionHours * 3600 * 1000;
+  setNameCookie(context.cookies, user.name, maxAge);
+  setAuthToken(context.cookies, user._id.toString(), maxAge);
   context.body = renderJsRedirect('/');
 };
 
@@ -35,4 +39,15 @@ const getUniqueName = async (email) => {
     const name = nameFromEmail + i;
     if (!usersWithSamePrefix.includes(name)) { return name; }
   }
+};
+
+
+const setNameCookie = (cookies, name, maxAge) => {
+  cookies.set('name', name, { httpOnly: false, maxAge });
+};
+
+
+const setAuthToken = (cookies, userId, maxAge) => {
+  const token = createAuthToken(userId);
+  cookies.set('auth_token', token, { maxAge });
 };

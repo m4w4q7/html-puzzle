@@ -23,6 +23,7 @@
   },
   "dependencies": {
     "dotenv": "8.0.0",
+    "jsonwebtoken": "8.5.1",
     "koa": "2.7.0",
     "koa-compose": "4.1.0",
     "koa-mount": "4.0.0",

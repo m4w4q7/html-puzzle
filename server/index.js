@@ -1,3 +1,4 @@
-import { Server } from './server.js';
+import { database } from './database/database.js';
+import { server } from './server.js';
 
-new Server().listen();
+database.connect().then(() => server.listen());

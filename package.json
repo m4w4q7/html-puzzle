@@ -28,6 +28,7 @@
     "koa-mount": "4.0.0",
     "koa-route": "3.2.0",
     "koa-static": "5.0.0",
+    "mongodb": "3.2.4",
     "openid-client": "2.5.0"
   },
   "engines": {

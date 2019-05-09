@@ -22,7 +22,7 @@ export class ProfileMenuComponent extends AbstractCustomElement {
 
 
   _signOut() {
-    document.cookie = 'email=; expires=Thu, 01 Jan 1970 00:00:00 GMT';
+    document.cookie = 'name=; expires=Thu, 01 Jan 1970 00:00:00 GMT';
     this._render();
   }
 
@@ -43,7 +43,7 @@ export class ProfileMenuComponent extends AbstractCustomElement {
   _getName() {
     const emailCookie = document.cookie.split(';')
       .map(entry => entry.trim().split('='))
-      .find(entry => entry[0] === 'email');
+      .find(entry => entry[0] === 'name');
 
     return emailCookie && emailCookie[1];
   }

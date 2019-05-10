@@ -1,7 +1,7 @@
 import { AbstractPuzzleSubcomponent } from '../abstract-puzzle-subcomponent/index.js';
 import { HighlightColors } from '../../enums.js';
 import { reflow } from '../../utils.js';
-import { AbstractMemberAccessError } from '../../../../abstract-member-access-error.js';
+import { AbstractMemberAccessError } from '../../../../errors/abstract-member-access-error.js';
 
 export class AbstractPuzzlePiece extends AbstractPuzzleSubcomponent {
 

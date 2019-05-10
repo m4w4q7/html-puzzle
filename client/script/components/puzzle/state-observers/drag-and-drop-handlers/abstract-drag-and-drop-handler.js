@@ -1,5 +1,5 @@
 import { DragStates } from '../../enums.js';
-import { AbstractMemberAccessError } from '../../../../abstract-member-access-error.js';
+import { AbstractMemberAccessError } from '../../../../errors/abstract-member-access-error.js';
 
 
 export class AbstractDragAndDropHandler {

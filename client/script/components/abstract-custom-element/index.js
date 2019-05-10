@@ -1,4 +1,4 @@
-import { AbstractMemberAccessError } from '../../abstract-member-access-error.js';
+import { AbstractMemberAccessError } from '../../errors/abstract-member-access-error.js';
 
 export class AbstractCustomElement extends HTMLElement {
 

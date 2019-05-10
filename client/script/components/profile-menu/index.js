@@ -1,5 +1,6 @@
 import { createTemplate } from './template.js';
 import { AbstractCustomElement } from '../abstract-custom-element/index.js';
+import { services } from '../../services/index.js';
 
 export class ProfileMenuComponent extends AbstractCustomElement {
 
@@ -8,6 +9,7 @@ export class ProfileMenuComponent extends AbstractCustomElement {
     this._attachShadowedTemplate(createTemplate);
     this._nodes.loginButton.addEventListener('click', () => this._signIn());
     this._nodes.signOutButton.addEventListener('click', () => this._signOut());
+    this._userService = services.user;
   }
 
 
@@ -17,13 +19,12 @@ export class ProfileMenuComponent extends AbstractCustomElement {
 
 
   _signIn() {
-    location.assign('/authenticate/google/login');
+    this._userService.signIn();
   }
 
 
   async _signOut() {
-    localStorage.removeItem('session');
-    await fetch('/api/signout');
+    await this._userService.signOut();
     this._render();
   }
 

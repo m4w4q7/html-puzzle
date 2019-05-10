@@ -41,12 +41,12 @@ class Users {
 
   async _getOne(query) {
     const result = await this._collection.find(query).limit(1).toArray();
-    return this._stringifyId(result[0]);
+    return result[0] ? this._stringifyId(result[0]) : null;
   }
 
 
-  _stringifyId(entry) {
-    return { ...entry, _id: entry._id.toHexString() };
+  _stringifyId(document) {
+    return { ...document, _id: document._id.toHexString() };
   }
 
 }

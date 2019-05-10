@@ -25,6 +25,7 @@ export class PlayPageComponent extends AbstractPageComponent {
 
 
   async onActivate(params) {
+    await super.onActivate(params);
     const exerciseName = params.get('exercise') || 'dropdown';
     const exercise = await fetchExercise(exerciseName);
 
@@ -44,6 +45,7 @@ export class PlayPageComponent extends AbstractPageComponent {
 
 
   async onDeactivate() {
+    await super.onDeactivate();
     this._nodes.clock.clear();
     this._hint = null;
   }

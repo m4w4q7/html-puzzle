@@ -22,7 +22,6 @@ export class EventEmitter {
 
 
   _emit(eventName, eventDetails) {
-    console.log('emit', eventName, this._subscriptions[eventName]);
     if (!this._subscriptions[eventName]) { return; }
     this._subscriptions[eventName].forEach(({ context, callback }) => {
       callback.call(context, eventDetails);

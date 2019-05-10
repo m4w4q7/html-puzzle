@@ -35,7 +35,7 @@ class Users {
 
   async setNameForId(id, name) {
     const _id = ObjectID.createFromHexString(id);
-    await this._collection.update({ _id }, { $set: { name } });
+    await this._collection.updateOne({ _id }, { $set: { name } });
   }
 
 

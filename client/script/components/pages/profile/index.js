@@ -8,11 +8,19 @@ export class ProfilePageComponent extends AbstractPageComponent {
     super();
     this._attachShadowedTemplate(createTemplate);
     this._nodes.applyButton.addEventListener('click', () => this._changeName());
+    services.user.subscribe('nameChange', this._onNameChange, this);
   }
 
 
-  onActivate() {
+  async onActivate() {
+    await super.onActivate();
     this._nodes.nameInput.value = services.user.getName();
+  }
+
+
+  _onNameChange() {
+    if (!this._isActive) { return; }
+    this._navigateToIndex();
   }
 
 
@@ -22,7 +30,6 @@ export class ProfilePageComponent extends AbstractPageComponent {
     if (newName.length < 3) { return alert('Name must be at least 3 characters long.'); }
     if (!await services.user.isNameFree(newName)) { return window.alert(`"${newName}" is already taken.`); }
     await services.user.changeName(newName);
-    this._navigateToIndex();
   }
 
 
@@ -34,4 +41,5 @@ export class ProfilePageComponent extends AbstractPageComponent {
   static get tagName() {
     return 'hpu-profile-page';
   }
+
 }

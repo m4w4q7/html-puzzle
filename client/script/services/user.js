@@ -37,13 +37,18 @@ export class UserService extends AbstractService {
 
 
   async changeName(newName) {
-    return this._serverService.postUser(this._getId(), newName);
+    if (!this.isAuthenticated()) { throw new Error('Invalid session!'); }
+    await this._serverService.postUser(this._getId(), newName);
+    this._session.user.name = newName;
+    localStorage.setItem('session', JSON.stringify(this._session));
+    this._emit('nameChange');
   }
 
 
   async signOut() {
     localStorage.removeItem('session');
     this._session = null;
+    this._emit('nameChange');
     return this._serverService.signOut();
   }
 

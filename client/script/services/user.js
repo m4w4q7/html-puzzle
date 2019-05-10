@@ -16,7 +16,7 @@ export class UserService extends AbstractService {
 
 
   isAuthenticated() {
-    return this._session && this._session.expires < Date.now();
+    return this._session && Date.now() < this._session.expires;
   }
 
 

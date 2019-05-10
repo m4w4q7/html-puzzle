@@ -12,7 +12,7 @@ export default async (context) => {
 
   const maxAge = config.sessionHours * 3600 * 1000;
   setNameCookie(context.cookies, user.name, maxAge);
-  setAuthToken(context.cookies, user._id.toString(), maxAge);
+  setAuthToken(context.cookies, user._id.toHexString(), maxAge);
   context.body = renderJsRedirect('/');
 };
 

@@ -1,5 +1,7 @@
+import mongodb from 'mongodb';
 import { database } from '../database.js';
 import { escapeForRegexp } from '../../utils/escape-for-regexp.js';
+const { ObjectID } = mongodb;
 
 class Users {
 
@@ -30,6 +32,12 @@ class Users {
   async insertOne(document) {
     const { insertedId } = await this._collection.insertOne(document);
     return insertedId;
+  }
+
+
+  async setNameForId(id, name) {
+    const _id = ObjectID.createFromHexString(id);
+    await this._collection.update({ _id }, { $set: { name } });
   }
 
 }

@@ -43,6 +43,7 @@ export class UserService extends AbstractService {
 
   async signOut() {
     localStorage.removeItem('session');
+    this._session = null;
     return this._serverService.signOut();
   }
 

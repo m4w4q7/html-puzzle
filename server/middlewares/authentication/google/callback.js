@@ -10,10 +10,9 @@ export default async (context) => {
   const tokenSet = await client.authorizationCallback(redirectUrl, context.request.query);
   const user = await getOrCreateUser(tokenSet.claims.sub, tokenSet.claims.email);
 
-  const maxAge = config.sessionHours * 3600 * 1000;
-  setNameCookie(context.cookies, user.name, maxAge);
-  setAuthToken(context.cookies, user._id.toHexString(), maxAge);
-  context.body = renderJsRedirect('/');
+  const expires = getExpiration();
+  setAuthToken(context.cookies, user._id, expires);
+  context.body = renderJsRedirect('/', { localStorage: getDataForLocalStorage(user, expires) });
 };
 
 
@@ -42,12 +41,24 @@ const getUniqueName = async (email) => {
 };
 
 
-const setNameCookie = (cookies, name, maxAge) => {
-  cookies.set('name', name, { httpOnly: false, maxAge });
+const setAuthToken = (cookies, userId, expires) => {
+  const token = createAuthToken(userId);
+  cookies.set('auth_token', token, { expires });
 };
 
 
-const setAuthToken = (cookies, userId, maxAge) => {
-  const token = createAuthToken(userId);
-  cookies.set('auth_token', token, { maxAge });
+const getDataForLocalStorage = (user, expires) => {
+  return {
+    session: JSON.stringify({
+      expires: expires.valueOf(),
+      user: { id: user._id, name: user.name }
+    })
+  };
+};
+
+
+const getExpiration = () => {
+  const expiration = new Date();
+  expiration.setHours(expiration.getHours() + config.sessionHours);
+  return expiration;
 };

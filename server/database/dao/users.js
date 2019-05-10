@@ -11,14 +11,12 @@ class Users {
 
 
   async getByGoogleId(id) {
-    const result = await this._collection.find({ googleId: id }).limit(1).toArray();
-    return result[0];
+    return this._getOne({ googleId: id });
   }
 
 
   async getByName(name) {
-    const result = await this._collection.find({ name }).limit(1).toArray();
-    return result[0];
+    return this._getOne({ name });
   }
 
 
@@ -38,6 +36,17 @@ class Users {
   async setNameForId(id, name) {
     const _id = ObjectID.createFromHexString(id);
     await this._collection.update({ _id }, { $set: { name } });
+  }
+
+
+  async _getOne(query) {
+    const result = await this._collection.find(query).limit(1).toArray();
+    return this._stringifyId(result[0]);
+  }
+
+
+  _stringifyId(entry) {
+    return { ...entry, _id: entry._id.toHexString() };
   }
 
 }

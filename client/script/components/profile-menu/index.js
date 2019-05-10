@@ -22,6 +22,7 @@ export class ProfileMenuComponent extends AbstractCustomElement {
 
 
   async _signOut() {
+    localStorage.removeItem('session');
     await fetch('/api/signout');
     this._render();
   }
@@ -41,11 +42,8 @@ export class ProfileMenuComponent extends AbstractCustomElement {
 
 
   _getName() {
-    const emailCookie = document.cookie.split(';')
-      .map(entry => entry.trim().split('='))
-      .find(entry => entry[0] === 'name');
-
-    return emailCookie && emailCookie[1];
+    const session = localStorage.getItem('session');
+    return session && JSON.parse(session).user.name;
   }
 
 

@@ -9,6 +9,7 @@ export default `
       <div class="name"></div>
     </div>
     <div class="dropdown-menu">
+        <div class="profile-menu__profile-link dropdown-menu__item"><span>Profile</span></div>
       <div class="profile-menu__sign-out dropdown-menu__item"><span>Sign out</span></div>
     </div>
   </div>
@@ -54,7 +55,7 @@ export default `
 
     .dropdown-menu__item {
       padding: 0 16px;
-      height: 48px;
+      height: 40px;
       display: flex;
       align-items: center;
       transition: background-color .2s;

@@ -6,5 +6,6 @@ export const createTemplate = createTemplateFactory(htmlTemplate, {
   loginButton: '.login-button',
   profileMenu: '.profile-menu',
   name: '.name',
+  linkToProfile: '.profile-menu__profile-link',
   signOutButton: '.profile-menu__sign-out',
 });

@@ -8,6 +8,7 @@ export class ProfileMenuComponent extends AbstractCustomElement {
     super();
     this._attachShadowedTemplate(createTemplate);
     this._nodes.loginButton.addEventListener('click', () => this._signIn());
+    this._nodes.linkToProfile.addEventListener('click', () => this._navigateToProfile());
     this._nodes.signOutButton.addEventListener('click', () => this._signOut());
     services.user.subscribe('nameChange', this._render, this);
   }
@@ -25,6 +26,11 @@ export class ProfileMenuComponent extends AbstractCustomElement {
 
   _signOut() {
     services.user.signOut();
+  }
+
+
+  _navigateToProfile() {
+    location.assign('#profile');
   }
 
 

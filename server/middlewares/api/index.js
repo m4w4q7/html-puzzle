@@ -5,6 +5,6 @@ import signout from './signout.js';
 
 
 export const apiMiddleware = new Router()
-  .get('/users', getUser)
+  .get('/users', sessionMiddleware, getUser)
   .get('/signout', signout)
   .routes();

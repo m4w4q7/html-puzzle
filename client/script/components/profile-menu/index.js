@@ -9,7 +9,7 @@ export class ProfileMenuComponent extends AbstractCustomElement {
     this._attachShadowedTemplate(createTemplate);
     this._nodes.loginButton.addEventListener('click', () => this._signIn());
     this._nodes.signOutButton.addEventListener('click', () => this._signOut());
-    this._userService = services.user;
+    services.user.subscribe('nameChange', this._render, this);
   }
 
 
@@ -19,18 +19,17 @@ export class ProfileMenuComponent extends AbstractCustomElement {
 
 
   _signIn() {
-    this._userService.signIn();
+    services.user.signIn();
   }
 
 
-  async _signOut() {
-    await this._userService.signOut();
-    this._render();
+  _signOut() {
+    services.user.signOut();
   }
 
 
   _render() {
-    const name = this._getName();
+    const name = services.user.getName();
     if (name) {
       this._nodes.name.innerText = name;
       this._nodes.profileMenu.style.display = '';
@@ -39,12 +38,6 @@ export class ProfileMenuComponent extends AbstractCustomElement {
       this._nodes.profileMenu.style.display = 'none';
       this._nodes.loginButtonContainer.style.display = '';
     }
-  }
-
-
-  _getName() {
-    const session = localStorage.getItem('session');
-    return session && JSON.parse(session).user.name;
   }
 
 

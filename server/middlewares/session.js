@@ -4,14 +4,16 @@ import { config } from '../config.js';
 
 
 export const sessionMiddleware = async (context, next) => {
+  const authToken = context.cookies.get('auth_token');
+  if (!authToken) { context.throw(401); }
   try {
     const userData = jwt.verify(context.cookies.get('auth_token'), config.authSecret);
     context.state.user = userData;
-    await next();
   } catch (error) {
     console.error(error.toString());
     context.cookies.set('name');
     context.cookies.set('auth_token');
-    context.status = 401;
+    context.throw(401);
   }
+  await next();
 };

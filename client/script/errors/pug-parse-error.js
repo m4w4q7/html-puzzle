@@ -1,9 +1,9 @@
 export class PugParseError extends Error {
 
-  constructor(line, index) {
-    super(`Could not parse line ${index}: ${line.trim()}`);
-    this._line = line;
-    this._index = index;
+  constructor(pug, lineNumber) {
+    super(`Could not parse line ${lineNumber}: ${pug.trim()}`);
+    this._pug = pug;
+    this._lineNumber = lineNumber;
   }
 
 
@@ -12,13 +12,13 @@ export class PugParseError extends Error {
   }
 
 
-  get line() {
-    return this._line;
+  get pug() {
+    return this._pug;
   }
 
 
-  get index() {
-    return this._index;
+  get lineNumber() {
+    return this._lineNumber;
   }
 
 }

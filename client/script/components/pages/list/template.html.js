@@ -12,6 +12,7 @@ export default `
     <li><a href="#play?exercise=basic-card">Basic Card</a></li>
     <li><a href="#play?exercise=complex-card">Complex Card</a></li>
     <li><a href="#play?exercise=navigation-bar">Navigation bar</a></li>
+    <li><a href="#play?exercise=card-grid-page">Card Grid page</a></li>
   </ul>
 </div>
 `;

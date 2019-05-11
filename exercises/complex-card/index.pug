@@ -1,0 +1,23 @@
+.e-card
+  .e-card__content.e-card__content-empty
+    e-icon(icon='e-b2clogo-simple', size='middle')
+  .e-card__lead
+    .e-card__caption
+      .e-card__title
+        | Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+      .e-card__badge
+        .e-label.e-label-secondary
+          | Default
+    .e-card__description
+      | sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+    .e-card__footer
+      a.e-btn.e-btn-primary
+        | Create
+      e-dropdown(data-markup-content='<e-icon icon="dots"></e-icon>', data-markup-class='e-btn e-btn-borderless e-btn-onlyicon', data-markup-class-active='e-btn-active', data-dropdown-align='top')
+        .e-dropdown__content
+          a.e-dropdown__item(href='#0')
+            e-icon(icon='eye', type='table')
+            | Preview
+          a.e-dropdown__item(href='#0')
+            e-icon(icon='pencil', type='table')
+            | Edit

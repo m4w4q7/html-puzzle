@@ -21,6 +21,7 @@ export class PlayPageComponent extends AbstractPageComponent {
     this._hintsUsed = 0;
     this._hintCalculator = null;
     this._originalModel = null;
+    this._cancelClockStart = null;
   }
 
 
@@ -33,7 +34,8 @@ export class PlayPageComponent extends AbstractPageComponent {
 
     this._nodes.exerciseName.textContent = exercise.name;
 
-    doOnNext(this._nodes.puzzle, 'mousedown', () => this._nodes.clock.start());
+    if (this._cancelClockStart) { this._cancelClockStart(); }
+    this._cancelClockStart = doOnNext(this._nodes.puzzle, 'mousedown', () => this._nodes.clock.start());
 
     this._originalModel = Pug.parse(exercise.pug);
     const shuffledModel = shuffle(this._originalModel);

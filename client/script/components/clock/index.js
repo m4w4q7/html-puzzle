@@ -12,6 +12,7 @@ export class ClockComponent extends AbstractCustomElement {
 
 
   start() {
+    this.stop();
     this._startDate = new Date();
     this._showTime(0);
     this._timeoutId = setTimeout(this._tick, 1000);

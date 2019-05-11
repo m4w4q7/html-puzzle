@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { groupedTextLine, groupedElementLine, groupedAttribute } from './patterns.js';
 import { BlockList } from '../model/block-list.js';
 import { Text } from '../model/text.js';
@@ -6,18 +7,26 @@ import { ClassList } from '../model/class-list.js';
 import { AttributeList } from '../model/attribute-list.js';
 import { Attribute } from '../model/attribute.js';
 import { matchAll } from '../utils.js';
+import { PugParseError } from '../errors/pug-parse-error.js';
 
 export const parse = (input) => {
-  return input
+  const errors = [];
+  const blockList = input
     .trim()
     .split('\n')
-    .map(parseBlock)
+    .map(parseBlock(errors))
     .filter(block => block)
     .reduce(buildTree, [new BlockList()])[0];
+  return { blockList, errors };
 };
 
 
-const parseBlock = line => line && (parseTextLine(line) || parseElementLine(line));
+const parseBlock = (errors) => (line, index) => {
+  if (!line) { return; }
+  const block = (parseTextLine(line) || parseElementLine(line));
+  if (!block) { errors.push(new PugParseError(line, index)); }
+  return block;
+};
 
 
 const parseTextLine = line => {

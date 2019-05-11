@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { AbstractPageComponent } from '../abstract-page/index.js';
 import { HorizontalResizableComponent } from '../../horizontal-resizable/index.js';
 import { PuzzleComponent } from '../../puzzle/index.js';
@@ -37,7 +38,7 @@ export class PlayPageComponent extends AbstractPageComponent {
     if (this._cancelClockStart) { this._cancelClockStart(); }
     this._cancelClockStart = doOnNext(this._nodes.puzzle, 'mousedown', () => this._nodes.clock.start());
 
-    this._originalModel = Pug.parse(exercise.pug);
+    this._originalModel = this._parsePug(exercise.pug);
     const shuffledModel = shuffle(this._originalModel);
 
     this._initPreviews(exercise, this._originalModel, shuffledModel);
@@ -57,6 +58,13 @@ export class PlayPageComponent extends AbstractPageComponent {
     const link = this._nodes.documentationLinkButton;
     link.href = url;
     link.style.display = url ? '' : 'none';
+  }
+
+
+  _parsePug(pug) {
+    const { blockList, errors } = Pug.parse(pug);
+    errors.forEach(error => console.error(error));
+    return blockList;
   }
 
 

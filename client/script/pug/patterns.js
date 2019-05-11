@@ -13,7 +13,7 @@ const className = `[_0-9a-zA-Z-]+`;
 const classSelector = `\\.${className}`;
 const classes = `(?:${classSelector})*`;
 
-const attributeName = `[_0-9a-zA-Z-]+`;
+const attributeName = `[:_0-9a-zA-Z-]+`;
 
 const backslash = `\\\\`;
 const escapedBackslash = `${backslash}${backslash}`;

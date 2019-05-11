@@ -11,8 +11,7 @@ export default `
     <li><a href="#play?exercise=emptystate">Emptystate</a></li>
     <li><a href="#play?exercise=basic-card">Basic Card</a></li>
     <li><a href="#play?exercise=complex-card">Complex Card</a></li>
-    <li><a href="#play?exercise=basic">Basic example to demonstrate puzzle parts</a></li>
-    <li><a href="#play?exercise=text-styles">Another basic example to demonstrate previews</a></li>
+    <li><a href="#play?exercise=navigation-bar">Navigation bar</a></li>
   </ul>
 </div>
 `;

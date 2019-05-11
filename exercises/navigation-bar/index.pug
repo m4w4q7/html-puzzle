@@ -1,0 +1,75 @@
+.e-topnav
+  .e-topnav__container
+    .e-topnav__logo.e-topnav__logo-b2c
+      svg
+        use(xmlns:xlink='http://www.w3.org/1999/xlink', xlink:href='#e-logo')
+    input#e-topnav__mobilemenu.e-topnav__mobilemenu(type='checkbox')
+    nav.e-menu
+      ul.e-menu__list
+        li.e-menu__item
+          a.e-menu__name(href='#0')
+            | Dashboard
+        li.e-menu__item.e-menu__item-active
+          span.e-menu__name
+            | Forms
+          .e-menu__drop
+            ul.e-menu__list.e-menu__list-child
+              li.e-menu__item.e-menu__item-child
+                a.e-menu__name.e-menu__name-child(href='#0')
+                  | Forms
+              li.e-menu__item.e-menu__item-child
+                a.e-menu__name.e-menu__name-child(href='#0')
+                  | Settings
+    label.e-hamburger(for='e-topnav__mobilemenu')
+      span.e-hamburger__line
+    .e-iconmenu
+      .e-iconmenu__item
+        e-dropdown(data-markup-class='e-btn e-btn-customerinfo e-btn-dropdown', data-markup-content='m4w4q7')
+          .e-dropdown__content
+            .e-iconmenu__profile
+              .e-iconmenu__profile__header
+                h3
+                  a(href='#0')
+                    | m4w4q7 - admin
+                .e-iconmenu__profile__time
+                  span
+                    | Tuesday, November 17 12:54 (GMT+1:00)
+              a.e-dropdown__item(href='#0')
+                e-icon(icon='e-profile', type='table')
+                | My Profile
+              a.e-dropdown__item(href='#0')
+                e-icon(icon='template', type='table')
+                | Switch to old UI
+              a.e-dropdown__item(href='#0')
+                e-icon(icon='life-ring', type='table')
+                | Online Help
+              a.e-dropdown__item(href='#0')
+                e-icon(icon='e-signout', type='table')
+                | Log Out
+      .e-iconmenu__item
+        e-dropdown(data-markup-class='e-iconmenu__name', data-markup-content='<svg class="e-icon e-icon-search"><use xlink:href="#search"></use></svg>')
+          .e-dropdown__content
+            .e-search
+              h3
+                label(for='js-function-search-query')
+                  | Search
+              form(method='get', name='workformsearch')
+                .e-field
+                  select.e-select(name='subject')
+                    option(value='1')
+                      | in contacts
+                    option(value='2')
+                      | in email campaigns
+                    option(value='4')
+                      | in segments
+                .e-field
+                  input.e-input(placeholder='Search for...', autofocus='')
+                button.e-btn.e-btn-primary(title='Search')
+                  e-icon(icon='search', color='white')
+                  | Search
+      .e-iconmenu__item
+        .e-iconmenu__name
+          span#notification-center-badge.active
+            e-icon(icon='bell')
+          #notification-center-badge-status.active
+            | 6

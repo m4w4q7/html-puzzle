@@ -51,11 +51,10 @@
           .e-dropdown__content
             .e-search
               h3
-                label(for='js-function-search-query')
-                  | Search
-              form(method='get', name='workformsearch')
+                | Search
+              form
                 .e-field
-                  select.e-select(name='subject')
+                  select.e-select
                     option(value='1')
                       | in contacts
                     option(value='2')
@@ -64,7 +63,7 @@
                       | in segments
                 .e-field
                   input.e-input(placeholder='Search for...', autofocus='')
-                button.e-btn.e-btn-primary(title='Search')
+                button.e-btn.e-btn-primary(type='button', title='Search')
                   e-icon(icon='search', color='white')
                   | Search
       .e-iconmenu__item

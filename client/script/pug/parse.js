@@ -24,7 +24,7 @@ export const parse = (input) => {
 const parseBlock = (errors) => (line, index) => {
   if (!line) { return; }
   const block = (parseTextLine(line) || parseElementLine(line));
-  if (!block) { errors.push(new PugParseError(line, index)); }
+  if (!block) { errors.push(new PugParseError(line, index + 1)); }
   return block;
 };
 

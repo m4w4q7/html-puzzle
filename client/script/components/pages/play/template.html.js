@@ -6,7 +6,7 @@ export default `
 <style>
   .puzzle-container {
     background-color: rgb(30, 30, 30);
-    height: 100%;
+    min-height: 100%;
     padding: 16px;
     width: max-content;
     min-width: 100%;
@@ -25,7 +25,7 @@ export default `
       <button id="hintButton" class="hpu-button">Hint</button>
   </div>
 
-  <hpu-horizontal-resizable ratio="0.66" style="flex: 1 0 0">
+  <hpu-horizontal-resizable ratio="0.66" style="flex: 1 0 0; overflow-y: scroll;">
 
     <div class="puzzle-container" slot="left">
       <hpu-puzzle></hpu-puzzle>

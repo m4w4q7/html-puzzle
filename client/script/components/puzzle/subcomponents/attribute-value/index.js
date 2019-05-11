@@ -27,7 +27,7 @@ export class PuzzleAttributeValueComponent extends AbstractPuzzlePiece {
 
 
   _escapeValue(value) {
-    return value.replace('\\', '\\\\').replace(`'`, `\\'`);
+    return value.replace(/\\/g, '\\\\').replace(/'/g, `\\'`);
   }
 
 

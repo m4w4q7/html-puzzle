@@ -26,7 +26,7 @@ export class Attribute {
 
 
   toString() {
-    return `[${this.name}="${this.value.replace('\\', '\\\\').replace('"', '\\"')}"]`;
+    return `[${this.name}="${this.value.replace(/\\/g, '\\\\').replace(/"/g, '\\"')}"]`;
   }
 
 }

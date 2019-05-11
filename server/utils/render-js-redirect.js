@@ -18,4 +18,4 @@ const renderLocalStorage = (localStorage = {}) => Object.entries(localStorage).m
 }).join('');
 
 
-const escapeQuote = text => text && text.replace(`'`, `\\'`);
+const escapeQuote = text => text && text.replace(/'/g, `\\'`);

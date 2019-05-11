@@ -83,4 +83,4 @@ const textLineRegexp = new RegExp(groupedTextLine);
 
 const elementLineRegexp = new RegExp(groupedElementLine);
 
-const unescapeAttributeValue = value => value.replace('\\\\', '\\').replace(`\\'`, `'`);
+const unescapeAttributeValue = value => value.replace(/\\\\/g, '\\').replace(/\\'/g, `'`);

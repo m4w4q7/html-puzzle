@@ -106,7 +106,11 @@ export class PlayPageComponent extends AbstractPageComponent {
   _onPuzzleChange(event) {
     this._hint = null;
     this._nodes.currentPreview.model = event.detail.model;
-    if (this._originalModel.isEqual(event.detail.model)) { alert('Congratulations! 🙂👍'); }
+    if (this._originalModel.isEqual(event.detail.model)) { setTimeout(() => {
+      alert('Congratulations! You\'ve successfully solved the puzzle.');
+      location.assign('#');
+    }, 200);
+    }
   }
 
 

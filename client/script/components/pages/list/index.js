@@ -6,6 +6,9 @@ export class ListPageComponent extends AbstractPageComponent {
   constructor() {
     super();
     this._attachShadowedTemplate(createTemplate);
+    this._nodes.list.addEventListener('click', ({ target }) => {
+      if (target.dataset.exercise) { location.assign(`#play?exercise=${target.dataset.exercise}`); }
+    });
   }
 
 

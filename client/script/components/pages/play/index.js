@@ -10,6 +10,7 @@ import { doOnNext } from '../../../utils.js';
 import { Pug } from '../../../pug/index.js';
 import { shuffle } from '../../../shuffle/index.js';
 import { HintCalculator } from '../../../hint/index.js';
+import { services } from '../../../services/index.js';
 
 export class PlayPageComponent extends AbstractPageComponent {
 
@@ -29,19 +30,19 @@ export class PlayPageComponent extends AbstractPageComponent {
   async onActivate(params) {
     await super.onActivate(params);
     const exerciseName = params.get('exercise') || 'dropdown';
-    const exercise = await fetchExercise(exerciseName);
+    this._exercise = await fetchExercise(exerciseName);
 
-    this._initDocumentation(exercise);
+    this._initDocumentation(this._exercise);
 
-    this._nodes.exerciseName.textContent = exercise.name;
+    this._nodes.exerciseName.textContent = this._exercise.name;
 
     if (this._cancelClockStart) { this._cancelClockStart(); }
     this._cancelClockStart = doOnNext(this._nodes.puzzle, 'mousedown', () => this._nodes.clock.start());
 
-    this._originalModel = this._parsePug(exercise.pug);
+    this._originalModel = this._parsePug(this._exercise.pug);
     const shuffledModel = shuffle(this._originalModel);
 
-    this._initPreviews(exercise, this._originalModel, shuffledModel);
+    this._initPreviews(this._exercise, this._originalModel, shuffledModel);
     this._initHint(this._originalModel);
     this._initPuzzle(shuffledModel);
   }
@@ -106,7 +107,13 @@ export class PlayPageComponent extends AbstractPageComponent {
   _onPuzzleChange(event) {
     this._hint = null;
     this._nodes.currentPreview.model = event.detail.model;
-    if (this._originalModel.isEqual(event.detail.model)) { setTimeout(() => {
+    if (this._originalModel.isEqual(event.detail.model)) {
+      if (services.user.isAuthenticated()) {
+        const timeTaken = this._nodes.clock.time;
+        const hintsUsed = this._hintsUsed;
+        services.server.postResult({ name: this._exercise.name }, { timeTaken, hintsUsed });
+      }
+      setTimeout(() => {
       alert('Congratulations! You\'ve successfully solved the puzzle.');
       location.assign('#');
     }, 200);

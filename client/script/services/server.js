@@ -24,6 +24,16 @@ export class ServerService extends AbstractService {
   }
 
 
+  async postResult(exercise, result) {
+    return this._sendRequest({
+      resource: '/api/results',
+      method: 'POST',
+      body: { exercise, result },
+      auth: true
+    });
+  }
+
+
   async signOut() {
     return this._sendRequest({
       resource: '/api/signout'

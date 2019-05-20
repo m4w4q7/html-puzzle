@@ -5,7 +5,6 @@ import { PuzzleComponent } from '../../puzzle/index.js';
 import { PreviewComponent } from '../../preview/index.js';
 import { ClockComponent } from '../../clock/index.js';
 import { createTemplate } from './template.js';
-import { fetchExercise } from '../../../fetch-exercise.js';
 import { doOnNext } from '../../../utils.js';
 import { Pug } from '../../../pug/index.js';
 import { shuffle } from '../../../shuffle/index.js';
@@ -29,8 +28,8 @@ export class PlayPageComponent extends AbstractPageComponent {
 
   async onActivate(params) {
     await super.onActivate(params);
-    const exerciseName = params.get('exercise') || 'dropdown';
-    this._exercise = await fetchExercise(exerciseName);
+    const exerciseId = params.get('exercise') || 'dropdown';
+    this._exercise = await services.server.getExerciseById(exerciseId);
 
     this._initDocumentation(this._exercise);
 

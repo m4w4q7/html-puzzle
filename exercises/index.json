@@ -1,0 +1,23 @@
+[
+  {
+    "name": "Basic components",
+    "exercises": [
+      "dropdown",
+      "emptystate",
+      "basic-card"
+    ]
+  },
+  {
+    "name": "Advanced",
+    "exercises": [
+      "complex-card",
+      "navigation-bar"
+    ]
+  },
+  {
+    "name": "Pages",
+    "exercises": [
+      "card-grid-page"
+    ]
+  }
+]

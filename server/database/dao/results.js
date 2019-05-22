@@ -9,7 +9,7 @@ class Results {
 
 
   async insertOne(document) {
-    const { insertedId } = await this._collection.insertOne(document);
+    const { insertedId } = await this._collection.insertOne({ ...document });
     return insertedId;
   }
 

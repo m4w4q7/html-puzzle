@@ -110,7 +110,7 @@ export class PlayPageComponent extends AbstractPageComponent {
       if (services.user.isAuthenticated()) {
         const timeTaken = this._nodes.clock.time;
         const hintsUsed = this._hintsUsed;
-        services.server.postResult({ name: this._exercise.name }, { timeTaken, hintsUsed });
+        services.server.postResult({ id: this._exercise.id }, { timeTaken, hintsUsed });
       }
       setTimeout(() => {
       alert('Congratulations! You\'ve successfully solved the puzzle.');

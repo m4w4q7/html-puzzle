@@ -40,7 +40,7 @@ class ExerciseService {
   async _readExerciseDataForId(id) {
     const exerciseData = await readJSON(join(root, id, 'index.json'));
     const pug = await readFile(join(root, id, exerciseData.pug));
-    return { [id]: { ...exerciseData, pug } };
+    return { [id]: { ...exerciseData, pug, id } };
   }
 
 

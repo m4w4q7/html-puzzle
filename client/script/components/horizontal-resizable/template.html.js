@@ -32,7 +32,7 @@ export default `
 
     .horizontal-resizable__left-pane {
       position: relative;
-      overflow: scroll;
+      overflow: auto;
     }
 
     .horizontal-resizable__right-pane {

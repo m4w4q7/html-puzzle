@@ -25,7 +25,7 @@ export default `
       <button id="hintButton" class="hpu-button">Hint</button>
   </div>
 
-  <hpu-horizontal-resizable ratio="0.66" style="flex: 1 0 0; overflow-y: scroll;">
+  <hpu-horizontal-resizable ratio="0.66" style="flex: 1 0 0; overflow-y: auto;">
 
     <div class="puzzle-container" slot="left">
       <hpu-puzzle></hpu-puzzle>

@@ -17,6 +17,7 @@ class ExerciseService {
     const exercisesJSON = await readJSON(join(root, 'index.json'));
     this._exercises = await this._readExerciseService(exercisesJSON);
     this._exerciseList = this._getExerciseList(exercisesJSON);
+    this._exerciseIdsList = Object.keys(this._exercises);
   }
 
 
@@ -27,6 +28,11 @@ class ExerciseService {
 
   list() {
     return this._exerciseList;
+  }
+
+
+  listIds() {
+    return this._exerciseIdsList;
   }
 
 

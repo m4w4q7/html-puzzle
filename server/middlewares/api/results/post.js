@@ -14,6 +14,7 @@ class PostResultAction {
 
 
   async execute() {
+    this._validateRequest();
     const newDocument = this._createNewDocument();
     await results.insertOne({ ...newDocument });
     if (await this._isRecord()) {

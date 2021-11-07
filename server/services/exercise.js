@@ -15,7 +15,7 @@ class ExerciseService {
 
   async initialize() {
     const exercisesJSON = await readJSON(join(root, 'index.json'));
-    this._exercises = await this._readExerciseService(exercisesJSON);
+    this._exercises = await this._readExercises(exercisesJSON);
     this._exerciseList = this._getExerciseList(exercisesJSON);
     this._exerciseIdsList = Object.keys(this._exercises);
   }
@@ -36,7 +36,7 @@ class ExerciseService {
   }
 
 
-  async _readExerciseService(exercisesJSON) {
+  async _readExercises(exercisesJSON) {
     const exerciseIds = exercisesJSON.map(group => group.exercises).flat();
     const flatExercisesWithData = await Promise.all(exerciseIds.map(this._readExerciseDataForId));
     return Object.assign(...flatExercisesWithData);

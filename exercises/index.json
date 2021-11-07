@@ -2,6 +2,7 @@
   {
     "name": "Basic components",
     "exercises": [
+      "simplest",
       "dropdown",
       "emptystate",
       "basic-card"

@@ -1,3 +1,4 @@
+import { convertSecondsToTime } from '../../utils.js';
 import { AbstractCustomElement } from '../abstract-custom-element/index.js';
 
 export class ClockComponent extends AbstractCustomElement {
@@ -37,14 +38,7 @@ export class ClockComponent extends AbstractCustomElement {
 
 
   _showTime(elapsedSeconds) {
-    const minutes = Math.floor(elapsedSeconds / 60).toString().padStart(2, '0');
-    const seconds = Math.floor(elapsedSeconds % 60).toString().padStart(2, '0');
-    this.textContent = `${minutes}:${seconds}`;
-  }
-
-
-  _showSeconds(value) {
-    this._dom.seconds.textContent = value.toString().padStart(2, '0');
+    this.textContent = convertSecondsToTime(elapsedSeconds);
   }
 
 

@@ -53,3 +53,10 @@ export const matchAll = function* (input, pattern) {
   // eslint-disable-next-line no-cond-assign
   while (match = pattern.exec(input)) { yield match; }
 };
+
+
+export const convertSecondsToTime = (totalSeconds) => {
+  const minutes = Math.floor(totalSeconds / 60).toString().padStart(2, '0');
+  const seconds = Math.floor(totalSeconds % 60).toString().padStart(2, '0');
+  return `${minutes}:${seconds}`;
+};

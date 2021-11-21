@@ -13,7 +13,7 @@ import signout from './signout.js';
 export const apiMiddleware = new Router()
   .get('/users', sessionMiddleware, getUser)
   .post('/users', sessionMiddleware, bodyParserMiddleware, postUser)
-  .get('/results', bodyParserMiddleware, getResults)
+  .get('/results', sessionMiddleware, getResults)
   .post('/results', sessionMiddleware, bodyParserMiddleware, postResult)
   .get('/exercises', listExercises)
   .get('/exercises/:id', getExercise)

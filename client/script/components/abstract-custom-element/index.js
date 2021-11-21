@@ -1,6 +1,6 @@
 import { AbstractMemberAccessError } from '../../errors/abstract-member-access-error.js';
 
-export class AbstractCustomElement extends HTMLElement {
+const createAbstractCustomElement = (SuperClass) => class extends SuperClass {
 
   _attachShadowedTemplate(createTemplate) {
     this.attachShadow({ mode: 'open' });
@@ -20,11 +20,19 @@ export class AbstractCustomElement extends HTMLElement {
   }
 
 
+  static get extends() {
+    return null;
+  }
+
+
   static define(dependencyChain = []) {
     if (customElements.get(this.tagName) || dependencyChain.includes(this)) { return; }
     const childDependencyChain = [...dependencyChain, this];
     this.dependencies.forEach(Element => Element.define(childDependencyChain));
-    customElements.define(this.tagName, this);
+    customElements.define(this.tagName, this, this.extends ? { extends: this.extends } : undefined);
   }
 
-}
+};
+
+export const AbstractCustomElement = createAbstractCustomElement(HTMLElement);
+export const AbstractTableRowCustomElement = createAbstractCustomElement(HTMLTableRowElement);

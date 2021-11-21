@@ -1,0 +1,44 @@
+.hpu-exercise-list-element {
+  border-top: 1px solid var(--gray);
+  border-bottom: 1px solid var(--gray);
+  height: 40px;
+}
+
+.hpu-exercise-list-element__name {
+  cursor: pointer;
+  padding-left: 16px;
+  text-align: left;
+  transition: background-color .2s, color .2s;
+}
+
+.hpu-exercise-list-element__name:hover {
+  background-color: var(--dark-gray-1);
+  color: var(--white);
+  text-decoration: underline;
+}
+
+.hpu-exercise-list-element__rank {
+  text-align: right;
+  padding-left: 40px;
+}
+
+.hpu-exercise-list-element__rank::after {
+  content: '\00a0';
+}
+
+.hpu-exercise-list-element__total_users_completed {
+  padding-right: 40px;
+}
+
+.hpu-exercise-list-element__action {
+  cursor: pointer;
+  padding-left: 16px;
+  padding-right: 16px;
+  transition: background-color .2s, color .2s;
+}
+
+.hpu-exercise-list-element__action:hover {
+  background-color: var(--dark-gray-1);
+  color: var(--white);
+  text-decoration: underline;
+}

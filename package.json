@@ -7,6 +7,7 @@
   "scripts": {
     "start": "node -r dotenv/config --experimental-modules server/index.js",
     "start:dev": "nodemon -r dotenv/config --experimental-modules server/index.js",
+    "generate-sample-data": "node -r dotenv/config --experimental-modules server/scripts/generate-sample-data/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -30,7 +31,8 @@
     "koa-router": "7.4.0",
     "koa-static": "5.0.0",
     "mongodb": "3.2.4",
-    "openid-client": "2.5.0"
+    "openid-client": "2.5.0",
+    "prompts": "2.4.2"
   },
   "engines": {
     "node": "12.x"

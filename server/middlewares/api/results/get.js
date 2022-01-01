@@ -46,9 +46,14 @@ class GetResultsAction {
 
   async _decoreateResultsWithRanks(results, userRecords) {
     const betterUsers = await records.countBetterRecordsPerExercise(userRecords);
-    betterUsers.forEach(exercise => results[exercise.exerciseId].rank = exercise.betterUsers + 1);
+    betterUsers.forEach(exercise => {
+      results[exercise.exerciseId].rank = results[exercise.exerciseId].record ?
+        exercise.betterUsers + 1 :
+        null;
+    });
+
     Object.values(results).forEach(result => {
-      if (result.record && !result.rank) { results.rank = 1; }
+      if (result.record && !result.rank) { result.rank = 1; }
     });
   }
 

@@ -24,6 +24,16 @@ export class ServerService extends AbstractService {
   }
 
 
+  async getResults(userId) {
+    return this._sendRequest({
+      resource: '/api/results',
+      method: 'get',
+      query: { user_id: userId },
+      auth: true
+    });
+  }
+
+
   async postResult(exercise, result) {
     return this._sendRequest({
       resource: '/api/results',

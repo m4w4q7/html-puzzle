@@ -25,6 +25,11 @@ export class UserService extends AbstractService {
   }
 
 
+  getId() {
+    return this.isAuthenticated() ? this._session.user.id : null;
+  }
+
+
   signIn() {
     location.assign('/authenticate/google/login');
   }
@@ -38,7 +43,7 @@ export class UserService extends AbstractService {
 
   async changeName(newName) {
     if (!this.isAuthenticated()) { throw new Error('Invalid session!'); }
-    await this._serverService.postUser(this._getId(), newName);
+    await this._serverService.postUser(this.getId(), newName);
     this._session.user.name = newName;
     localStorage.setItem('session', JSON.stringify(this._session));
     this._emit('nameChange');
@@ -56,11 +61,6 @@ export class UserService extends AbstractService {
   _getSession() {
     const session = localStorage.getItem('session');
     return session && JSON.parse(session);
-  }
-
-
-  _getId() {
-    return this.isAuthenticated() ? this._session.user.id : null;
   }
 
 }

@@ -30,6 +30,7 @@ class Records {
 
 
   async countBetterRecordsPerExercise(records) {
+    if (!records.length) { return []; }
     const matcherDisjunctions = records.reduce(this._addBetterThanRecordCondition, []);
     return await this._collection.aggregate([
       { $match: { $or: matcherDisjunctions } },

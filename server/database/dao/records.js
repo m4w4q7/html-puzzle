@@ -31,7 +31,7 @@ class Records {
 
   async countBetterRecordsPerExercise(records) {
     if (!records.length) { return []; }
-    const matcherDisjunctions = records.reduce(this._addBetterThanRecordCondition, []);
+    const matcherDisjunctions = records.map(this._transformToBetterThanRecordCondition);
     return await this._collection.aggregate([
       { $match: { $or: matcherDisjunctions } },
       { $group: { _id: { exerciseId: '$exercise.id' }, betterUsers: { $sum: 1 } } },
@@ -49,15 +49,14 @@ class Records {
   }
 
 
-  _addBetterThanRecordCondition(conditions, record) {
-    conditions.push({
+  _transformToBetterThanRecordCondition(record) {
+    return {
       'exercise.id': record.exercise.id,
       $or: [
         { 'result.hintsUsed': { $lt: record.result.hintsUsed } },
         { 'result.hintsUsed': record.result.hintsUsed, 'result.timeTaken': { $lt: record.result.timeTaken } }
       ]
-    });
-    return conditions;
+    };
   }
 
 }

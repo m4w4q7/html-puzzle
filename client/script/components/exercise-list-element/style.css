@@ -6,7 +6,7 @@
 
 .hpu-exercise-list-element__name {
   cursor: pointer;
-  padding-left: 16px;
+  padding: 0 16px;
   text-align: left;
   transition: background-color .2s, color .2s;
 }

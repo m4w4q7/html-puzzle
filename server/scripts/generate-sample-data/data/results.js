@@ -41,9 +41,14 @@ export const getRecordsData = ({ userId }) => {
         user: { id: new ObjectID().toHexString() },
         result: { hintsUsed: 2, timeTaken: 59576 },
         createdAt: new Date()
+      },
+
+      {
+        exercise: { id: 'basic-card' },
+        user: { id: userId },
+        result: { hintsUsed: 2, timeTaken: 128576 },
+        createdAt: new Date()
       }
-
-
     ]
   };
 };

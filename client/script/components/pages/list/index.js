@@ -23,7 +23,7 @@ export class ListPageComponent extends AbstractPageComponent {
         ...group.exercises.map(exercise => ({
           type: 'element',
           name: exercise.name,
-          best: this._results[exercise.id]?.record?.timeTaken / 1000 || null,
+          record: this._results[exercise.id]?.record ?? null,
           rank: this._results[exercise.id]?.rank ?? null,
           totalUsersCompleted: this._results[exercise.id]?.totalUsersCompleted ?? 0,
           exerciseId: exercise.id,

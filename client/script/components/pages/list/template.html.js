@@ -11,8 +11,8 @@ export default `
       <thead>
         <tr class="hpu-exercise-group-title-row">
           <th></th>
-          <th style="padding: 0 24px;">Personal best</th>
-          <th colspan="2">Rank</th>
+          <th style="padding: 0 24px;" colspan="2">Personal best</th>
+          <th style="text-align: right;" colspan="2">Rank</th>
           <th></th>
         </tr>
       </thead>

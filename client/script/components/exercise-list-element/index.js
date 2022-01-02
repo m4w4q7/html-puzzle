@@ -26,8 +26,18 @@ export class ExerciseListElementComponent extends AbstractTableRowCustomElement 
   }
 
 
-  set best(value) {
-    this._nodes.best.textContent = value ? convertSecondsToTime(value) : '-';
+  set record(value) {
+    if (value) {
+      this._nodes.time.textContent = convertSecondsToTime(value.timeTaken / 1000);
+      this._nodes.hints.textContent = `${value.hintsUsed} hint${value.hintsUsed > 1 ? 's' : ''}`;
+      this._nodes.time.colSpan = 1;
+      this._nodes.hints.style.display = '';
+    } else {
+      this._nodes.time.textContent = '-';
+      this._nodes.hints.textContent = '';
+      this._nodes.time.colSpan = 2;
+      this._nodes.hints.style.display = 'none';
+    }
   }
 
 

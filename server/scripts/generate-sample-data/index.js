@@ -25,6 +25,8 @@ const { ObjectID } = mongodb;
       choices,
     });
 
+    if (!userId) { process.exit(0); }
+
     const recordsData = getRecordsData({ userId });
 
     await Promise.all(

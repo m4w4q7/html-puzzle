@@ -8,6 +8,7 @@
     "start": "node -r dotenv/config --experimental-modules server/index.js",
     "start:dev": "nodemon -r dotenv/config --experimental-modules server/index.js",
     "generate-sample-data": "node -r dotenv/config --experimental-modules server/scripts/generate-sample-data/index.js",
+    "drop-data-except-users": "node -r dotenv/config --experimental-modules server/scripts/drop-data-except-users/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

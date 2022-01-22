@@ -1,11 +1,10 @@
 /* eslint-disable no-console */
 import { database } from './database/database.js';
 import { server } from './server.js';
-import { services } from './services/index.js';
 import { registerGracefulShutdown } from './utils/register-graceful-shutdown.js';
 
 
-Promise.all([database.connect(), services.exercise.initialize()])
+Promise.all([database.connect()])
   .then(() => {
     server.listen();
     registerGracefulShutdown(server, database);

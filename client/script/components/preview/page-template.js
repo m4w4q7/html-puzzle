@@ -1,11 +1,13 @@
-export const renderDocument = ({ css, js }) => `
+export const renderDocument = ({ cssUrls, jsUrls, css, js }) => `
 <!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8" />
     <title></title>
-    ${renderStyleSheets(css)}
-    ${renderScripts(js)}
+    ${renderExternalStyleSheets(cssUrls)}
+    ${renderExternalScripts(jsUrls)}
+    ${renderEmbeddedStyle(css)}
+    ${renderEmbeddedScript(js)}
   </head>
   <body>
   </body>
@@ -13,11 +15,16 @@ export const renderDocument = ({ css, js }) => `
 `;
 
 
-const renderStyleSheets = styleSheets => styleSheets.map(url => {
+const renderExternalStyleSheets = styleSheets => styleSheets.map(url => {
   return `<link rel="stylesheet" type="text/css" href="${url}">`;
 });
 
 
-const renderScripts = scripts => scripts.map(url => {
+const renderExternalScripts = scripts => scripts.map(url => {
   return `<script src="${url}"></script>`;
 });
+
+
+const renderEmbeddedStyle = css => css ? `<style>${css}</style>` : '';
+
+const renderEmbeddedScript = js => js ? `<script>${js}</script>` : '';

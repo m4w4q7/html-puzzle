@@ -11,7 +11,7 @@ export class PreviewComponent extends AbstractCustomElement {
     super();
     this._onIframeContentLoaded = this._onIframeContentLoaded.bind(this);
     this._model = null;
-    this._assets = { css: [], js: [] };
+    this._assets = { cssUrls: [], jsUrls: [], css: '', js: '' };
     this._nodes = {
       iframe: null,
       iframeBody: null,
@@ -21,8 +21,8 @@ export class PreviewComponent extends AbstractCustomElement {
   }
 
 
-  set assets({ css = [], js = [] }) {
-    this._assets = { css, js };
+  set assets({ cssUrls = [], jsUrls = [], css, js }) {
+    this._assets = { cssUrls, jsUrls, css, js };
     this._renderIframe();
   }
 

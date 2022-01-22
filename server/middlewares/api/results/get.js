@@ -1,5 +1,5 @@
-import { services } from '../../../services/index.js';
 import { records } from '../../../database/dao/records.js';
+import { exerciseLists } from '../../../database/dao/exercise-lists.js';
 
 
 class GetResultsAction {
@@ -12,7 +12,10 @@ class GetResultsAction {
 
   async execute() {
     this._validateRequest();
-    const exerciseIds = services.exercise.listIds();
+    const listSlug = this._context.query['list_slug'] || null;
+    const exerciseList = await exerciseLists.getForSlug(listSlug);
+    const exerciseIds = exerciseList.exerciseGroups.map(({ exercises }) => exercises).flat();
+
     const results = this._createEmptyResults(exerciseIds);
     const userRecords = await records.list(this._userId, exerciseIds);
     this._decoreateResultsWithUserRecords(results, userRecords);

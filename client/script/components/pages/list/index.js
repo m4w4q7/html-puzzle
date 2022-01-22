@@ -23,10 +23,10 @@ export class ListPageComponent extends AbstractPageComponent {
         ...group.exercises.map(exercise => ({
           type: 'element',
           name: exercise.name,
-          record: this._results[exercise.id]?.record ?? null,
-          rank: this._results[exercise.id]?.rank ?? null,
-          totalUsersCompleted: this._results[exercise.id]?.totalUsersCompleted ?? 0,
-          exerciseId: exercise.id,
+          record: this._results[exercise._id]?.record ?? null,
+          rank: this._results[exercise._id]?.rank ?? null,
+          totalUsersCompleted: this._results[exercise._id]?.totalUsersCompleted ?? 0,
+          exerciseId: exercise._id,
         }))
       ];
     }, []);
@@ -51,7 +51,7 @@ export class ListPageComponent extends AbstractPageComponent {
     const userId = services.user.getId();
     const [results, exercises] = await Promise.all([
       userId ? services.server.getResults(userId) : Promise.resolve({}),
-      services.server.getExercises()
+      services.exercises.getGroups()
     ]);
     this._results = results;
     this._exercises = exercises;

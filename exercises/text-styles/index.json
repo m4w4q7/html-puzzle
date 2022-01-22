@@ -1,6 +1,0 @@
-{
-  "name": "Another Basic Example",
-  "pug": "./index.pug",
-  "css": ["./style.css"],
-  "js": []
-}

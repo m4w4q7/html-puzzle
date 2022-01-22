@@ -51,13 +51,6 @@ export class ServerService extends AbstractService {
   }
 
 
-  async getExerciseById(id) {
-    return this._sendRequest({
-      resource: `/api/exercises/${id}`
-    });
-  }
-
-
   async signOut() {
     return this._sendRequest({
       resource: '/api/signout'

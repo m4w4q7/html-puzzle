@@ -29,7 +29,7 @@ export class PlayPageComponent extends AbstractPageComponent {
   async onActivate(params) {
     await super.onActivate(params);
     const exerciseId = params.get('exercise') || 'dropdown';
-    this._exercise = await services.server.getExerciseById(exerciseId);
+    this._exercise = await services.exercises.getById(exerciseId);
 
     this._initDocumentation(this._exercise);
 
@@ -54,10 +54,10 @@ export class PlayPageComponent extends AbstractPageComponent {
   }
 
 
-  _initDocumentation({ documentation: url = '' }) {
+  _initDocumentation({ documentationUrl = '' }) {
     const link = this._nodes.documentationLinkButton;
-    link.href = url;
-    link.style.display = url ? '' : 'none';
+    link.href = documentationUrl;
+    link.style.display = documentationUrl ? '' : 'none';
   }
 
 
@@ -69,8 +69,14 @@ export class PlayPageComponent extends AbstractPageComponent {
 
 
   _initPreviews(exercise, originalModel, shuffledModel) {
-    this._nodes.goalPreview.assets = { css: exercise.css, js: exercise.js };
-    this._nodes.currentPreview.assets = { css: exercise.css, js: exercise.js };
+    const assets = {
+      css: exercise.css,
+      js: exercise.js,
+      cssUrls: exercise.cssUrls,
+      jsUrls: exercise.jsUrls,
+    };
+    this._nodes.goalPreview.assets = assets;
+    this._nodes.currentPreview.assets = assets;
 
     this._nodes.goalPreview.model = originalModel;
     this._nodes.currentPreview.model = shuffledModel;

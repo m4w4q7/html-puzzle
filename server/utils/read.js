@@ -1,9 +1,5 @@
-import { readFile as readFileFs } from 'fs';
+import { readFile as readFileFs } from 'fs/promises';
 
-
-export const readFile = (path) => new Promise((resolve, reject) => {
-  readFileFs(path, { encoding: 'utf8' }, (error, data) => error ? reject(error) : resolve(data));
-});
-
+export const readFile = (path) => readFileFs(path, { encoding: 'utf8' });
 
 export const readJSON = (path) => readFile(path).then(JSON.parse);

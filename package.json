@@ -36,6 +36,6 @@
     "prompts": "2.4.2"
   },
   "engines": {
-    "node": "12.x"
+    "node": "16.x"
   }
 }

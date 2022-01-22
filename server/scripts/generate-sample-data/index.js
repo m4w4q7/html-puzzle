@@ -3,6 +3,7 @@ import mongodb from 'mongodb';
 import prompts from 'prompts';
 import { config } from '../../config.js';
 import { getRecordsData } from './data/results.js';
+import exercisesData from './data/exercises/index.js';
 const { ObjectID } = mongodb;
 
 (async () => {
@@ -14,20 +15,23 @@ const { ObjectID } = mongodb;
     const users = (await db.collection('users').find({}).toArray());
     const choices = users
       .map(({ name, _id }) => ({ title: name, value: _id.toHexString() }))
-      .concat({ title: '[new user]', value: new ObjectID().toHexString() });
+      .concat({ title: '[anonymous]', value: new ObjectID().toHexString() });
 
 
     const { userId } = await prompts({
       type: 'select',
       name: 'userId',
-      message: 'For which user should the data be generated?',
+      message: 'Which user should the data be generated for?',
       choices,
     });
 
-    const data = getRecordsData({ userId });
+    const recordsData = getRecordsData({ userId });
 
     await Promise.all(
-      Object.entries(data)
+      [
+        ...Object.entries(recordsData),
+        ...Object.entries(exercisesData)
+      ]
         .map(([collectionName, documents]) => db.collection(collectionName).insertMany(documents))
     );
 
